@@ -1,15 +1,15 @@
-"""Command-line orchestrator: simulate PANSS trajectories and export metrics.
+"""Command-line entry point for the Neuro-Sim dopamine and medication engine.
 
 Usage::
 
-    python main.py                      # 52 weeks, seed 22 -> ./metrics.json
-    python main.py --weeks 26 --seed 7  # shorter study, different draw
-    python main.py --output out.json    # custom location (metrics.js beside it)
+    python3 main.py                 # 12-week course -> metrics.json / metrics.js
+    python3 main.py --weeks 24      # longer course
+    python3 main.py --no-mirror     # keep outputs in python/ only
 
-Outputs land next to this script and are mirrored into ``../web`` so the
-presentation can consume them.  The JSON file is fetched when the deck is
-served over HTTP; the ``metrics.js`` twin is loaded as a plain script so the
-deck also works when opened directly from the file system.
+Outputs are written next to this script and mirrored into ``../web`` so the
+presentation can consume them: ``metrics.json`` is fetched when the deck is
+served over HTTP, and the ``metrics.js`` twin is loaded as a plain script so
+the deck also works when opened directly from the file system.
 """
 
 from __future__ import annotations
@@ -30,12 +30,11 @@ DEFAULT_WEB_DIR = HERE.parent / "web"
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Synthesize PANSS trajectories for the schizophrenia presentation."
+        description="Simulate dopamine pathways under antipsychotic treatment."
     )
     parser.add_argument(
-        "--weeks", type=int, default=52, help="study length in weeks"
+        "--weeks", type=int, default=12, help="length of the treatment course"
     )
-    parser.add_argument("--seed", type=int, default=22, help="random seed")
     parser.add_argument(
         "--output",
         type=pathlib.Path,
@@ -49,14 +48,14 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         help="presentation folder to mirror the outputs into (default: ../web)",
     )
     parser.add_argument(
-        "--no-mirror",
-        action="store_true",
-        help="do not copy the outputs into the presentation folder",
-    )
-    parser.add_argument(
         "--no-js",
         action="store_true",
         help="do not write the metrics.js twin next to the JSON file",
+    )
+    parser.add_argument(
+        "--no-mirror",
+        action="store_true",
+        help="do not copy the outputs into the presentation folder",
     )
     parser.add_argument(
         "--quiet", action="store_true", help="suppress the summary table"
@@ -98,38 +97,27 @@ def mirror_outputs(
 
 def print_summary(metrics: Dict[str, object]) -> None:
     header = (
-        f"{'Scenario':<34}{'Base':>6}{'End':>6}{'Red%':>7}  "
-        f"{'Response':<16}{'Remission':<12}"
+        f"{'State':<12}{'D2%':>5}{'5HT2A%':>8}{'MesoL':>8}{'MesoC':>8}"
+        f"{'Pos':>6}{'Neg':>6}{'EPS':>6}{'Func':>6}"
     )
     print(header)
     print("-" * len(header))
-    for scenario in metrics["scenarios"]:
-        assessment = scenario["assessment"]
-        response = assessment["response"]
-        remission = assessment["remission"]
-        response_label = (
-            "much improved" if response["responder_50"]
-            else "minimal" if response["responder_20"]
-            else "none"
-        )
-        remission_label = (
-            "sustained" if remission["sustained_remission"]
-            else "threshold" if remission["symptomatic_at_endpoint"]
-            else "no"
-        )
+    for state in metrics["states"]:
+        steady = state["steady"]
+        symptoms = steady["symptoms"]
         print(
-            f"{scenario['name'][:33]:<34}"
-            f"{scenario['baseline']['total']:>6}"
-            f"{scenario['endpoint']['total']:>6}"
-            f"{response['percent_reduction']:>7.1f}  "
-            f"{response_label:<16}{remission_label:<12}"
+            f"{state['key']:<12}{steady['d2_occupancy']:>5}"
+            f"{steady['ht2a_occupancy']:>8}{steady['mesolimbic']:>8}"
+            f"{steady['mesocortical']:>8}{symptoms['positive']:>6.0f}"
+            f"{symptoms['negative']:>6.0f}{symptoms['eps']:>6.0f}"
+            f"{symptoms['functioning']:>6.0f}"
         )
 
 
 def main(argv: List[str]) -> int:
     args = parse_args(argv)
     try:
-        metrics = sa.build_metrics(weeks=args.weeks, seed=args.seed)
+        metrics = sa.build_metrics(weeks=args.weeks)
         written = write_outputs(metrics, args.output, write_js=not args.no_js)
         if not args.no_mirror:
             written += mirror_outputs(written, args.web_dir)

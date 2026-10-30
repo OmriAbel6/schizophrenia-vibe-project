@@ -2,7 +2,7 @@
 
 **Project:** מבוא לסכיזופרניה: פסיכוביולוגיה, תפיסה וטכנולוגיה
 **Repository:** https://github.com/OmriAbel6/schizophrenia-vibe-project
-**Version:** 1.0 · **Date:** 2026-10-30 · **Status:** Submitted
+**Version:** 2.0 · **Date:** 2026-10-30 · **Status:** Iteration 2 (Neuro-Sim & UX overhaul)
 
 ---
 
@@ -10,9 +10,10 @@
 
 Schizophrenia is a heterogeneous psychotic disorder whose clinical, neurobiological and perceptual
 dimensions are usually taught in isolation. Static slides cannot convey the perceptual distortion patients
-describe, nor the way standardised scales such as the PANSS turn symptoms into numbers that drive clinical
-decisions. This capstone delivers an interactive, Hebrew-language web presentation that integrates the
-three dimensions and demonstrates a reproducible computational pipeline behind the clinical metrics.
+describe, nor the way dopamine pathways and receptor blockade explain why antipsychotics relieve some
+symptoms while worsening others. This capstone delivers an interactive, Hebrew-language web presentation
+that integrates the three dimensions and demonstrates a reproducible computational model (the Neuro-Sim
+dopamine engine) behind the neurobiology slides.
 
 ## 2. Goals
 
@@ -20,7 +21,7 @@ three dimensions and demonstrates a reproducible computational pipeline behind t
 |---|---|---|
 | G1 | Teach the clinical, neurobiological and perceptual dimensions in 20 slides of academic Hebrew | Slide outline reviewed; every claim cited in slide 20 |
 | G2 | Let the audience *experience* perceptual distortion safely | Slide 8 renders an interactive 3D scene with adjustable intensity and an opt-in auditory layer |
-| G3 | Show how symptom scores become clinical decisions | Slides 16–18 render metrics produced by the Python tool, with the decision rules visible |
+| G3 | Show how dopamine pathway imbalance and receptor blockade produce and relieve symptoms | Slides 16–18 render large, code-free interactive visuals driven by the Python Neuro-Sim output |
 | G4 | Meet the course engineering standards | RTL/BiDi correct, PEP 8, modular code, incremental Git history, prompt logs, PRD |
 
 ## 3. Non-Goals
@@ -55,20 +56,20 @@ three dimensions and demonstrates a reproducible computational pipeline behind t
 | F-09 | Slide 8 auditory layer synthesised with Web Audio, started only on user gesture | Should |
 | F-10 | 2D canvas fallback when Three.js/WebGL is unavailable | Should |
 | F-11 | Slides 16–18 load `metrics.json` via `fetch`, falling back to `metrics.js` when opened from disk | Must |
-| F-12 | Charts: grouped columns by PANSS domain (baseline/endpoint), trajectory line chart with crosshair tooltip and relapse markers, assessment cards | Must |
+| F-12 | Slide 16: animated side-by-side pathway gauges (healthy vs. untreated psychosis) with ≥ 18 px Hebrew labels; Slide 17: medication simulator with state buttons (ללא טיפול / דור 1 / דור 2) that animate pathway, symptom and side-effect charts; Slide 18: functioning-over-time curve with hoverable milestone cards. No code or terminal output on these slides | Must |
 | F-13 | Every multi-series chart has a legend and a table view; direct labels are selective | Must |
 | F-14 | Slide 20 lists academic references in APA style | Must |
 
-### 5.2 Python tool (python/)
+### 5.2 Python tool – Neuro-Sim dopamine & medication engine (python/)
 
 | ID | Requirement | Priority |
 |---|---|---|
-| P-01 | `schizophrenia_analysis.py` models the 30-item PANSS (1–7) with validation and domain totals | Must |
-| P-02 | Treatment profiles with per-domain efficacy, build-up half-life, relapse hazard, adherence | Must |
-| P-03 | `TrajectorySimulator` produces weekly assessments with relapse events and rater noise, seeded | Must |
-| P-04 | Metrics: % reduction of adjusted total, responder 20/50 %, Andreasen remission (26 weeks), severity band, dominant dimension, clinical flags | Must |
-| P-05 | `main.py` CLI: `--weeks`, `--seed`, `--output`, `--web-dir`, `--no-js`, `--no-mirror`, `--quiet` | Must |
-| P-06 | Writes `metrics.json` and `metrics.js` to `python/` and mirrors them to `web/` | Must |
+| P-01 | Model the mesolimbic pathway (hyperactivity > 100 % → positive symptoms) and the mesocortical pathway (hypoactivity < 100 % → negative/cognitive symptoms) | Must |
+| P-02 | Receptor model: D2 blockade removes a fraction of pathway signalling; 5-HT2A blockade releases cortical dopamine; EPS emerge above ~80 % striatal D2 occupancy | Must |
+| P-03 | Four clinical states: healthy (100/100), untreated psychosis (185/45), first-generation antipsychotic (broad D2 blockade), second-generation antipsychotic (D2 + 5-HT2A) | Must |
+| P-04 | Per state: steady-state signalling, symptom profile (positive, hallucinations, delusions, anxiety, negative, cognitive, EPS, metabolic, functioning), 12-week time course and milestone takeaways in Hebrew | Must |
+| P-05 | Occupancy sweep (0–100 % D2) per drug generation for the interactive simulator | Must |
+| P-06 | `main.py` CLI: `--weeks`, `--output`, `--web-dir`, `--no-js`, `--no-mirror`, `--quiet`; writes `metrics.json`/`metrics.js` to `python/` and mirrors them to `web/` | Must |
 | P-07 | Standard library only; `requirements.txt` present; PEP 8 (≤ 88 chars, black-compatible) | Must |
 
 ## 6. Non-Functional Requirements
@@ -87,23 +88,26 @@ three dimensions and demonstrates a reproducible computational pipeline behind t
 
 1 Title · 2 Clinical definition & epidemiology · 3 DSM-5-TR criteria · 4 Positive vs. negative symptoms ·
 5 Dopamine hypothesis · 6 Glutamate / NMDA hypofunction · 7 Prefrontal hypofunction ·
-8 **3D hallucination simulation** · 9 Cognitive impairment (MATRICS) · 10 Affective symptoms & suicide risk ·
+8 **First-person 3D hallucination experience** · 9 Cognitive impairment (MATRICS) · 10 Affective symptoms & suicide risk ·
 11 Functional decline · 12 Course & prognosis · 13 Antipsychotics (FGA/SGA) · 14 Psychotherapy & rehabilitation ·
-15 Digital health · 16 **PANSS & tool architecture + domain chart** · 17 **Trajectory simulation chart** ·
-18 **Algorithmic assessment** · 19 Ethics, stigma, future tech · 20 Summary, Q&A, references.
+15 Digital health · 16 **Dopamine storm: mesolimbic vs. mesocortical gauges** · 17 **Real-time medication simulator** ·
+18 **Brain balance & quality of life over time** · 19 Ethics, stigma, future tech · 20 Summary, Q&A, references.
 
 ## 8. Data Contract (`metrics.json`)
 
 ```
-meta: { generated_at, generator, weeks, seed, disclaimer_he, scale{...}, thresholds{...}, references[] }
-scenarios[]: {
-  key, name, name_he, treatment{...},
-  baseline{positive, negative, general, total, severity, items{P1..G16}},
-  endpoint{positive, negative, general, total, severity},
-  trajectory[]: {week, positive, negative, general, total, composite_index, remission_threshold},
-  relapses[]: {week, magnitude, duration_weeks},
-  assessment{severity, response, remission, dominant_dimension, relapse_count, flags[]}
+meta: { generated_at, generator, weeks, healthy_signaling, disclaimer_he, model{...},
+        pathways{mesolimbic, mesocortical}, symptom_labels_he{...}, references[] }
+states[]: {
+  key, name_he, summary_he,
+  drug{key, name, name_he, generation, d2_occupancy, ht2a_occupancy, metabolic_burden},
+  raw{mesolimbic, mesocortical},
+  steady{mesolimbic, mesocortical, d2_occupancy, ht2a_occupancy,
+         symptoms{positive, hallucinations, delusions, anxiety, negative, cognitive, eps, metabolic, functioning}},
+  timeline[]: {week, mesolimbic, mesocortical, d2_occupancy, ht2a_occupancy, ...symptoms},
+  milestones[]: {week, title_he, takeaway_he}
 }
+occupancy_sweep[]: {d2_occupancy, fga{mesolimbic, mesocortical, positive, negative, eps, functioning}, sga{...}}
 ```
 
 ## 9. Engineering Process Requirements
@@ -116,7 +120,7 @@ scenarios[]: {
 
 | Check | Method | Result |
 |---|---|---|
-| Python compiles, runs, PEP 8 line length | `py_compile`, character-length scan | Pass |
+| Python compiles, runs, PEP 8 line length (Neuro-Sim engine) | `py_compile`, character-length scan | Pass |
 | JS syntax | `node --check app.js` | Pass |
 | Chart palette | dataviz validator, dark mode, surfaces `#0f172a` and `#1e293b` | All six checks pass |
 | Slide layouts | Headless Chrome screenshots of slides 1, 3, 5, 8, 12, 13, 16, 17, 18, 20 at 1440×900 | Pass |

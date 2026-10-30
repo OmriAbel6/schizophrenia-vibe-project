@@ -1,1915 +1,2279 @@
 {
   "meta": {
-    "generated_at": "2026-10-30T11:23:59.087856+00:00",
-    "generator": "schizophrenia_analysis.py",
-    "weeks": 52,
-    "seed": 22,
-    "disclaimer_he": "נתונים סינתטיים להמחשה אקדמית בלבד – אינם מייצגים מטופלים אמיתיים ואינם כלי קליני.",
-    "scale": {
-      "name": "PANSS",
-      "items": 30,
-      "item_range": [
-        1,
-        7
-      ],
-      "total_range": [
-        30,
-        210
-      ],
-      "domains": {
-        "positive": 7,
-        "negative": 7,
-        "general": 16
+    "generated_at": "2026-10-30T11:52:21.269356+00:00",
+    "generator": "schizophrenia_analysis.py (Neuro-Sim dopamine engine)",
+    "weeks": 12,
+    "healthy_signaling": 100.0,
+    "disclaimer_he": "מודל חינוכי מפושט של נתיבי הדופמין והשפעת תרופות – אינו מייצג מטופלים אמיתיים ואינו הנחיית מינון.",
+    "model": {
+      "d2_blockade_gain": 0.65,
+      "ht2a_cortical_gain": 60.0,
+      "eps_threshold_occupancy": 0.8,
+      "pathway_adaptation_weeks": 2.5
+    },
+    "pathways": {
+      "mesolimbic": {
+        "name_he": "הנתיב המזולימבי",
+        "origin_he": "VTA ← גרעין האקומבנס / סטריאטום",
+        "drives_he": "תסמינים חיוביים: הזיות ומחשבות שווא",
+        "pathology_he": "פעילות יתר (מעל 100%) – סערת דופמין"
       },
-      "domain_labels_he": {
-        "positive": "תסמינים חיוביים",
-        "negative": "תסמינים שליליים",
-        "general": "פסיכופתולוגיה כללית"
-      },
-      "item_labels_en": {
-        "P1": "Delusions",
-        "P2": "Conceptual disorganization",
-        "P3": "Hallucinatory behavior",
-        "P4": "Excitement",
-        "P5": "Grandiosity",
-        "P6": "Suspiciousness / persecution",
-        "P7": "Hostility",
-        "N1": "Blunted affect",
-        "N2": "Emotional withdrawal",
-        "N3": "Poor rapport",
-        "N4": "Passive / apathetic social withdrawal",
-        "N5": "Difficulty in abstract thinking",
-        "N6": "Lack of spontaneity and flow of conversation",
-        "N7": "Stereotyped thinking",
-        "G1": "Somatic concern",
-        "G2": "Anxiety",
-        "G3": "Guilt feelings",
-        "G4": "Tension",
-        "G5": "Mannerisms and posturing",
-        "G6": "Depression",
-        "G7": "Motor retardation",
-        "G8": "Uncooperativeness",
-        "G9": "Unusual thought content",
-        "G10": "Disorientation",
-        "G11": "Poor attention",
-        "G12": "Lack of judgment and insight",
-        "G13": "Disturbance of volition",
-        "G14": "Poor impulse control",
-        "G15": "Preoccupation",
-        "G16": "Active social avoidance"
-      },
-      "item_labels_he": {
-        "P1": "מחשבות שווא",
-        "P2": "חוסר ארגון מושגי",
-        "P3": "התנהגות הזייתית",
-        "P4": "התרגשות יתר",
-        "P5": "גדלות",
-        "P6": "חשדנות / רדיפה",
-        "P7": "עוינות",
-        "N1": "אפקט קהה",
-        "N2": "נסיגה רגשית",
-        "N3": "קשר דל",
-        "N4": "נסיגה חברתית פסיבית",
-        "N5": "קושי בחשיבה מופשטת",
-        "N6": "חוסר ספונטניות בשיחה",
-        "N7": "חשיבה סטריאוטיפית",
-        "G1": "דאגה סומטית",
-        "G2": "חרדה",
-        "G3": "רגשות אשמה",
-        "G4": "מתח",
-        "G5": "מנייריזם ותנוחה",
-        "G6": "דיכאון",
-        "G7": "האטה מוטורית",
-        "G8": "חוסר שיתוף פעולה",
-        "G9": "תוכן מחשבה חריג",
-        "G10": "חוסר התמצאות",
-        "G11": "קשב ירוד",
-        "G12": "חוסר שיפוט ותובנה",
-        "G13": "הפרעה ברצייה",
-        "G14": "שליטה ירודה בדחפים",
-        "G15": "שקיעה במחשבות",
-        "G16": "הימנעות חברתית פעילה"
+      "mesocortical": {
+        "name_he": "הנתיב המזוקורטיקלי",
+        "origin_he": "VTA ← קורטקס פרה-פרונטלי",
+        "drives_he": "תסמינים שליליים וקוגניטיביים: אפתיה, השטחה, קשב",
+        "pathology_he": "תת-פעילות (מתחת ל-100%) – חסר דופמין"
       }
     },
-    "thresholds": {
-      "response_minimal_pct": 20.0,
-      "response_much_improved_pct": 50.0,
-      "remission_items": [
-        "P1",
-        "P2",
-        "P3",
-        "N1",
-        "N4",
-        "N6",
-        "G5",
-        "G9"
+    "symptom_labels_he": {
+      "positive": "תסמינים חיוביים",
+      "hallucinations": "הזיות",
+      "delusions": "מחשבות שווא",
+      "anxiety": "חרדה",
+      "negative": "תסמינים שליליים",
+      "cognitive": "ליקוי קוגניטיבי",
+      "eps": "תופעות לוואי מוטוריות (EPS)",
+      "metabolic": "עומס מטבולי",
+      "functioning": "תפקוד יומיומי"
+    },
+    "references": [
+      "Howes, O. D., & Kapur, S. (2009). Schizophrenia Bulletin, 35(3), 549-562.",
+      "Kapur, S., & Seeman, P. (2001). American Journal of Psychiatry, 158(3), 360-369.",
+      "Kapur, S., Zipursky, R., et al. (2000). American Journal of Psychiatry, 157(4), 514-520.",
+      "Stahl, S. M. (2021). Stahl's Essential Psychopharmacology (5th ed.)."
+    ]
+  },
+  "states": [
+    {
+      "key": "healthy",
+      "name_he": "בריא (איזון נוירוכימי תקין)",
+      "summary_he": "שני הנתיבים מאוזנים סביב 100% – תפיסה ותפקוד תקינים.",
+      "drug": {
+        "key": "none",
+        "name": "No treatment",
+        "name_he": "ללא טיפול",
+        "generation": 0,
+        "d2_occupancy": 0,
+        "ht2a_occupancy": 0,
+        "metabolic_burden": 0.0
+      },
+      "raw": {
+        "mesolimbic": 100.0,
+        "mesocortical": 100.0
+      },
+      "steady": {
+        "mesolimbic": 100.0,
+        "mesocortical": 100.0,
+        "d2_occupancy": 0,
+        "ht2a_occupancy": 0,
+        "symptoms": {
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        }
+      },
+      "timeline": [
+        {
+          "week": 0.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 0.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 1.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 1.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 2.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 2.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 3.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 3.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 4.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 4.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 5.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 5.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 6.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 6.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 7.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 7.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 8.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 8.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 9.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 9.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 10.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 10.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 11.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 11.5,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        },
+        {
+          "week": 12.0,
+          "mesolimbic": 100.0,
+          "mesocortical": 100.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 5.1,
+          "hallucinations": 4.9,
+          "delusions": 6.6,
+          "anxiety": 11.7,
+          "negative": 7.6,
+          "cognitive": 8.8,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 94.9
+        }
       ],
-      "remission_item_max": 3,
-      "remission_duration_weeks": 26,
-      "severity_bands": [
+      "milestones": [
         {
-          "upper_exclusive": 58,
-          "key": "minimal",
-          "label_he": "קל מאוד / ללא"
+          "week": 0,
+          "title_he": "איזון",
+          "takeaway_he": "שני הנתיבים ב-100% – אין תסמינים."
         },
         {
-          "upper_exclusive": 75,
-          "key": "mild",
-          "label_he": "קל"
-        },
-        {
-          "upper_exclusive": 95,
-          "key": "moderate",
-          "label_he": "בינוני"
-        },
-        {
-          "upper_exclusive": 116,
-          "key": "marked",
-          "label_he": "ניכר"
-        },
-        {
-          "upper_exclusive": null,
-          "key": "severe",
-          "label_he": "חמור"
+          "week": 12.0,
+          "title_he": "יציבות",
+          "takeaway_he": "ללא שינוי לאורך זמן – קו הייחוס להשוואה."
         }
       ]
     },
-    "references": [
-      "Kay, S. R., Fiszbein, A., & Opler, L. A. (1987). Schizophrenia Bulletin, 13(2), 261-276.",
-      "Leucht, S., et al. (2005). Neuropsychopharmacology, 30, 2318-2325.",
-      "Andreasen, N. C., et al. (2005). American Journal of Psychiatry, 162(3), 441-449.",
-      "Leucht, S., et al. (2009). Neuropsychopharmacology, 34, 2318-2325."
-    ]
-  },
-  "scenarios": [
     {
-      "key": "first_episode_sga",
-      "name": "First-episode psychosis, SGA monotherapy",
-      "name_he": "אפיזודה ראשונה – דור שני בלבד",
-      "treatment": {
-        "key": "sga",
-        "name": "Second-generation antipsychotic (risperidone)",
-        "name_he": "אנטי-פסיכוטי דור שני (ריספרידון)",
-        "drug_class": "SGA",
-        "efficacy": {
-          "positive": 0.62,
-          "negative": 0.32,
-          "general": 0.45
-        },
-        "adherence": 0.88
+      "key": "psychosis",
+      "name_he": "התקף פסיכוטי (ללא טיפול)",
+      "summary_he": "סערת דופמין בנתיב המזולימבי (185%) לצד חסר מזוקורטיקלי (45%) – הזיות, מחשבות שווא וחרדה גבוהה.",
+      "drug": {
+        "key": "none",
+        "name": "No treatment",
+        "name_he": "ללא טיפול",
+        "generation": 0,
+        "d2_occupancy": 0,
+        "ht2a_occupancy": 0,
+        "metabolic_burden": 0.0
       },
-      "baseline": {
-        "positive": 36,
-        "negative": 21,
-        "general": 51,
-        "total": 108,
-        "severity": {
-          "key": "marked",
-          "label_he": "ניכר"
-        },
-        "items": {
-          "P1": 5,
-          "P2": 5,
-          "P3": 7,
-          "P4": 5,
-          "P5": 5,
-          "P6": 5,
-          "P7": 4,
-          "N1": 3,
-          "N2": 4,
-          "N3": 3,
-          "N4": 4,
-          "N5": 3,
-          "N6": 2,
-          "N7": 2,
-          "G1": 3,
-          "G2": 1,
-          "G3": 3,
-          "G4": 3,
-          "G5": 4,
-          "G6": 3,
-          "G7": 3,
-          "G8": 4,
-          "G9": 4,
-          "G10": 2,
-          "G11": 5,
-          "G12": 3,
-          "G13": 5,
-          "G14": 3,
-          "G15": 3,
-          "G16": 2
+      "raw": {
+        "mesolimbic": 185.0,
+        "mesocortical": 45.0
+      },
+      "steady": {
+        "mesolimbic": 185.0,
+        "mesocortical": 45.0,
+        "d2_occupancy": 0,
+        "ht2a_occupancy": 0,
+        "symptoms": {
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
         }
       },
-      "endpoint": {
-        "positive": 19,
-        "negative": 18,
-        "general": 37,
-        "total": 74,
-        "severity": {
-          "key": "mild",
-          "label_he": "קל"
+      "timeline": [
+        {
+          "week": 0.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 0.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 1.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 1.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 2.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 2.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 3.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 3.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 4.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 4.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 5.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 5.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 6.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 6.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 7.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 7.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 8.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 8.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 9.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 9.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 10.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 10.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 11.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 11.5,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 12.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
         }
-      },
-      "trajectory": [
+      ],
+      "milestones": [
         {
           "week": 0,
-          "positive": 36,
-          "negative": 21,
-          "general": 51,
-          "total": 108,
-          "composite_index": 15,
-          "remission_threshold": false
-        },
-        {
-          "week": 1,
-          "positive": 31,
-          "negative": 21,
-          "general": 48,
-          "total": 100,
-          "composite_index": 10,
-          "remission_threshold": false
-        },
-        {
-          "week": 2,
-          "positive": 28,
-          "negative": 21,
-          "general": 45,
-          "total": 94,
-          "composite_index": 7,
-          "remission_threshold": false
-        },
-        {
-          "week": 3,
-          "positive": 28,
-          "negative": 18,
-          "general": 45,
-          "total": 91,
-          "composite_index": 10,
-          "remission_threshold": false
+          "title_he": "התקף חריף",
+          "takeaway_he": "הזיות וחרדה בשיא; התפקוד היומיומי קורס."
         },
         {
           "week": 4,
-          "positive": 26,
-          "negative": 17,
-          "general": 42,
-          "total": 85,
-          "composite_index": 9,
-          "remission_threshold": false
+          "title_he": "ללא טיפול",
+          "takeaway_he": "סערת הדופמין אינה שוככת מעצמה – התפקוד נותר נמוך."
         },
         {
-          "week": 5,
-          "positive": 25,
-          "negative": 20,
-          "general": 42,
-          "total": 87,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 6,
-          "positive": 23,
-          "negative": 18,
-          "general": 42,
-          "total": 83,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 7,
-          "positive": 25,
-          "negative": 20,
-          "general": 40,
-          "total": 85,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 8,
-          "positive": 22,
-          "negative": 16,
-          "general": 40,
-          "total": 78,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 9,
-          "positive": 21,
-          "negative": 18,
-          "general": 38,
-          "total": 77,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 10,
-          "positive": 21,
-          "negative": 18,
-          "general": 40,
-          "total": 79,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 11,
-          "positive": 21,
-          "negative": 18,
-          "general": 37,
-          "total": 76,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 12,
-          "positive": 22,
-          "negative": 15,
-          "general": 42,
-          "total": 79,
-          "composite_index": 7,
-          "remission_threshold": false
-        },
-        {
-          "week": 13,
-          "positive": 20,
-          "negative": 17,
-          "general": 38,
-          "total": 75,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 14,
-          "positive": 21,
-          "negative": 18,
-          "general": 36,
-          "total": 75,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 15,
-          "positive": 19,
-          "negative": 14,
-          "general": 37,
-          "total": 70,
-          "composite_index": 5,
-          "remission_threshold": true
-        },
-        {
-          "week": 16,
-          "positive": 22,
-          "negative": 18,
-          "general": 39,
-          "total": 79,
-          "composite_index": 4,
-          "remission_threshold": false
-        },
-        {
-          "week": 17,
-          "positive": 22,
-          "negative": 17,
-          "general": 38,
-          "total": 77,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 18,
-          "positive": 22,
-          "negative": 17,
-          "general": 37,
-          "total": 76,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 19,
-          "positive": 21,
-          "negative": 15,
-          "general": 39,
-          "total": 75,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 20,
-          "positive": 19,
-          "negative": 16,
-          "general": 35,
-          "total": 70,
-          "composite_index": 3,
-          "remission_threshold": true
-        },
-        {
-          "week": 21,
-          "positive": 22,
-          "negative": 16,
-          "general": 36,
-          "total": 74,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 22,
-          "positive": 21,
-          "negative": 17,
-          "general": 37,
-          "total": 75,
-          "composite_index": 4,
-          "remission_threshold": false
-        },
-        {
-          "week": 23,
-          "positive": 21,
-          "negative": 15,
-          "general": 38,
-          "total": 74,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 24,
-          "positive": 20,
-          "negative": 17,
-          "general": 37,
-          "total": 74,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 25,
-          "positive": 21,
-          "negative": 18,
-          "general": 37,
-          "total": 76,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 26,
-          "positive": 24,
-          "negative": 18,
-          "general": 39,
-          "total": 81,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 27,
-          "positive": 29,
-          "negative": 20,
-          "general": 42,
-          "total": 91,
-          "composite_index": 9,
-          "remission_threshold": false
-        },
-        {
-          "week": 28,
-          "positive": 34,
-          "negative": 21,
-          "general": 44,
-          "total": 99,
-          "composite_index": 13,
-          "remission_threshold": false
-        },
-        {
-          "week": 29,
-          "positive": 32,
-          "negative": 21,
-          "general": 45,
-          "total": 98,
-          "composite_index": 11,
-          "remission_threshold": false
-        },
-        {
-          "week": 30,
-          "positive": 36,
-          "negative": 20,
-          "general": 48,
-          "total": 104,
-          "composite_index": 16,
-          "remission_threshold": false
-        },
-        {
-          "week": 31,
-          "positive": 33,
-          "negative": 21,
-          "general": 44,
-          "total": 98,
-          "composite_index": 12,
-          "remission_threshold": false
-        },
-        {
-          "week": 32,
-          "positive": 28,
-          "negative": 20,
-          "general": 40,
-          "total": 88,
-          "composite_index": 8,
-          "remission_threshold": false
-        },
-        {
-          "week": 33,
-          "positive": 25,
-          "negative": 18,
-          "general": 39,
-          "total": 82,
-          "composite_index": 7,
-          "remission_threshold": false
-        },
-        {
-          "week": 34,
-          "positive": 20,
-          "negative": 17,
-          "general": 37,
-          "total": 74,
-          "composite_index": 3,
-          "remission_threshold": true
-        },
-        {
-          "week": 35,
-          "positive": 21,
-          "negative": 18,
-          "general": 37,
-          "total": 76,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 36,
-          "positive": 21,
-          "negative": 15,
-          "general": 36,
-          "total": 72,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 37,
-          "positive": 22,
-          "negative": 18,
-          "general": 38,
-          "total": 78,
-          "composite_index": 4,
-          "remission_threshold": false
-        },
-        {
-          "week": 38,
-          "positive": 20,
-          "negative": 16,
-          "general": 41,
-          "total": 77,
-          "composite_index": 4,
-          "remission_threshold": false
-        },
-        {
-          "week": 39,
-          "positive": 21,
-          "negative": 16,
-          "general": 39,
-          "total": 76,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 40,
-          "positive": 18,
-          "negative": 16,
-          "general": 35,
-          "total": 69,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 41,
-          "positive": 21,
-          "negative": 16,
-          "general": 35,
-          "total": 72,
-          "composite_index": 5,
-          "remission_threshold": true
-        },
-        {
-          "week": 42,
-          "positive": 20,
-          "negative": 14,
-          "general": 37,
-          "total": 71,
-          "composite_index": 6,
-          "remission_threshold": true
-        },
-        {
-          "week": 43,
-          "positive": 19,
-          "negative": 19,
-          "general": 38,
-          "total": 76,
-          "composite_index": 0,
-          "remission_threshold": false
-        },
-        {
-          "week": 44,
-          "positive": 20,
-          "negative": 17,
-          "general": 39,
-          "total": 76,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 45,
-          "positive": 21,
-          "negative": 16,
-          "general": 37,
-          "total": 74,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 46,
-          "positive": 20,
-          "negative": 19,
-          "general": 38,
-          "total": 77,
-          "composite_index": 1,
-          "remission_threshold": false
-        },
-        {
-          "week": 47,
-          "positive": 19,
-          "negative": 17,
-          "general": 38,
-          "total": 74,
-          "composite_index": 2,
-          "remission_threshold": false
-        },
-        {
-          "week": 48,
-          "positive": 21,
-          "negative": 17,
-          "general": 38,
-          "total": 76,
-          "composite_index": 4,
-          "remission_threshold": true
-        },
-        {
-          "week": 49,
-          "positive": 21,
-          "negative": 18,
-          "general": 39,
-          "total": 78,
-          "composite_index": 3,
-          "remission_threshold": false
-        },
-        {
-          "week": 50,
-          "positive": 22,
-          "negative": 15,
-          "general": 37,
-          "total": 74,
-          "composite_index": 7,
-          "remission_threshold": false
-        },
-        {
-          "week": 51,
-          "positive": 20,
-          "negative": 17,
-          "general": 39,
-          "total": 76,
-          "composite_index": 3,
-          "remission_threshold": true
-        },
-        {
-          "week": 52,
-          "positive": 19,
-          "negative": 18,
-          "general": 37,
-          "total": 74,
-          "composite_index": 1,
-          "remission_threshold": false
+          "week": 12.0,
+          "title_he": "מהלך מתמשך",
+          "takeaway_he": "ככל שהפסיכוזה אינה מטופלת זמן רב יותר, ההחלמה קשה יותר."
         }
-      ],
-      "relapses": [
-        {
-          "week": 25,
-          "magnitude": 0.5,
-          "duration_weeks": 7
-        },
-        {
-          "week": 26,
-          "magnitude": 0.57,
-          "duration_weeks": 8
-        }
-      ],
-      "assessment": {
-        "severity": {
-          "key": "mild",
-          "label_he": "קל"
-        },
-        "response": {
-          "percent_reduction": 43.6,
-          "responder_20": true,
-          "responder_50": false,
-          "label_he": "תגובה מינימלית"
-        },
-        "remission": {
-          "symptomatic_at_endpoint": false,
-          "consecutive_weeks_at_endpoint": 0,
-          "longest_streak_weeks": 3,
-          "sustained_remission": false,
-          "required_weeks": 26,
-          "label_he": "ללא רמיסיה"
-        },
-        "dominant_dimension": {
-          "key": "mixed",
-          "label_he": "תמונה מעורבת"
-        },
-        "relapse_count": 2,
-        "flags": [
-          {
-            "code": "recurrent_relapse",
-            "label_he": "הישנויות חוזרות – לבדוק היענות / טיפול בזריקה"
-          }
-        ]
-      }
+      ]
     },
     {
-      "key": "chronic_fga",
-      "name": "Chronic course, FGA monotherapy",
-      "name_he": "מהלך כרוני – דור ראשון בלבד",
-      "treatment": {
+      "key": "fga",
+      "name_he": "תרופות דור 1 (חסימת D2 גורפת – למשל הלדול)",
+      "summary_he": "חסימה גורפת של D2 מרגיעה את הסערה המזולימבית, אך מדכאת עוד יותר את הנתיב המזוקורטיקלי ומזניקה תופעות לוואי מוטוריות (EPS).",
+      "drug": {
         "key": "fga",
-        "name": "First-generation antipsychotic (haloperidol)",
-        "name_he": "אנטי-פסיכוטי דור ראשון (הלופרידול)",
-        "drug_class": "FGA",
-        "efficacy": {
-          "positive": 0.6,
-          "negative": 0.2,
-          "general": 0.4
-        },
-        "adherence": 0.8
+        "name": "Haloperidol (first generation)",
+        "name_he": "הלופרידול (דור ראשון)",
+        "generation": 1,
+        "d2_occupancy": 86,
+        "ht2a_occupancy": 5,
+        "metabolic_burden": 12.0
       },
-      "baseline": {
-        "positive": 32,
-        "negative": 32,
-        "general": 63,
-        "total": 127,
-        "severity": {
-          "key": "severe",
-          "label_he": "חמור"
-        },
-        "items": {
-          "P1": 5,
-          "P2": 5,
-          "P3": 4,
-          "P4": 5,
-          "P5": 5,
-          "P6": 4,
-          "P7": 4,
-          "N1": 4,
-          "N2": 5,
-          "N3": 4,
-          "N4": 4,
-          "N5": 5,
-          "N6": 5,
-          "N7": 5,
-          "G1": 3,
-          "G2": 4,
-          "G3": 3,
-          "G4": 4,
-          "G5": 3,
-          "G6": 5,
-          "G7": 4,
-          "G8": 4,
-          "G9": 5,
-          "G10": 5,
-          "G11": 6,
-          "G12": 4,
-          "G13": 3,
-          "G14": 3,
-          "G15": 5,
-          "G16": 2
+      "raw": {
+        "mesolimbic": 185.0,
+        "mesocortical": 45.0
+      },
+      "steady": {
+        "mesolimbic": 81.6,
+        "mesocortical": 22.8,
+        "d2_occupancy": 86,
+        "ht2a_occupancy": 5,
+        "symptoms": {
+          "positive": 1.2,
+          "hallucinations": 1.1,
+          "delusions": 3.0,
+          "anxiety": 25.2,
+          "negative": 98.1,
+          "cognitive": 94.3,
+          "eps": 81.8,
+          "metabolic": 12.0,
+          "functioning": 45.6
         }
       },
-      "endpoint": {
-        "positive": 19,
-        "negative": 29,
-        "general": 48,
-        "total": 96,
-        "severity": {
-          "key": "marked",
-          "label_he": "ניכר"
+      "timeline": [
+        {
+          "week": 0.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 0.5,
+          "mesolimbic": 180.3,
+          "mesocortical": 44.0,
+          "d2_occupancy": 21.6,
+          "ht2a_occupancy": 1.3,
+          "positive": 97.8,
+          "hallucinations": 92.9,
+          "delusions": 90.0,
+          "anxiety": 78.4,
+          "negative": 89.7,
+          "cognitive": 80.2,
+          "eps": 0.0,
+          "metabolic": 0.5,
+          "functioning": 29.2
+        },
+        {
+          "week": 1.0,
+          "mesolimbic": 170.0,
+          "mesocortical": 41.8,
+          "d2_occupancy": 37.7,
+          "ht2a_occupancy": 2.2,
+          "positive": 94.9,
+          "hallucinations": 90.1,
+          "delusions": 87.4,
+          "anxiety": 76.3,
+          "negative": 91.3,
+          "cognitive": 82.4,
+          "eps": 0.0,
+          "metabolic": 1.0,
+          "functioning": 29.4
+        },
+        {
+          "week": 1.5,
+          "mesolimbic": 158.0,
+          "mesocortical": 39.2,
+          "d2_occupancy": 49.8,
+          "ht2a_occupancy": 2.9,
+          "positive": 87.1,
+          "hallucinations": 82.8,
+          "delusions": 80.4,
+          "anxiety": 70.7,
+          "negative": 92.9,
+          "cognitive": 84.8,
+          "eps": 0.1,
+          "metabolic": 1.5,
+          "functioning": 31.3
+        },
+        {
+          "week": 2.0,
+          "mesolimbic": 146.0,
+          "mesocortical": 36.6,
+          "d2_occupancy": 58.9,
+          "ht2a_occupancy": 3.4,
+          "positive": 71.4,
+          "hallucinations": 67.8,
+          "delusions": 66.3,
+          "anxiety": 59.5,
+          "negative": 94.2,
+          "cognitive": 86.9,
+          "eps": 0.5,
+          "metabolic": 2.0,
+          "functioning": 36.1
+        },
+        {
+          "week": 2.5,
+          "mesolimbic": 135.1,
+          "mesocortical": 34.3,
+          "d2_occupancy": 65.7,
+          "ht2a_occupancy": 3.8,
+          "positive": 50.1,
+          "hallucinations": 47.6,
+          "delusions": 47.1,
+          "anxiety": 44.6,
+          "negative": 95.1,
+          "cognitive": 88.6,
+          "eps": 2.7,
+          "metabolic": 2.5,
+          "functioning": 42.7
+        },
+        {
+          "week": 3.0,
+          "mesolimbic": 125.5,
+          "mesocortical": 32.3,
+          "d2_occupancy": 70.8,
+          "ht2a_occupancy": 4.1,
+          "positive": 31.2,
+          "hallucinations": 29.6,
+          "delusions": 30.1,
+          "anxiety": 32.3,
+          "negative": 95.9,
+          "cognitive": 89.9,
+          "eps": 9.1,
+          "metabolic": 3.0,
+          "functioning": 47.9
+        },
+        {
+          "week": 3.5,
+          "mesolimbic": 117.4,
+          "mesocortical": 30.5,
+          "d2_occupancy": 74.6,
+          "ht2a_occupancy": 4.3,
+          "positive": 18.8,
+          "hallucinations": 17.8,
+          "delusions": 18.9,
+          "anxiety": 25.6,
+          "negative": 96.4,
+          "cognitive": 90.9,
+          "eps": 20.6,
+          "metabolic": 3.5,
+          "functioning": 50.2
+        },
+        {
+          "week": 4.0,
+          "mesolimbic": 110.7,
+          "mesocortical": 29.1,
+          "d2_occupancy": 77.5,
+          "ht2a_occupancy": 4.5,
+          "positive": 11.6,
+          "hallucinations": 11.0,
+          "delusions": 12.5,
+          "anxiety": 23.3,
+          "negative": 96.8,
+          "cognitive": 91.6,
+          "eps": 34.7,
+          "metabolic": 4.0,
+          "functioning": 50.4
+        },
+        {
+          "week": 4.5,
+          "mesolimbic": 105.1,
+          "mesocortical": 27.9,
+          "d2_occupancy": 79.6,
+          "ht2a_occupancy": 4.6,
+          "positive": 7.6,
+          "hallucinations": 7.3,
+          "delusions": 8.9,
+          "anxiety": 23.0,
+          "negative": 97.1,
+          "cognitive": 92.2,
+          "eps": 47.6,
+          "metabolic": 4.5,
+          "functioning": 49.6
+        },
+        {
+          "week": 5.0,
+          "mesolimbic": 100.6,
+          "mesocortical": 26.9,
+          "d2_occupancy": 81.2,
+          "ht2a_occupancy": 4.7,
+          "positive": 5.4,
+          "hallucinations": 5.1,
+          "delusions": 6.8,
+          "anxiety": 23.4,
+          "negative": 97.3,
+          "cognitive": 92.7,
+          "eps": 57.5,
+          "metabolic": 5.0,
+          "functioning": 48.8
+        },
+        {
+          "week": 5.5,
+          "mesolimbic": 96.9,
+          "mesocortical": 26.1,
+          "d2_occupancy": 82.4,
+          "ht2a_occupancy": 4.8,
+          "positive": 4.0,
+          "hallucinations": 3.8,
+          "delusions": 5.6,
+          "anxiety": 23.8,
+          "negative": 97.5,
+          "cognitive": 93.0,
+          "eps": 64.6,
+          "metabolic": 5.5,
+          "functioning": 48.1
+        },
+        {
+          "week": 6.0,
+          "mesolimbic": 93.9,
+          "mesocortical": 25.5,
+          "d2_occupancy": 83.3,
+          "ht2a_occupancy": 4.8,
+          "positive": 3.2,
+          "hallucinations": 3.0,
+          "delusions": 4.8,
+          "anxiety": 24.2,
+          "negative": 97.6,
+          "cognitive": 93.3,
+          "eps": 69.6,
+          "metabolic": 6.0,
+          "functioning": 47.5
+        },
+        {
+          "week": 6.5,
+          "mesolimbic": 91.5,
+          "mesocortical": 25.0,
+          "d2_occupancy": 84.0,
+          "ht2a_occupancy": 4.9,
+          "positive": 2.6,
+          "hallucinations": 2.5,
+          "delusions": 4.3,
+          "anxiety": 24.5,
+          "negative": 97.7,
+          "cognitive": 93.5,
+          "eps": 73.0,
+          "metabolic": 6.5,
+          "functioning": 47.1
+        },
+        {
+          "week": 7.0,
+          "mesolimbic": 89.6,
+          "mesocortical": 24.6,
+          "d2_occupancy": 84.5,
+          "ht2a_occupancy": 4.9,
+          "positive": 2.2,
+          "hallucinations": 2.1,
+          "delusions": 4.0,
+          "anxiety": 24.7,
+          "negative": 97.8,
+          "cognitive": 93.7,
+          "eps": 75.5,
+          "metabolic": 7.0,
+          "functioning": 46.8
+        },
+        {
+          "week": 7.5,
+          "mesolimbic": 88.0,
+          "mesocortical": 24.2,
+          "d2_occupancy": 84.9,
+          "ht2a_occupancy": 4.9,
+          "positive": 2.0,
+          "hallucinations": 1.9,
+          "delusions": 3.8,
+          "anxiety": 24.8,
+          "negative": 97.8,
+          "cognitive": 93.8,
+          "eps": 77.2,
+          "metabolic": 7.5,
+          "functioning": 46.5
+        },
+        {
+          "week": 8.0,
+          "mesolimbic": 86.8,
+          "mesocortical": 24.0,
+          "d2_occupancy": 85.2,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.8,
+          "hallucinations": 1.7,
+          "delusions": 3.6,
+          "anxiety": 24.9,
+          "negative": 97.9,
+          "cognitive": 93.9,
+          "eps": 78.4,
+          "metabolic": 8.0,
+          "functioning": 46.3
+        },
+        {
+          "week": 8.5,
+          "mesolimbic": 85.8,
+          "mesocortical": 23.7,
+          "d2_occupancy": 85.4,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.6,
+          "hallucinations": 1.5,
+          "delusions": 3.5,
+          "anxiety": 25.0,
+          "negative": 97.9,
+          "cognitive": 94.0,
+          "eps": 79.3,
+          "metabolic": 8.5,
+          "functioning": 46.2
+        },
+        {
+          "week": 9.0,
+          "mesolimbic": 85.0,
+          "mesocortical": 23.6,
+          "d2_occupancy": 85.5,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.5,
+          "hallucinations": 1.4,
+          "delusions": 3.4,
+          "anxiety": 25.1,
+          "negative": 98.0,
+          "cognitive": 94.1,
+          "eps": 79.9,
+          "metabolic": 9.0,
+          "functioning": 46.1
+        },
+        {
+          "week": 9.5,
+          "mesolimbic": 84.3,
+          "mesocortical": 23.4,
+          "d2_occupancy": 85.6,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.4,
+          "hallucinations": 1.4,
+          "delusions": 3.3,
+          "anxiety": 25.1,
+          "negative": 98.0,
+          "cognitive": 94.1,
+          "eps": 80.4,
+          "metabolic": 9.5,
+          "functioning": 46.0
+        },
+        {
+          "week": 10.0,
+          "mesolimbic": 83.8,
+          "mesocortical": 23.3,
+          "d2_occupancy": 85.7,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.4,
+          "hallucinations": 1.3,
+          "delusions": 3.2,
+          "anxiety": 25.1,
+          "negative": 98.0,
+          "cognitive": 94.2,
+          "eps": 80.7,
+          "metabolic": 10.0,
+          "functioning": 45.9
+        },
+        {
+          "week": 10.5,
+          "mesolimbic": 83.4,
+          "mesocortical": 23.2,
+          "d2_occupancy": 85.8,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.3,
+          "hallucinations": 1.3,
+          "delusions": 3.2,
+          "anxiety": 25.2,
+          "negative": 98.0,
+          "cognitive": 94.2,
+          "eps": 81.0,
+          "metabolic": 10.5,
+          "functioning": 45.8
+        },
+        {
+          "week": 11.0,
+          "mesolimbic": 83.0,
+          "mesocortical": 23.2,
+          "d2_occupancy": 85.9,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.3,
+          "hallucinations": 1.2,
+          "delusions": 3.2,
+          "anxiety": 25.2,
+          "negative": 98.0,
+          "cognitive": 94.2,
+          "eps": 81.2,
+          "metabolic": 11.0,
+          "functioning": 45.8
+        },
+        {
+          "week": 11.5,
+          "mesolimbic": 82.8,
+          "mesocortical": 23.1,
+          "d2_occupancy": 85.9,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.3,
+          "hallucinations": 1.2,
+          "delusions": 3.1,
+          "anxiety": 25.2,
+          "negative": 98.0,
+          "cognitive": 94.2,
+          "eps": 81.3,
+          "metabolic": 11.5,
+          "functioning": 45.7
+        },
+        {
+          "week": 12.0,
+          "mesolimbic": 82.5,
+          "mesocortical": 23.0,
+          "d2_occupancy": 85.9,
+          "ht2a_occupancy": 5.0,
+          "positive": 1.2,
+          "hallucinations": 1.2,
+          "delusions": 3.1,
+          "anxiety": 25.2,
+          "negative": 98.0,
+          "cognitive": 94.2,
+          "eps": 81.4,
+          "metabolic": 12.0,
+          "functioning": 45.7
         }
-      },
-      "trajectory": [
+      ],
+      "milestones": [
         {
           "week": 0,
-          "positive": 32,
-          "negative": 32,
-          "general": 63,
-          "total": 127,
-          "composite_index": 0,
-          "remission_threshold": false
+          "title_he": "תחילת טיפול",
+          "takeaway_he": "התרופה מתחילה לתפוס קולטני D2; המוח עדיין בסערה."
         },
         {
-          "week": 1,
-          "positive": 31,
-          "negative": 32,
-          "general": 61,
-          "total": 124,
-          "composite_index": -1,
-          "remission_threshold": false
+          "week": 2.5,
+          "title_he": "החרדה יורדת",
+          "takeaway_he": "ההרגעה מורגשת עוד לפני שההזיות נעלמות."
         },
         {
-          "week": 2,
-          "positive": 26,
-          "negative": 30,
-          "general": 57,
-          "total": 113,
-          "composite_index": -4,
-          "remission_threshold": false
+          "week": 3.5,
+          "title_he": "ההזיות שוככות",
+          "takeaway_he": "חסימת D2 מורידה את הסערה המזולימבית מתחת לסף ההזיה."
         },
         {
-          "week": 3,
-          "positive": 26,
-          "negative": 30,
-          "general": 55,
-          "total": 111,
-          "composite_index": -4,
-          "remission_threshold": false
+          "week": 5.0,
+          "title_he": "תופעות לוואי מוטוריות",
+          "takeaway_he": "תפיסה של יותר מ-80% מקולטני D2 מביאה לנוקשות ולרעד (EPS)."
         },
         {
-          "week": 4,
-          "positive": 25,
-          "negative": 31,
-          "general": 53,
-          "total": 109,
-          "composite_index": -6,
-          "remission_threshold": false
+          "week": 12.0,
+          "title_he": "תפקוד חלקי",
+          "takeaway_he": "ההזיות נעלמו, אך האפתיה ותופעות הלוואי מגבילות את איכות החיים."
+        }
+      ]
+    },
+    {
+      "key": "sga",
+      "name_he": "תרופות דור 2 (איזון סרוטונין-דופמין משולב)",
+      "summary_he": "חסימת D2 מתונה עם חסימת 5-HT2A: הסערה המזולימבית נרגעת, הפעילות המזוקורטיקלית נשמרת ואף משתפרת, ותופעות הלוואי המוטוריות מזעריות.",
+      "drug": {
+        "key": "sga",
+        "name": "Risperidone-like (second generation)",
+        "name_he": "ריספרידון (דור שני)",
+        "generation": 2,
+        "d2_occupancy": 70,
+        "ht2a_occupancy": 90,
+        "metabolic_burden": 38.0
+      },
+      "raw": {
+        "mesolimbic": 185.0,
+        "mesocortical": 45.0
+      },
+      "steady": {
+        "mesolimbic": 100.8,
+        "mesocortical": 78.5,
+        "d2_occupancy": 70,
+        "ht2a_occupancy": 90,
+        "symptoms": {
+          "positive": 5.5,
+          "hallucinations": 5.2,
+          "delusions": 6.9,
+          "anxiety": 13.5,
+          "negative": 33.0,
+          "cognitive": 28.9,
+          "eps": 7.6,
+          "metabolic": 38.0,
+          "functioning": 80.6
+        }
+      },
+      "timeline": [
+        {
+          "week": 0.0,
+          "mesolimbic": 185.0,
+          "mesocortical": 45.0,
+          "d2_occupancy": 0.0,
+          "ht2a_occupancy": 0.0,
+          "positive": 98.5,
+          "hallucinations": 93.5,
+          "delusions": 90.6,
+          "anxiety": 78.9,
+          "negative": 88.9,
+          "cognitive": 79.1,
+          "eps": 0.0,
+          "metabolic": 0.0,
+          "functioning": 29.4
         },
         {
-          "week": 5,
-          "positive": 23,
-          "negative": 29,
-          "general": 54,
-          "total": 106,
-          "composite_index": -6,
-          "remission_threshold": false
+          "week": 0.5,
+          "mesolimbic": 181.9,
+          "mesocortical": 46.3,
+          "d2_occupancy": 14.4,
+          "ht2a_occupancy": 18.6,
+          "positive": 98.0,
+          "hallucinations": 93.1,
+          "delusions": 90.2,
+          "anxiety": 78.6,
+          "negative": 87.9,
+          "cognitive": 77.7,
+          "eps": 0.0,
+          "metabolic": 1.6,
+          "functioning": 29.9
         },
         {
-          "week": 6,
-          "positive": 23,
-          "negative": 26,
-          "general": 52,
-          "total": 101,
-          "composite_index": -3,
-          "remission_threshold": false
+          "week": 1.0,
+          "mesolimbic": 174.7,
+          "mesocortical": 49.1,
+          "d2_occupancy": 25.9,
+          "ht2a_occupancy": 33.3,
+          "positive": 96.5,
+          "hallucinations": 91.7,
+          "delusions": 88.8,
+          "anxiety": 77.5,
+          "negative": 85.1,
+          "cognitive": 74.3,
+          "eps": 0.0,
+          "metabolic": 3.2,
+          "functioning": 31.5
         },
         {
-          "week": 7,
-          "positive": 22,
-          "negative": 30,
-          "general": 50,
-          "total": 102,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 1.5,
+          "mesolimbic": 166.0,
+          "mesocortical": 52.6,
+          "d2_occupancy": 35.0,
+          "ht2a_occupancy": 45.0,
+          "positive": 93.0,
+          "hallucinations": 88.3,
+          "delusions": 85.7,
+          "anxiety": 74.9,
+          "negative": 81.0,
+          "cognitive": 69.6,
+          "eps": 0.0,
+          "metabolic": 4.8,
+          "functioning": 34.4
         },
         {
-          "week": 8,
-          "positive": 22,
-          "negative": 27,
-          "general": 51,
-          "total": 100,
-          "composite_index": -5,
-          "remission_threshold": false
+          "week": 2.0,
+          "mesolimbic": 157.0,
+          "mesocortical": 56.1,
+          "d2_occupancy": 42.2,
+          "ht2a_occupancy": 54.3,
+          "positive": 86.3,
+          "hallucinations": 81.9,
+          "delusions": 79.6,
+          "anxiety": 70.1,
+          "negative": 76.1,
+          "cognitive": 64.4,
+          "eps": 0.0,
+          "metabolic": 6.3,
+          "functioning": 38.8
         },
         {
-          "week": 9,
-          "positive": 21,
-          "negative": 26,
-          "general": 49,
-          "total": 96,
-          "composite_index": -5,
-          "remission_threshold": false
+          "week": 2.5,
+          "mesolimbic": 148.6,
+          "mesocortical": 59.5,
+          "d2_occupancy": 48.0,
+          "ht2a_occupancy": 61.7,
+          "positive": 75.6,
+          "hallucinations": 71.8,
+          "delusions": 70.0,
+          "anxiety": 62.4,
+          "negative": 70.5,
+          "cognitive": 59.0,
+          "eps": 0.0,
+          "metabolic": 7.9,
+          "functioning": 44.7
         },
         {
-          "week": 10,
-          "positive": 21,
-          "negative": 28,
-          "general": 51,
-          "total": 100,
-          "composite_index": -7,
-          "remission_threshold": false
+          "week": 3.0,
+          "mesolimbic": 140.9,
+          "mesocortical": 62.6,
+          "d2_occupancy": 52.5,
+          "ht2a_occupancy": 67.5,
+          "positive": 62.0,
+          "hallucinations": 58.9,
+          "delusions": 57.8,
+          "anxiety": 52.7,
+          "negative": 65.0,
+          "cognitive": 54.0,
+          "eps": 0.1,
+          "metabolic": 9.5,
+          "functioning": 51.5
         },
         {
-          "week": 11,
-          "positive": 21,
-          "negative": 29,
-          "general": 50,
-          "total": 100,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 3.5,
+          "mesolimbic": 134.2,
+          "mesocortical": 65.2,
+          "d2_occupancy": 56.1,
+          "ht2a_occupancy": 72.1,
+          "positive": 48.3,
+          "hallucinations": 45.8,
+          "delusions": 45.4,
+          "anxiety": 42.8,
+          "negative": 59.8,
+          "cognitive": 49.6,
+          "eps": 0.3,
+          "metabolic": 11.1,
+          "functioning": 58.3
         },
         {
-          "week": 12,
-          "positive": 20,
-          "negative": 29,
-          "general": 48,
-          "total": 97,
-          "composite_index": -9,
-          "remission_threshold": false
+          "week": 4.0,
+          "mesolimbic": 128.4,
+          "mesocortical": 67.5,
+          "d2_occupancy": 59.0,
+          "ht2a_occupancy": 75.8,
+          "positive": 36.6,
+          "hallucinations": 34.8,
+          "delusions": 34.9,
+          "anxiety": 34.4,
+          "negative": 55.1,
+          "cognitive": 45.8,
+          "eps": 0.5,
+          "metabolic": 12.7,
+          "functioning": 64.1
         },
         {
-          "week": 13,
-          "positive": 19,
-          "negative": 26,
-          "general": 49,
-          "total": 94,
-          "composite_index": -7,
-          "remission_threshold": false
+          "week": 4.5,
+          "mesolimbic": 123.5,
+          "mesocortical": 69.5,
+          "d2_occupancy": 61.2,
+          "ht2a_occupancy": 78.8,
+          "positive": 27.8,
+          "hallucinations": 26.4,
+          "delusions": 27.0,
+          "anxiety": 28.2,
+          "negative": 51.1,
+          "cognitive": 42.6,
+          "eps": 0.9,
+          "metabolic": 14.2,
+          "functioning": 68.6
         },
         {
-          "week": 14,
-          "positive": 19,
-          "negative": 27,
-          "general": 48,
-          "total": 94,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 5.0,
+          "mesolimbic": 119.4,
+          "mesocortical": 71.1,
+          "d2_occupancy": 63.1,
+          "ht2a_occupancy": 81.1,
+          "positive": 21.5,
+          "hallucinations": 20.4,
+          "delusions": 21.3,
+          "anxiety": 23.7,
+          "negative": 47.7,
+          "cognitive": 40.0,
+          "eps": 1.4,
+          "metabolic": 15.8,
+          "functioning": 71.9
         },
         {
-          "week": 15,
-          "positive": 20,
-          "negative": 28,
-          "general": 48,
-          "total": 96,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 5.5,
+          "mesolimbic": 116.0,
+          "mesocortical": 72.5,
+          "d2_occupancy": 64.5,
+          "ht2a_occupancy": 82.9,
+          "positive": 17.1,
+          "hallucinations": 16.2,
+          "delusions": 17.4,
+          "anxiety": 20.7,
+          "negative": 44.9,
+          "cognitive": 37.8,
+          "eps": 2.0,
+          "metabolic": 17.4,
+          "functioning": 74.3
         },
         {
-          "week": 16,
-          "positive": 20,
-          "negative": 28,
-          "general": 48,
-          "total": 96,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 6.0,
+          "mesolimbic": 113.2,
+          "mesocortical": 73.6,
+          "d2_occupancy": 65.6,
+          "ht2a_occupancy": 84.4,
+          "positive": 14.0,
+          "hallucinations": 13.3,
+          "delusions": 14.6,
+          "anxiety": 18.6,
+          "negative": 42.6,
+          "cognitive": 36.1,
+          "eps": 2.7,
+          "metabolic": 19.0,
+          "functioning": 76.1
         },
         {
-          "week": 17,
-          "positive": 21,
-          "negative": 30,
-          "general": 47,
-          "total": 98,
-          "composite_index": -9,
-          "remission_threshold": false
+          "week": 6.5,
+          "mesolimbic": 110.9,
+          "mesocortical": 74.5,
+          "d2_occupancy": 66.5,
+          "ht2a_occupancy": 85.5,
+          "positive": 11.9,
+          "hallucinations": 11.3,
+          "delusions": 12.7,
+          "anxiety": 17.2,
+          "negative": 40.7,
+          "cognitive": 34.7,
+          "eps": 3.3,
+          "metabolic": 20.6,
+          "functioning": 77.3
         },
         {
-          "week": 18,
-          "positive": 20,
-          "negative": 28,
-          "general": 45,
-          "total": 93,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 7.0,
+          "mesolimbic": 109.1,
+          "mesocortical": 75.2,
+          "d2_occupancy": 67.2,
+          "ht2a_occupancy": 86.5,
+          "positive": 10.3,
+          "hallucinations": 9.8,
+          "delusions": 11.3,
+          "anxiety": 16.2,
+          "negative": 39.2,
+          "cognitive": 33.6,
+          "eps": 4.0,
+          "metabolic": 22.2,
+          "functioning": 78.2
         },
         {
-          "week": 19,
-          "positive": 21,
-          "negative": 29,
-          "general": 48,
-          "total": 98,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 7.5,
+          "mesolimbic": 107.5,
+          "mesocortical": 75.9,
+          "d2_occupancy": 67.8,
+          "ht2a_occupancy": 87.2,
+          "positive": 9.2,
+          "hallucinations": 8.7,
+          "delusions": 10.3,
+          "anxiety": 15.5,
+          "negative": 38.0,
+          "cognitive": 32.7,
+          "eps": 4.5,
+          "metabolic": 23.8,
+          "functioning": 78.9
         },
         {
-          "week": 20,
-          "positive": 20,
-          "negative": 27,
-          "general": 48,
-          "total": 95,
-          "composite_index": -7,
-          "remission_threshold": false
+          "week": 8.0,
+          "mesolimbic": 106.3,
+          "mesocortical": 76.4,
+          "d2_occupancy": 68.3,
+          "ht2a_occupancy": 87.8,
+          "positive": 8.4,
+          "hallucinations": 7.9,
+          "delusions": 9.5,
+          "anxiety": 15.0,
+          "negative": 37.1,
+          "cognitive": 31.9,
+          "eps": 5.0,
+          "metabolic": 25.3,
+          "functioning": 79.3
         },
         {
-          "week": 21,
-          "positive": 20,
-          "negative": 28,
-          "general": 50,
-          "total": 98,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 8.5,
+          "mesolimbic": 105.2,
+          "mesocortical": 76.8,
+          "d2_occupancy": 68.6,
+          "ht2a_occupancy": 88.2,
+          "positive": 7.7,
+          "hallucinations": 7.3,
+          "delusions": 9.0,
+          "anxiety": 14.7,
+          "negative": 36.3,
+          "cognitive": 31.3,
+          "eps": 5.5,
+          "metabolic": 26.9,
+          "functioning": 79.7
         },
         {
-          "week": 22,
-          "positive": 24,
-          "negative": 32,
-          "general": 52,
-          "total": 108,
-          "composite_index": -8,
-          "remission_threshold": false
+          "week": 9.0,
+          "mesolimbic": 104.4,
+          "mesocortical": 77.1,
+          "d2_occupancy": 68.9,
+          "ht2a_occupancy": 88.6,
+          "positive": 7.2,
+          "hallucinations": 6.9,
+          "delusions": 8.5,
+          "anxiety": 14.4,
+          "negative": 35.6,
+          "cognitive": 30.9,
+          "eps": 5.9,
+          "metabolic": 28.5,
+          "functioning": 79.9
         },
         {
-          "week": 23,
-          "positive": 27,
-          "negative": 31,
-          "general": 56,
-          "total": 114,
-          "composite_index": -4,
-          "remission_threshold": false
+          "week": 9.5,
+          "mesolimbic": 103.7,
+          "mesocortical": 77.4,
+          "d2_occupancy": 69.1,
+          "ht2a_occupancy": 88.9,
+          "positive": 6.9,
+          "hallucinations": 6.5,
+          "delusions": 8.2,
+          "anxiety": 14.2,
+          "negative": 35.1,
+          "cognitive": 30.5,
+          "eps": 6.2,
+          "metabolic": 30.1,
+          "functioning": 80.1
         },
         {
-          "week": 24,
-          "positive": 29,
-          "negative": 32,
-          "general": 56,
-          "total": 117,
-          "composite_index": -3,
-          "remission_threshold": false
+          "week": 10.0,
+          "mesolimbic": 103.2,
+          "mesocortical": 77.6,
+          "d2_occupancy": 69.3,
+          "ht2a_occupancy": 89.1,
+          "positive": 6.6,
+          "hallucinations": 6.3,
+          "delusions": 7.9,
+          "anxiety": 14.0,
+          "negative": 34.7,
+          "cognitive": 30.2,
+          "eps": 6.5,
+          "metabolic": 31.7,
+          "functioning": 80.2
         },
         {
-          "week": 25,
-          "positive": 30,
-          "negative": 32,
-          "general": 58,
-          "total": 120,
-          "composite_index": -2,
-          "remission_threshold": false
+          "week": 10.5,
+          "mesolimbic": 102.7,
+          "mesocortical": 77.8,
+          "d2_occupancy": 69.5,
+          "ht2a_occupancy": 89.3,
+          "positive": 6.4,
+          "hallucinations": 6.0,
+          "delusions": 7.7,
+          "anxiety": 13.9,
+          "negative": 34.4,
+          "cognitive": 29.9,
+          "eps": 6.7,
+          "metabolic": 33.2,
+          "functioning": 80.2
         },
         {
-          "week": 26,
-          "positive": 27,
-          "negative": 33,
-          "general": 51,
-          "total": 111,
-          "composite_index": -6,
-          "remission_threshold": false
+          "week": 11.0,
+          "mesolimbic": 102.4,
+          "mesocortical": 77.9,
+          "d2_occupancy": 69.6,
+          "ht2a_occupancy": 89.4,
+          "positive": 6.2,
+          "hallucinations": 5.9,
+          "delusions": 7.6,
+          "anxiety": 13.8,
+          "negative": 34.1,
+          "cognitive": 29.7,
+          "eps": 6.9,
+          "metabolic": 34.8,
+          "functioning": 80.2
         },
         {
-          "week": 27,
-          "positive": 23,
-          "negative": 30,
-          "general": 48,
-          "total": 101,
-          "composite_index": -7,
-          "remission_threshold": false
+          "week": 11.5,
+          "mesolimbic": 102.1,
+          "mesocortical": 78.0,
+          "d2_occupancy": 69.7,
+          "ht2a_occupancy": 89.6,
+          "positive": 6.0,
+          "hallucinations": 5.7,
+          "delusions": 7.4,
+          "anxiety": 13.8,
+          "negative": 33.9,
+          "cognitive": 29.6,
+          "eps": 7.0,
+          "metabolic": 36.4,
+          "functioning": 80.2
         },
         {
-          "week": 28,
-          "positive": 24,
-          "negative": 30,
-          "general": 50,
-          "total": 104,
-          "composite_index": -6,
-          "remission_threshold": false
-        },
-        {
-          "week": 29,
-          "positive": 25,
-          "negative": 31,
-          "general": 57,
-          "total": 113,
-          "composite_index": -6,
-          "remission_threshold": false
-        },
-        {
-          "week": 30,
-          "positive": 28,
-          "negative": 32,
-          "general": 56,
-          "total": 116,
-          "composite_index": -4,
-          "remission_threshold": false
-        },
-        {
-          "week": 31,
-          "positive": 30,
-          "negative": 32,
-          "general": 60,
-          "total": 122,
-          "composite_index": -2,
-          "remission_threshold": false
-        },
-        {
-          "week": 32,
-          "positive": 28,
-          "negative": 31,
-          "general": 54,
-          "total": 113,
-          "composite_index": -3,
-          "remission_threshold": false
-        },
-        {
-          "week": 33,
-          "positive": 25,
-          "negative": 30,
-          "general": 52,
-          "total": 107,
-          "composite_index": -5,
-          "remission_threshold": false
-        },
-        {
-          "week": 34,
-          "positive": 22,
-          "negative": 28,
-          "general": 49,
-          "total": 99,
-          "composite_index": -6,
-          "remission_threshold": false
-        },
-        {
-          "week": 35,
-          "positive": 19,
-          "negative": 29,
-          "general": 48,
-          "total": 96,
-          "composite_index": -10,
-          "remission_threshold": false
-        },
-        {
-          "week": 36,
-          "positive": 21,
-          "negative": 26,
-          "general": 47,
-          "total": 94,
-          "composite_index": -5,
-          "remission_threshold": false
-        },
-        {
-          "week": 37,
-          "positive": 22,
-          "negative": 28,
-          "general": 49,
-          "total": 99,
-          "composite_index": -6,
-          "remission_threshold": false
-        },
-        {
-          "week": 38,
-          "positive": 20,
-          "negative": 27,
-          "general": 48,
-          "total": 95,
-          "composite_index": -7,
-          "remission_threshold": false
-        },
-        {
-          "week": 39,
-          "positive": 20,
-          "negative": 28,
-          "general": 50,
-          "total": 98,
-          "composite_index": -8,
-          "remission_threshold": false
-        },
-        {
-          "week": 40,
-          "positive": 21,
-          "negative": 28,
-          "general": 50,
-          "total": 99,
-          "composite_index": -7,
-          "remission_threshold": false
-        },
-        {
-          "week": 41,
-          "positive": 21,
-          "negative": 27,
-          "general": 50,
-          "total": 98,
-          "composite_index": -6,
-          "remission_threshold": false
-        },
-        {
-          "week": 42,
-          "positive": 20,
-          "negative": 28,
-          "general": 47,
-          "total": 95,
-          "composite_index": -8,
-          "remission_threshold": false
-        },
-        {
-          "week": 43,
-          "positive": 19,
-          "negative": 29,
-          "general": 53,
-          "total": 101,
-          "composite_index": -10,
-          "remission_threshold": false
-        },
-        {
-          "week": 44,
-          "positive": 23,
-          "negative": 29,
-          "general": 48,
-          "total": 100,
-          "composite_index": -6,
-          "remission_threshold": false
-        },
-        {
-          "week": 45,
-          "positive": 19,
-          "negative": 29,
-          "general": 48,
-          "total": 96,
-          "composite_index": -10,
-          "remission_threshold": false
-        },
-        {
-          "week": 46,
-          "positive": 21,
-          "negative": 30,
-          "general": 47,
-          "total": 98,
-          "composite_index": -9,
-          "remission_threshold": false
-        },
-        {
-          "week": 47,
-          "positive": 18,
-          "negative": 29,
-          "general": 46,
-          "total": 93,
-          "composite_index": -11,
-          "remission_threshold": false
-        },
-        {
-          "week": 48,
-          "positive": 20,
-          "negative": 31,
-          "general": 50,
-          "total": 101,
-          "composite_index": -11,
-          "remission_threshold": false
-        },
-        {
-          "week": 49,
-          "positive": 20,
-          "negative": 30,
-          "general": 49,
-          "total": 99,
-          "composite_index": -10,
-          "remission_threshold": false
-        },
-        {
-          "week": 50,
-          "positive": 22,
-          "negative": 25,
-          "general": 48,
-          "total": 95,
-          "composite_index": -3,
-          "remission_threshold": false
-        },
-        {
-          "week": 51,
-          "positive": 20,
-          "negative": 28,
-          "general": 48,
-          "total": 96,
-          "composite_index": -8,
-          "remission_threshold": false
-        },
-        {
-          "week": 52,
-          "positive": 19,
-          "negative": 29,
-          "general": 48,
-          "total": 96,
-          "composite_index": -10,
-          "remission_threshold": false
+          "week": 12.0,
+          "mesolimbic": 101.8,
+          "mesocortical": 78.1,
+          "d2_occupancy": 69.7,
+          "ht2a_occupancy": 89.6,
+          "positive": 5.9,
+          "hallucinations": 5.6,
+          "delusions": 7.3,
+          "anxiety": 13.7,
+          "negative": 33.7,
+          "cognitive": 29.4,
+          "eps": 7.1,
+          "metabolic": 38.0,
+          "functioning": 80.2
         }
       ],
-      "relapses": [
+      "milestones": [
         {
-          "week": 21,
-          "magnitude": 0.44,
-          "duration_weeks": 7
+          "week": 0,
+          "title_he": "תחילת טיפול",
+          "takeaway_he": "התרופה מתחילה לתפוס קולטני D2; המוח עדיין בסערה."
         },
         {
-          "week": 27,
-          "magnitude": 0.45,
-          "duration_weeks": 8
+          "week": 3.5,
+          "title_he": "החרדה יורדת",
+          "takeaway_he": "ההרגעה מורגשת עוד לפני שההזיות נעלמות."
+        },
+        {
+          "week": 3.5,
+          "title_he": "הנתיב המזוקורטיקלי מתאושש",
+          "takeaway_he": "חסימת 5-HT2A משחררת דופמין בקורטקס – האפתיה פוחתת."
+        },
+        {
+          "week": 5.0,
+          "title_he": "ההזיות שוככות",
+          "takeaway_he": "חסימת D2 מורידה את הסערה המזולימבית מתחת לסף ההזיה."
+        },
+        {
+          "week": 7.0,
+          "title_he": "חזרה לתפקוד",
+          "takeaway_he": "איזון בין שני הנתיבים מחזיר את היכולת לעבוד, ללמוד ולהתחבר."
         }
-      ],
-      "assessment": {
-        "severity": {
-          "key": "marked",
-          "label_he": "ניכר"
-        },
-        "response": {
-          "percent_reduction": 32.0,
-          "responder_20": true,
-          "responder_50": false,
-          "label_he": "תגובה מינימלית"
-        },
-        "remission": {
-          "symptomatic_at_endpoint": false,
-          "consecutive_weeks_at_endpoint": 0,
-          "longest_streak_weeks": 0,
-          "sustained_remission": false,
-          "required_weeks": 26,
-          "label_he": "ללא רמיסיה"
-        },
-        "dominant_dimension": {
-          "key": "negative",
-          "label_he": "תמונה שלילית-דומיננטית"
-        },
-        "relapse_count": 2,
-        "flags": [
-          {
-            "code": "persistent_negative",
-            "label_he": "תסמינים שליליים מתמשכים – לשקול שיקום קוגניטיבי"
-          },
-          {
-            "code": "recurrent_relapse",
-            "label_he": "הישנויות חוזרות – לבדוק היענות / טיפול בזריקה"
-          },
-          {
-            "code": "depressive_symptoms",
-            "label_he": "תסמיני דיכאון – הערכת סיכון אובדני"
-          }
-        ]
+      ]
+    }
+  ],
+  "occupancy_sweep": [
+    {
+      "d2_occupancy": 0,
+      "fga": {
+        "mesolimbic": 185.0,
+        "mesocortical": 45.0,
+        "positive": 98.5,
+        "negative": 88.9,
+        "eps": 0.0,
+        "functioning": 28.4
+      },
+      "sga": {
+        "mesolimbic": 185.0,
+        "mesocortical": 45.0,
+        "positive": 98.5,
+        "negative": 88.9,
+        "eps": 0.0,
+        "functioning": 26.3
       }
     },
     {
-      "key": "integrated_care",
-      "name": "Integrated care: SGA + CBTp + family intervention",
-      "name_he": "טיפול משולב – תרופה, CBTp ומשפחה",
-      "treatment": {
-        "key": "sga_plus_cbtp",
-        "name": "SGA + CBTp + family intervention",
-        "name_he": "דור שני + CBTp + התערבות משפחתית",
-        "drug_class": "SGA + psychosocial",
-        "efficacy": {
-          "positive": 0.7,
-          "negative": 0.5,
-          "general": 0.6
-        },
-        "adherence": 0.94
+      "d2_occupancy": 5,
+      "fga": {
+        "mesolimbic": 179.0,
+        "mesocortical": 43.7,
+        "positive": 97.5,
+        "negative": 89.9,
+        "eps": 0.0,
+        "functioning": 28.3
       },
-      "baseline": {
-        "positive": 38,
-        "negative": 27,
-        "general": 55,
-        "total": 120,
-        "severity": {
-          "key": "severe",
-          "label_he": "חמור"
-        },
-        "items": {
-          "P1": 5,
-          "P2": 5,
-          "P3": 6,
-          "P4": 5,
-          "P5": 5,
-          "P6": 6,
-          "P7": 6,
-          "N1": 3,
-          "N2": 5,
-          "N3": 4,
-          "N4": 4,
-          "N5": 4,
-          "N6": 4,
-          "N7": 3,
-          "G1": 3,
-          "G2": 4,
-          "G3": 4,
-          "G4": 5,
-          "G5": 3,
-          "G6": 2,
-          "G7": 3,
-          "G8": 1,
-          "G9": 2,
-          "G10": 4,
-          "G11": 4,
-          "G12": 2,
-          "G13": 6,
-          "G14": 5,
-          "G15": 4,
-          "G16": 3
-        }
+      "sga": {
+        "mesolimbic": 179.0,
+        "mesocortical": 47.4,
+        "positive": 97.5,
+        "negative": 86.8,
+        "eps": 0.0,
+        "functioning": 27.6
+      }
+    },
+    {
+      "d2_occupancy": 10,
+      "fga": {
+        "mesolimbic": 173.0,
+        "mesocortical": 42.4,
+        "positive": 95.9,
+        "negative": 90.9,
+        "eps": 0.0,
+        "functioning": 28.4
       },
-      "endpoint": {
-        "positive": 18,
-        "negative": 19,
-        "general": 34,
-        "total": 71,
-        "severity": {
-          "key": "mild",
-          "label_he": "קל"
-        }
+      "sga": {
+        "mesolimbic": 173.0,
+        "mesocortical": 49.8,
+        "positive": 95.9,
+        "negative": 84.3,
+        "eps": 0.0,
+        "functioning": 29.3
+      }
+    },
+    {
+      "d2_occupancy": 15,
+      "fga": {
+        "mesolimbic": 167.0,
+        "mesocortical": 41.1,
+        "positive": 93.5,
+        "negative": 91.7,
+        "eps": 0.0,
+        "functioning": 28.8
       },
-      "trajectory": [
-        {
-          "week": 0,
-          "positive": 38,
-          "negative": 27,
-          "general": 55,
-          "total": 120,
-          "composite_index": 11,
-          "remission_threshold": false
-        },
-        {
-          "week": 1,
-          "positive": 32,
-          "negative": 25,
-          "general": 51,
-          "total": 108,
-          "composite_index": 7,
-          "remission_threshold": false
-        },
-        {
-          "week": 2,
-          "positive": 31,
-          "negative": 24,
-          "general": 47,
-          "total": 102,
-          "composite_index": 7,
-          "remission_threshold": false
-        },
-        {
-          "week": 3,
-          "positive": 28,
-          "negative": 23,
-          "general": 46,
-          "total": 97,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 4,
-          "positive": 27,
-          "negative": 23,
-          "general": 41,
-          "total": 91,
-          "composite_index": 4,
-          "remission_threshold": false
-        },
-        {
-          "week": 5,
-          "positive": 27,
-          "negative": 21,
-          "general": 40,
-          "total": 88,
-          "composite_index": 6,
-          "remission_threshold": false
-        },
-        {
-          "week": 6,
-          "positive": 23,
-          "negative": 21,
-          "general": 40,
-          "total": 84,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 7,
-          "positive": 25,
-          "negative": 20,
-          "general": 38,
-          "total": 83,
-          "composite_index": 5,
-          "remission_threshold": false
-        },
-        {
-          "week": 8,
-          "positive": 23,
-          "negative": 18,
-          "general": 35,
-          "total": 76,
-          "composite_index": 5,
-          "remission_threshold": true
-        },
-        {
-          "week": 9,
-          "positive": 23,
-          "negative": 19,
-          "general": 37,
-          "total": 79,
-          "composite_index": 4,
-          "remission_threshold": false
-        },
-        {
-          "week": 10,
-          "positive": 20,
-          "negative": 18,
-          "general": 34,
-          "total": 72,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 11,
-          "positive": 18,
-          "negative": 21,
-          "general": 35,
-          "total": 74,
-          "composite_index": -3,
-          "remission_threshold": true
-        },
-        {
-          "week": 12,
-          "positive": 21,
-          "negative": 19,
-          "general": 35,
-          "total": 75,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 13,
-          "positive": 20,
-          "negative": 19,
-          "general": 33,
-          "total": 72,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 14,
-          "positive": 19,
-          "negative": 18,
-          "general": 34,
-          "total": 71,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 15,
-          "positive": 18,
-          "negative": 18,
-          "general": 35,
-          "total": 71,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 16,
-          "positive": 19,
-          "negative": 18,
-          "general": 33,
-          "total": 70,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 17,
-          "positive": 19,
-          "negative": 17,
-          "general": 34,
-          "total": 70,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 18,
-          "positive": 19,
-          "negative": 18,
-          "general": 35,
-          "total": 72,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 19,
-          "positive": 19,
-          "negative": 18,
-          "general": 33,
-          "total": 70,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 20,
-          "positive": 17,
-          "negative": 17,
-          "general": 32,
-          "total": 66,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 21,
-          "positive": 17,
-          "negative": 18,
-          "general": 34,
-          "total": 69,
-          "composite_index": -1,
-          "remission_threshold": true
-        },
-        {
-          "week": 22,
-          "positive": 18,
-          "negative": 15,
-          "general": 34,
-          "total": 67,
-          "composite_index": 3,
-          "remission_threshold": true
-        },
-        {
-          "week": 23,
-          "positive": 19,
-          "negative": 18,
-          "general": 32,
-          "total": 69,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 24,
-          "positive": 17,
-          "negative": 17,
-          "general": 35,
-          "total": 69,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 25,
-          "positive": 18,
-          "negative": 19,
-          "general": 33,
-          "total": 70,
-          "composite_index": -1,
-          "remission_threshold": true
-        },
-        {
-          "week": 26,
-          "positive": 16,
-          "negative": 19,
-          "general": 34,
-          "total": 69,
-          "composite_index": -3,
-          "remission_threshold": true
-        },
-        {
-          "week": 27,
-          "positive": 17,
-          "negative": 17,
-          "general": 33,
-          "total": 67,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 28,
-          "positive": 18,
-          "negative": 17,
-          "general": 32,
-          "total": 67,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 29,
-          "positive": 17,
-          "negative": 19,
-          "general": 32,
-          "total": 68,
-          "composite_index": -2,
-          "remission_threshold": true
-        },
-        {
-          "week": 30,
-          "positive": 16,
-          "negative": 17,
-          "general": 36,
-          "total": 69,
-          "composite_index": -1,
-          "remission_threshold": true
-        },
-        {
-          "week": 31,
-          "positive": 17,
-          "negative": 20,
-          "general": 32,
-          "total": 69,
-          "composite_index": -3,
-          "remission_threshold": true
-        },
-        {
-          "week": 32,
-          "positive": 18,
-          "negative": 18,
-          "general": 37,
-          "total": 73,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 33,
-          "positive": 19,
-          "negative": 17,
-          "general": 31,
-          "total": 67,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 34,
-          "positive": 19,
-          "negative": 17,
-          "general": 31,
-          "total": 67,
-          "composite_index": 2,
-          "remission_threshold": true
-        },
-        {
-          "week": 35,
-          "positive": 18,
-          "negative": 18,
-          "general": 34,
-          "total": 70,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 36,
-          "positive": 19,
-          "negative": 18,
-          "general": 32,
-          "total": 69,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 37,
-          "positive": 17,
-          "negative": 17,
-          "general": 31,
-          "total": 65,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 38,
-          "positive": 19,
-          "negative": 18,
-          "general": 31,
-          "total": 68,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 39,
-          "positive": 19,
-          "negative": 15,
-          "general": 32,
-          "total": 66,
-          "composite_index": 4,
-          "remission_threshold": true
-        },
-        {
-          "week": 40,
-          "positive": 19,
-          "negative": 20,
-          "general": 34,
-          "total": 73,
-          "composite_index": -1,
-          "remission_threshold": true
-        },
-        {
-          "week": 41,
-          "positive": 18,
-          "negative": 17,
-          "general": 33,
-          "total": 68,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 42,
-          "positive": 18,
-          "negative": 18,
-          "general": 32,
-          "total": 68,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 43,
-          "positive": 20,
-          "negative": 17,
-          "general": 34,
-          "total": 71,
-          "composite_index": 3,
-          "remission_threshold": true
-        },
-        {
-          "week": 44,
-          "positive": 18,
-          "negative": 18,
-          "general": 32,
-          "total": 68,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 45,
-          "positive": 18,
-          "negative": 19,
-          "general": 33,
-          "total": 70,
-          "composite_index": -1,
-          "remission_threshold": true
-        },
-        {
-          "week": 46,
-          "positive": 18,
-          "negative": 18,
-          "general": 33,
-          "total": 69,
-          "composite_index": 0,
-          "remission_threshold": true
-        },
-        {
-          "week": 47,
-          "positive": 17,
-          "negative": 19,
-          "general": 33,
-          "total": 69,
-          "composite_index": -2,
-          "remission_threshold": true
-        },
-        {
-          "week": 48,
-          "positive": 19,
-          "negative": 18,
-          "general": 32,
-          "total": 69,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 49,
-          "positive": 15,
-          "negative": 19,
-          "general": 34,
-          "total": 68,
-          "composite_index": -4,
-          "remission_threshold": true
-        },
-        {
-          "week": 50,
-          "positive": 19,
-          "negative": 18,
-          "general": 33,
-          "total": 70,
-          "composite_index": 1,
-          "remission_threshold": true
-        },
-        {
-          "week": 51,
-          "positive": 15,
-          "negative": 18,
-          "general": 35,
-          "total": 68,
-          "composite_index": -3,
-          "remission_threshold": true
-        },
-        {
-          "week": 52,
-          "positive": 18,
-          "negative": 19,
-          "general": 34,
-          "total": 71,
-          "composite_index": -1,
-          "remission_threshold": true
-        }
-      ],
-      "relapses": [],
-      "assessment": {
-        "severity": {
-          "key": "mild",
-          "label_he": "קל"
-        },
-        "response": {
-          "percent_reduction": 54.4,
-          "responder_20": true,
-          "responder_50": true,
-          "label_he": "שיפור ניכר"
-        },
-        "remission": {
-          "symptomatic_at_endpoint": true,
-          "consecutive_weeks_at_endpoint": 43,
-          "longest_streak_weeks": 43,
-          "sustained_remission": true,
-          "required_weeks": 26,
-          "label_he": "רמיסיה מלאה"
-        },
-        "dominant_dimension": {
-          "key": "mixed",
-          "label_he": "תמונה מעורבת"
-        },
-        "relapse_count": 0,
-        "flags": [
-          {
-            "code": "stable",
-            "label_he": "מהלך יציב – המשך מעקב"
-          }
-        ]
+      "sga": {
+        "mesolimbic": 167.0,
+        "mesocortical": 52.2,
+        "positive": 93.5,
+        "negative": 81.5,
+        "eps": 0.0,
+        "functioning": 31.4
+      }
+    },
+    {
+      "d2_occupancy": 20,
+      "fga": {
+        "mesolimbic": 160.9,
+        "mesocortical": 39.8,
+        "positive": 89.7,
+        "negative": 92.5,
+        "eps": 0.0,
+        "functioning": 29.8
+      },
+      "sga": {
+        "mesolimbic": 160.9,
+        "mesocortical": 54.6,
+        "positive": 89.7,
+        "negative": 78.3,
+        "eps": 0.0,
+        "functioning": 34.1
+      }
+    },
+    {
+      "d2_occupancy": 25,
+      "fga": {
+        "mesolimbic": 154.9,
+        "mesocortical": 38.6,
+        "positive": 84.0,
+        "negative": 93.2,
+        "eps": 0.0,
+        "functioning": 31.4
+      },
+      "sga": {
+        "mesolimbic": 154.9,
+        "mesocortical": 57.0,
+        "positive": 84.0,
+        "negative": 74.8,
+        "eps": 0.0,
+        "functioning": 37.6
+      }
+    },
+    {
+      "d2_occupancy": 30,
+      "fga": {
+        "mesolimbic": 148.9,
+        "mesocortical": 37.3,
+        "positive": 76.1,
+        "negative": 93.9,
+        "eps": 0.0,
+        "functioning": 33.9
+      },
+      "sga": {
+        "mesolimbic": 148.9,
+        "mesocortical": 59.4,
+        "positive": 76.1,
+        "negative": 70.8,
+        "eps": 0.0,
+        "functioning": 42.0
+      }
+    },
+    {
+      "d2_occupancy": 35,
+      "fga": {
+        "mesolimbic": 142.9,
+        "mesocortical": 36.0,
+        "positive": 65.9,
+        "negative": 94.5,
+        "eps": 0.0,
+        "functioning": 37.2
+      },
+      "sga": {
+        "mesolimbic": 142.9,
+        "mesocortical": 61.8,
+        "positive": 65.9,
+        "negative": 66.5,
+        "eps": 0.0,
+        "functioning": 47.3
+      }
+    },
+    {
+      "d2_occupancy": 40,
+      "fga": {
+        "mesolimbic": 136.9,
+        "mesocortical": 34.7,
+        "positive": 54.0,
+        "negative": 95.0,
+        "eps": 0.0,
+        "functioning": 41.1
+      },
+      "sga": {
+        "mesolimbic": 136.9,
+        "mesocortical": 64.2,
+        "positive": 54.0,
+        "negative": 61.9,
+        "eps": 0.0,
+        "functioning": 53.3
+      }
+    },
+    {
+      "d2_occupancy": 45,
+      "fga": {
+        "mesolimbic": 130.9,
+        "mesocortical": 33.4,
+        "positive": 41.5,
+        "negative": 95.5,
+        "eps": 0.0,
+        "functioning": 45.2
+      },
+      "sga": {
+        "mesolimbic": 130.9,
+        "mesocortical": 66.6,
+        "positive": 41.5,
+        "negative": 57.1,
+        "eps": 0.0,
+        "functioning": 59.6
+      }
+    },
+    {
+      "d2_occupancy": 50,
+      "fga": {
+        "mesolimbic": 124.9,
+        "mesocortical": 32.1,
+        "positive": 30.1,
+        "negative": 95.9,
+        "eps": 0.1,
+        "functioning": 48.9
+      },
+      "sga": {
+        "mesolimbic": 124.9,
+        "mesocortical": 68.9,
+        "positive": 30.1,
+        "negative": 52.2,
+        "eps": 0.1,
+        "functioning": 65.6
+      }
+    },
+    {
+      "d2_occupancy": 55,
+      "fga": {
+        "mesolimbic": 118.9,
+        "mesocortical": 30.8,
+        "positive": 20.7,
+        "negative": 96.3,
+        "eps": 0.2,
+        "functioning": 52.0
+      },
+      "sga": {
+        "mesolimbic": 118.9,
+        "mesocortical": 71.3,
+        "positive": 20.7,
+        "negative": 47.2,
+        "eps": 0.2,
+        "functioning": 70.8
+      }
+    },
+    {
+      "d2_occupancy": 60,
+      "fga": {
+        "mesolimbic": 112.8,
+        "mesocortical": 29.5,
+        "positive": 13.6,
+        "negative": 96.7,
+        "eps": 0.7,
+        "functioning": 54.2
+      },
+      "sga": {
+        "mesolimbic": 112.8,
+        "mesocortical": 73.7,
+        "positive": 13.6,
+        "negative": 42.3,
+        "eps": 0.7,
+        "functioning": 75.1
+      }
+    },
+    {
+      "d2_occupancy": 65,
+      "fga": {
+        "mesolimbic": 106.8,
+        "mesocortical": 28.3,
+        "positive": 8.7,
+        "negative": 97.0,
+        "eps": 2.3,
+        "functioning": 55.5
+      },
+      "sga": {
+        "mesolimbic": 106.8,
+        "mesocortical": 76.1,
+        "positive": 8.7,
+        "negative": 37.5,
+        "eps": 2.3,
+        "functioning": 78.4
+      }
+    },
+    {
+      "d2_occupancy": 70,
+      "fga": {
+        "mesolimbic": 100.8,
+        "mesocortical": 27.0,
+        "positive": 5.5,
+        "negative": 97.3,
+        "eps": 7.6,
+        "functioning": 55.7
+      },
+      "sga": {
+        "mesolimbic": 100.8,
+        "mesocortical": 78.5,
+        "positive": 5.5,
+        "negative": 33.0,
+        "eps": 7.6,
+        "functioning": 80.6
+      }
+    },
+    {
+      "d2_occupancy": 75,
+      "fga": {
+        "mesolimbic": 94.8,
+        "mesocortical": 25.7,
+        "positive": 3.4,
+        "negative": 97.6,
+        "eps": 22.3,
+        "functioning": 54.1
+      },
+      "sga": {
+        "mesolimbic": 94.8,
+        "mesocortical": 80.9,
+        "positive": 3.4,
+        "negative": 28.7,
+        "eps": 22.3,
+        "functioning": 80.7
+      }
+    },
+    {
+      "d2_occupancy": 80,
+      "fga": {
+        "mesolimbic": 88.8,
+        "mesocortical": 24.4,
+        "positive": 2.1,
+        "negative": 97.8,
+        "eps": 50.0,
+        "functioning": 50.2
+      },
+      "sga": {
+        "mesolimbic": 88.8,
+        "mesocortical": 81.6,
+        "positive": 2.1,
+        "negative": 27.6,
+        "eps": 50.0,
+        "functioning": 77.5
+      }
+    },
+    {
+      "d2_occupancy": 85,
+      "fga": {
+        "mesolimbic": 82.8,
+        "mesocortical": 23.1,
+        "positive": 1.3,
+        "negative": 98.0,
+        "eps": 77.7,
+        "functioning": 46.2
+      },
+      "sga": {
+        "mesolimbic": 82.8,
+        "mesocortical": 80.1,
+        "positive": 1.3,
+        "negative": 30.1,
+        "eps": 77.7,
+        "functioning": 72.6
+      }
+    },
+    {
+      "d2_occupancy": 90,
+      "fga": {
+        "mesolimbic": 76.8,
+        "mesocortical": 21.8,
+        "positive": 0.8,
+        "negative": 98.2,
+        "eps": 92.4,
+        "functioning": 44.1
+      },
+      "sga": {
+        "mesolimbic": 76.8,
+        "mesocortical": 78.7,
+        "positive": 0.8,
+        "negative": 32.7,
+        "eps": 92.4,
+        "functioning": 69.6
+      }
+    },
+    {
+      "d2_occupancy": 95,
+      "fga": {
+        "mesolimbic": 70.8,
+        "mesocortical": 20.5,
+        "positive": 0.5,
+        "negative": 98.4,
+        "eps": 97.7,
+        "functioning": 43.3
+      },
+      "sga": {
+        "mesolimbic": 70.8,
+        "mesocortical": 77.2,
+        "positive": 0.5,
+        "negative": 35.4,
+        "eps": 97.7,
+        "functioning": 67.8
+      }
+    },
+    {
+      "d2_occupancy": 100,
+      "fga": {
+        "mesolimbic": 64.8,
+        "mesocortical": 19.2,
+        "positive": 0.3,
+        "negative": 98.6,
+        "eps": 99.3,
+        "functioning": 43.0
+      },
+      "sga": {
+        "mesolimbic": 64.8,
+        "mesocortical": 75.8,
+        "positive": 0.3,
+        "negative": 38.2,
+        "eps": 99.3,
+        "functioning": 66.5
       }
     }
   ]
