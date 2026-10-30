@@ -7,10 +7,10 @@
   <meta name="description" content="מצגת אקדמית אינטראקטיבית בת 20 שקופיות על סכיזופרניה – ממדים קליניים, נוירוביולוגיים ותפיסתיים, כולל סימולציה תלת-ממדית ורכיב חישובי בפייתון.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body data-palette="#3987e5,#d95926,#199e70">
+<body data-palette="#15803d,#3b82f6,#b91c1c">
 
 <div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
 
@@ -23,9 +23,9 @@
       <h1 class="title">מבוא לסכיזופרניה:<br><span class="accent">פסיכוביולוגיה, תפיסה וטכנולוגיה</span></h1>
       <p class="lead">ממדים קליניים, נוירוביולוגיים ותפיסתיים – והדגמה חישובית של הערכת תסמינים</p>
       <div class="presenters">
-        <div class="presenter"><span class="presenter__role">מציג/ה</span><span class="presenter__name">[שם הסטודנט/ית הראשון/ה]</span></div>
-        <div class="presenter"><span class="presenter__role">מציג/ה</span><span class="presenter__name">[שם הסטודנט/ית השני/ה]</span></div>
-        <div class="presenter"><span class="presenter__role">מנחה</span><span class="presenter__name">[שם המנחה · שם המוסד]</span></div>
+        <div class="presenter"><span class="presenter__role">מגישים</span><span class="presenter__name">עומרי אבל</span></div>
+        <div class="presenter"><span class="presenter__role">מגישים</span><span class="presenter__name">אלה אדרי</span></div>
+        <div class="presenter presenter--lecturer"><span class="presenter__role">מרצה</span><span class="presenter__name">ד״ר יורם ראובן סגל</span></div>
       </div>
       <p class="hint">ניווט: מקשי החיצים (→ אחורה, ← קדימה) · <bdi>F</bdi> למסך מלא · <bdi>Home</bdi>/<bdi>End</bdi> לתחילת וסוף המצגת</p>
     </div>
@@ -61,24 +61,29 @@
 
   <!-- ===================== 3 ===================== -->
   <section class="slide" data-title="קריטריונים אבחוניים">
-    <div class="slide__inner">
+    <div class="slide__inner slide__inner--wide">
       <p class="eyebrow">חלק א׳ · הממד הקליני</p>
       <h2>קריטריונים אבחוניים לפי <bdi>DSM-5-TR</bdi></h2>
       <div class="criteria">
         <div class="criterion criterion--wide">
           <span class="criterion__letter">A</span>
-          <div>
+          <div class="criterion__body">
             <strong>תסמינים אופייניים</strong> – שניים או יותר מהבאים, כל אחד למשך חלק ניכר מתקופה של חודש (פחות אם טופלו), ולפחות אחד מבין 1–3:
-            <ol class="inline-list">
-              <li>מחשבות שווא</li><li>הזיות</li><li>דיבור לא מאורגן</li><li>התנהגות לא מאורגנת או קטטונית</li><li>תסמינים שליליים</li>
-            </ol>
+            <ul class="symptom-list" aria-label="חמשת התסמינים של קריטריון A">
+              <li class="is-pos"><span class="num">1</span>מחשבות שווא</li>
+              <li class="is-pos"><span class="num">2</span>הזיות</li>
+              <li class="is-pos"><span class="num">3</span>דיבור לא מאורגן</li>
+              <li class="is-pos"><span class="num">4</span>התנהגות לא מאורגנת או קטטונית</li>
+              <li class="is-neg"><span class="num">5</span>תסמינים שליליים</li>
+            </ul>
+            <div class="symptom-key"><span><i class="is-pos"></i>תסמינים חיוביים</span><span><i class="is-neg"></i>תסמינים שליליים</span></div>
           </div>
         </div>
-        <div class="criterion"><span class="criterion__letter">B</span><div><strong>ירידה תפקודית</strong> – בעבודה, ביחסים בין-אישיים או בטיפול עצמי, ביחס לרמה שקדמה להופעת ההפרעה.</div></div>
-        <div class="criterion"><span class="criterion__letter">C</span><div><strong>משך</strong> – סימני ההפרעה נמשכים לפחות שישה חודשים, מתוכם חודש לפחות של תסמינים פעילים (קריטריון A).</div></div>
-        <div class="criterion"><span class="criterion__letter">D</span><div><strong>שלילת</strong> הפרעה סכיזואפקטיבית והפרעות מצב רוח עם מאפיינים פסיכוטיים.</div></div>
-        <div class="criterion"><span class="criterion__letter">E</span><div><strong>שלילת</strong> השפעה פיזיולוגית של חומר או מצב רפואי כללי.</div></div>
-        <div class="criterion"><span class="criterion__letter">F</span><div>בהינתן היסטוריה של אוטיזם או הפרעת תקשורת – האבחנה ניתנת רק אם קיימות מחשבות שווא או הזיות בולטות.</div></div>
+        <div class="criterion"><span class="criterion__letter">B</span><div class="criterion__body"><strong>ירידה תפקודית</strong> – בעבודה, ביחסים בין-אישיים או בטיפול עצמי, ביחס לרמה שקדמה להופעת ההפרעה.</div></div>
+        <div class="criterion"><span class="criterion__letter">C</span><div class="criterion__body"><strong>משך</strong> – סימני ההפרעה נמשכים לפחות שישה חודשים, מתוכם חודש לפחות של תסמינים פעילים (קריטריון A).</div></div>
+        <div class="criterion"><span class="criterion__letter">D</span><div class="criterion__body"><strong>שלילת</strong> הפרעה סכיזואפקטיבית והפרעות מצב רוח עם מאפיינים פסיכוטיים.</div></div>
+        <div class="criterion"><span class="criterion__letter">E</span><div class="criterion__body"><strong>שלילת</strong> השפעה פיזיולוגית של חומר או מצב רפואי כללי.</div></div>
+        <div class="criterion"><span class="criterion__letter">F</span><div class="criterion__body">בהינתן היסטוריה של אוטיזם או הפרעת תקשורת – האבחנה ניתנת רק אם קיימות מחשבות שווא או הזיות בולטות.</div></div>
       </div>
       <p class="footnote">ב-<bdi>DSM-5</bdi> בוטלו תת-הסוגים הקלאסיים (פרנואידית, הבפרנית וכו׳) לטובת הערכה ממדית של חומרת התסמינים.</p>
     </div>
@@ -239,8 +244,8 @@
             <button class="btn" id="simReset" type="button">איפוס</button>
             <button class="btn" id="simPause" type="button">השהיה</button>
           </div>
-          <p class="sim__note">מה מודגם: עיוות שדה הראייה (שינוי זווית הצפייה), אובייקטים ללא עיגון מרחבי, צבעוניות "סוחפת" ורעש שמיעתי בלתי צפוי – מאפיינים המתוארים בדיווחי מטופלים ובמחקרי סימולציה חינוכיים.</p>
-          <p class="sim__note sim__note--warn">אזהרה: הבהובים ותנועה. ההדגמה היא המחשה חינוכית מופשטת ואינה מייצגת חוויה של אדם ספציפי.</p>
+          <p class="note">מה מודגם: עיוות שדה הראייה (שינוי זווית הצפייה), אובייקטים ללא עיגון מרחבי, צבעוניות "סוחפת" ורעש שמיעתי בלתי צפוי – מאפיינים המתוארים בדיווחי מטופלים ובמחקרי סימולציה חינוכיים.</p>
+          <p class="note note--warn">אזהרה: הבהובים ותנועה. ההדגמה היא המחשה חינוכית מופשטת ואינה מייצגת חוויה של אדם ספציפי.</p>
         </aside>
       </div>
     </div>
@@ -370,8 +375,8 @@
   </section>
 
   <!-- ===================== 13 ===================== -->
-  <section class="slide" data-title="טיפול תרופתי">
-    <div class="slide__inner">
+  <section class="slide slide--treatments" data-title="טיפול תרופתי">
+    <div class="slide__inner slide__inner--wide">
       <p class="eyebrow">חלק ה׳ · טיפולים עכשוויים</p>
       <h2>טיפול תרופתי: אנטי-פסיכוטיים מדור ראשון ושני</h2>
       <table class="table">
