@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>מבוא לסכיזופרניה: פסיכוביולוגיה, תפיסה וטכנולוגיה</title>
+  <meta name="description" content="מצגת אקדמית אינטראקטיבית בת 20 שקופיות על סכיזופרניה – ממדים קליניים, נוירוביולוגיים ותפיסתיים, כולל סימולציה תלת-ממדית ורכיב חישובי בפייתון.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-palette="#3987e5,#d95926,#199e70">
+
+<div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
+
+<main class="deck" id="deck" aria-live="polite">
+
+  <!-- ===================== 1 ===================== -->
+  <section class="slide slide--title" data-title="שער">
+    <div class="slide__inner">
+      <p class="eyebrow">פרויקט גמר · הנדסה ופסיכולוגיה · תשפ״ז</p>
+      <h1 class="title">מבוא לסכיזופרניה:<br><span class="accent">פסיכוביולוגיה, תפיסה וטכנולוגיה</span></h1>
+      <p class="lead">ממדים קליניים, נוירוביולוגיים ותפיסתיים – והדגמה חישובית של הערכת תסמינים</p>
+      <div class="presenters">
+        <div class="presenter"><span class="presenter__role">מציג/ה</span><span class="presenter__name">[שם הסטודנט/ית הראשון/ה]</span></div>
+        <div class="presenter"><span class="presenter__role">מציג/ה</span><span class="presenter__name">[שם הסטודנט/ית השני/ה]</span></div>
+        <div class="presenter"><span class="presenter__role">מנחה</span><span class="presenter__name">[שם המנחה · שם המוסד]</span></div>
+      </div>
+      <p class="hint">ניווט: מקשי החיצים (→ אחורה, ← קדימה) · <bdi>F</bdi> למסך מלא · <bdi>Home</bdi>/<bdi>End</bdi> לתחילת וסוף המצגת</p>
+    </div>
+  </section>
+
+  <!-- ===================== 2 ===================== -->
+  <section class="slide" data-title="הגדרה קלינית">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק א׳ · הממד הקליני</p>
+      <h2>הגדרה קלינית ואפידמיולוגיה</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>מהי סכיזופרניה?</h3>
+          <ul>
+            <li>הפרעה פסיכוטית כרונית והטרוגנית, הפוגעת בחשיבה, בתפיסה, ברגש ובתפקוד.</li>
+            <li>מאופיינת בשילוב של תסמינים חיוביים, שליליים, קוגניטיביים ואפקטיביים, בעוצמה ובמהלך משתנים.</li>
+            <li>התפיסה העכשווית: ספקטרום של הפרעות (<bdi>schizophrenia spectrum</bdi>) ולא ישות אחידה, עם מודל נוירו-התפתחותי של אינטראקציה בין גנים לסביבה.</li>
+            <li>גורמי סיכון סביבתיים מתועדים: סיבוכי היריון ולידה, שימוש בקנאביס בגיל ההתבגרות, הגירה, עיור וטראומה בילדות.</li>
+          </ul>
+        </div>
+        <div class="card card--stats">
+          <h3>מספרים מרכזיים</h3>
+          <div class="stat-row">
+            <div class="stat"><span class="stat__label">שכיחות לאורך החיים</span><span class="stat__value"><bdi>0.3–0.7%</bdi></span><span class="stat__note">DSM-5-TR</span></div>
+            <div class="stat"><span class="stat__label">תורשתיות (מחקרי תאומים)</span><span class="stat__value"><bdi>≈80%</bdi></span><span class="stat__note">סיכון פוליגני</span></div>
+            <div class="stat"><span class="stat__label">גיל הופעה אופייני</span><span class="stat__value"><bdi>18–25</bdi></span><span class="stat__note">בנשים – שיא שני מאוחר</span></div>
+            <div class="stat"><span class="stat__label">קיצור תוחלת חיים</span><span class="stat__value"><bdi>≈15</bdi> שנים</span><span class="stat__note">בעיקר תחלואה קרדיו-מטבולית</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3 ===================== -->
+  <section class="slide" data-title="קריטריונים אבחוניים">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק א׳ · הממד הקליני</p>
+      <h2>קריטריונים אבחוניים לפי <bdi>DSM-5-TR</bdi></h2>
+      <div class="criteria">
+        <div class="criterion criterion--wide">
+          <span class="criterion__letter">A</span>
+          <div>
+            <strong>תסמינים אופייניים</strong> – שניים או יותר מהבאים, כל אחד למשך חלק ניכר מתקופה של חודש (פחות אם טופלו), ולפחות אחד מבין 1–3:
+            <ol class="inline-list">
+              <li>מחשבות שווא</li><li>הזיות</li><li>דיבור לא מאורגן</li><li>התנהגות לא מאורגנת או קטטונית</li><li>תסמינים שליליים</li>
+            </ol>
+          </div>
+        </div>
+        <div class="criterion"><span class="criterion__letter">B</span><div><strong>ירידה תפקודית</strong> – בעבודה, ביחסים בין-אישיים או בטיפול עצמי, ביחס לרמה שקדמה להופעת ההפרעה.</div></div>
+        <div class="criterion"><span class="criterion__letter">C</span><div><strong>משך</strong> – סימני ההפרעה נמשכים לפחות שישה חודשים, מתוכם חודש לפחות של תסמינים פעילים (קריטריון A).</div></div>
+        <div class="criterion"><span class="criterion__letter">D</span><div><strong>שלילת</strong> הפרעה סכיזואפקטיבית והפרעות מצב רוח עם מאפיינים פסיכוטיים.</div></div>
+        <div class="criterion"><span class="criterion__letter">E</span><div><strong>שלילת</strong> השפעה פיזיולוגית של חומר או מצב רפואי כללי.</div></div>
+        <div class="criterion"><span class="criterion__letter">F</span><div>בהינתן היסטוריה של אוטיזם או הפרעת תקשורת – האבחנה ניתנת רק אם קיימות מחשבות שווא או הזיות בולטות.</div></div>
+      </div>
+      <p class="footnote">ב-<bdi>DSM-5</bdi> בוטלו תת-הסוגים הקלאסיים (פרנואידית, הבפרנית וכו׳) לטובת הערכה ממדית של חומרת התסמינים.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 4 ===================== -->
+  <section class="slide" data-title="תסמינים חיוביים ושליליים">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק א׳ · הממד הקליני</p>
+      <h2>תסמינים חיוביים לעומת תסמינים שליליים</h2>
+      <div class="cols">
+        <div class="card card--positive">
+          <h3><span class="dot dot--pos"></span> תסמינים חיוביים – "תוספת" לחוויה</h3>
+          <ul>
+            <li><strong>הזיות</strong> – בעיקר שמיעתיות (קולות מדברים על המטופל או אליו), לעיתים חזותיות או גופניות.</li>
+            <li><strong>מחשבות שווא</strong> – רדיפה, ייחוס, גדלות, שליטה חיצונית, שידור או הכנסת מחשבות.</li>
+            <li><strong>הפרעה בצורת החשיבה</strong> – התפרקות אסוציאציות, דיבור לא קוהרנטי, נאולוגיזמים.</li>
+            <li><strong>התנהגות לא מאורגנת</strong> – התנהגות ביזארית, אגיטציה, תנוחות קטטוניות.</li>
+          </ul>
+          <p class="card__foot">מגיבים יחסית היטב לטיפול תרופתי; נוטים להתפרץ באפיזודות.</p>
+        </div>
+        <div class="card card--negative">
+          <h3><span class="dot dot--neg"></span> תסמינים שליליים – "גריעה" מהתפקוד</h3>
+          <ul>
+            <li><strong>השטחה רגשית</strong> – טווח ביטוי רגשי מצומצם, מבט "ריק".</li>
+            <li><strong>אלוגיה</strong> – דלות דיבור ותוכן.</li>
+            <li><strong>אבוליציה</strong> – חוסר יוזמה ורצייה, קושי להתמיד בפעילות ממוקדת מטרה.</li>
+            <li><strong>אנהדוניה</strong> – בעיקר צפייתית (<bdi>anticipatory</bdi>): קושי לצפות הנאה, ולאו דווקא לחוות אותה.</li>
+            <li><strong>א-סוציאליות</strong> – ירידה בעניין בקשר חברתי.</li>
+          </ul>
+          <p class="card__foot">מנבאים את התוצאה התפקודית; תגובה מוגבלת לתרופות. יש להבחין בין שליליים ראשוניים לבין משניים (לדיכאון, לתופעות לוואי או לבידוד).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5 ===================== -->
+  <section class="slide" data-title="השערת הדופמין">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ב׳ · הממד הנוירוביולוגי</p>
+      <h2>השערת הדופמין – מהגרסה הקלאסית לגרסה השלישית</h2>
+      <div class="cols cols--3-2">
+        <div class="card">
+          <ul>
+            <li><strong>הגרסה הקלאסית (שנות ה-60–70):</strong> כל התרופות האנטי-פסיכוטיות היעילות חוסמות קולטני <bdi>D2</bdi>, ואמפטמין (משחרר דופמין) מחולל פסיכוזה – מכאן הסקה על עודף דופמין.</li>
+            <li><strong>הגרסה השנייה:</strong> הבחנה אזורית – פעילות יתר במסלול המזולימבי מסבירה תסמינים חיוביים, ותת-פעילות במסלול המזוקורטיקלי מסבירה תסמינים שליליים וקוגניטיביים.</li>
+            <li><strong>הגרסה השלישית (<bdi>Howes &amp; Kapur, 2009</bdi>):</strong> הפרעה פרה-סינפטית בסטריאטום – עלייה ביכולת סינתזת הדופמין ובשחרורו, כפי שנמדד ב-<bdi>PET</bdi>; מסלול סופי משותף של גורמי סיכון רבים.</li>
+            <li><strong>סליינס חריג (<bdi>Kapur, 2003</bdi>):</strong> שחרור דופמין לא תלוי-הקשר מייחס חשיבות לגירויים ניטרליים; מחשבות השווא הן ניסיון קוגניטיבי להסביר את החוויה.</li>
+          </ul>
+        </div>
+        <div class="card card--flow">
+          <h3>שרשרת הסבר</h3>
+          <div class="flow">
+            <div class="flow__step">גורמי סיכון<br><small>גנטיקה · סטרס · קנאביס</small></div>
+            <div class="flow__arrow" aria-hidden="true">←</div>
+            <div class="flow__step">דופמין פרה-סינפטי מוגבר<br><small>סטריאטום אסוציאטיבי</small></div>
+            <div class="flow__arrow" aria-hidden="true">←</div>
+            <div class="flow__step">סליינס חריג<br><small>גירויים ניטרליים "חשובים"</small></div>
+            <div class="flow__arrow" aria-hidden="true">←</div>
+            <div class="flow__step">מחשבות שווא והזיות<br><small>פרשנות לחוויה</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6 ===================== -->
+  <section class="slide" data-title="גלוטמט">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ב׳ · הממד הנוירוביולוגי</p>
+      <h2>הפרעה בוויסות הגלוטמט – השערת תת-תפקוד קולטן <bdi>NMDA</bdi></h2>
+      <div class="cols">
+        <div class="card">
+          <h3>הראיות</h3>
+          <ul>
+            <li>אנטגוניסטים לקולטן <bdi>NMDA</bdi> – פנציקלידין (<bdi>PCP</bdi>) וקטמין – מחוללים באנשים בריאים תסמינים חיוביים, שליליים <em>וקוגניטיביים</em>, בניגוד לאמפטמין שמחולל בעיקר תסמינים חיוביים (<bdi>Javitt &amp; Zukin, 1991</bdi>).</li>
+            <li>דלקת מוח אוטואימונית נגד קולטן <bdi>NMDA</bdi> (<bdi>anti-NMDAR encephalitis</bdi>) מתבטאת בתמונה פסיכוטית.</li>
+            <li>מחקרי גנום (<bdi>GWAS</bdi>) מצביעים על גנים במסלול הגלוטמטרגי והסינפטי (למשל <bdi>GRIN2A</bdi>, <bdi>GRM3</bdi>).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>המנגנון המשוער</h3>
+          <ul>
+            <li>תת-תפקוד של קולטני <bdi>NMDA</bdi> על אינטרנוירונים מעכבים מסוג פרוואלבומין (<bdi>PV+ GABA</bdi>) בקורטקס הפרה-פרונטלי.</li>
+            <li>כתוצאה – ירידה בעיכוב, "דיס-אינהיביציה" של תאי הפירמידה, רעש עצבי ופגיעה בתנודות גמא הנדרשות לזיכרון עבודה.</li>
+            <li>השלכה למטה: ויסות לקוי של נוירוני הדופמין במזנצפלון – כך שהשערת הגלוטמט ממוקמת "במעלה הזרם" של השערת הדופמין.</li>
+            <li>יישומים טיפוליים (ניסויים): אגוניסטים לאתר הגליצין, מעכבי <bdi>GlyT1</bdi>, אגוניסטים ל-<bdi>mGluR2/3</bdi> – עם תוצאות מעורבות עד כה.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7 ===================== -->
+  <section class="slide" data-title="הקורטקס הפרה-פרונטלי">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ב׳ · הממד הנוירוביולוגי</p>
+      <h2>תת-תפקוד של הקורטקס הפרה-פרונטלי</h2>
+      <div class="cols cols--3">
+        <div class="card">
+          <h3>היפו-פרונטליות</h3>
+          <ul>
+            <li><bdi>Weinberger et al. (1986)</bdi>: זרימת דם מופחתת בקורטקס הפרה-פרונטלי הדורסו-לטרלי (<bdi>DLPFC</bdi>) בזמן ביצוע מבחן ויסקונסין.</li>
+            <li>בדימות תפקודי: הפעלה לא יעילה במשימות זיכרון עבודה – לעיתים "יתר" בעומס נמוך ו"חסר" בעומס גבוה.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>ממצאים מבניים</h3>
+          <ul>
+            <li>הפחתה בנפח חומר אפור, ובמיוחד בצפיפות הסינפסות והזיזים הדנדריטיים בשכבה III.</li>
+            <li>הרחבת חדרי המוח ודילול קורטיקלי מתקדם בשנים שסביב ההתפרצות.</li>
+            <li>היפוקמפוס ותלמוס מעורבים גם הם – רשת ולא אזור יחיד.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>המודל הנוירו-התפתחותי</h3>
+          <ul>
+            <li>השערת הגיזום הסינפטי המופרז (<bdi>Feinberg, 1982</bdi>) בגיל ההתבגרות.</li>
+            <li>תמיכה גנטית: וריאנטים של גן המשלים <bdi>C4A</bdi> הקשורים להגברת גיזום בתיווך מיקרוגליה (<bdi>Sekar et al., 2016</bdi>).</li>
+            <li>מסביר מדוע ההפרעה מתפרצת דווקא בעשור השני–שלישי לחיים.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 8 ===================== -->
+  <section class="slide slide--sim" data-title="סימולציה תלת-ממדית">
+    <div class="slide__inner slide__inner--wide">
+      <p class="eyebrow">חלק ג׳ · הממד התפיסתי</p>
+      <h2>סימולציה תלת-ממדית: חוויית ההלוצינציה והעיוות התפיסתי</h2>
+      <div class="sim">
+        <div class="sim__stage" id="simStage" aria-label="סצנה תלת-ממדית המדמה עיוות תפיסתי">
+          <div class="sim__overlay" id="simOverlay">
+            <p>הסצנה ממחישה עיוות פרספקטיבה, גאומטריות צפות ו"סחף תפיסתי". לחצו כדי להפעיל.</p>
+            <button class="btn btn--primary" id="simStart" type="button">הפעלת הסימולציה</button>
+          </div>
+        </div>
+        <aside class="sim__controls" aria-label="בקרת הסימולציה">
+          <h3>בקרות</h3>
+          <label class="control">
+            <span>עוצמת העיוות <output id="intensityOut">55</output></span>
+            <input type="range" id="intensity" min="0" max="100" value="55" dir="ltr">
+          </label>
+          <label class="control control--toggle">
+            <input type="checkbox" id="drift" checked>
+            <span>סחף מצלמה ועיוות פרספקטיבה</span>
+          </label>
+          <label class="control control--toggle">
+            <input type="checkbox" id="wireframe">
+            <span>מצב רשת (<bdi>wireframe</bdi>)</span>
+          </label>
+          <label class="control control--toggle">
+            <input type="checkbox" id="audio">
+            <span>הזיות שמיעה (רחש, לחשושים ודרון)</span>
+          </label>
+          <div class="control control--buttons">
+            <button class="btn" id="simReset" type="button">איפוס</button>
+            <button class="btn" id="simPause" type="button">השהיה</button>
+          </div>
+          <p class="sim__note">מה מודגם: עיוות שדה הראייה (שינוי זווית הצפייה), אובייקטים ללא עיגון מרחבי, צבעוניות "סוחפת" ורעש שמיעתי בלתי צפוי – מאפיינים המתוארים בדיווחי מטופלים ובמחקרי סימולציה חינוכיים.</p>
+          <p class="sim__note sim__note--warn">אזהרה: הבהובים ותנועה. ההדגמה היא המחשה חינוכית מופשטת ואינה מייצגת חוויה של אדם ספציפי.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 9 ===================== -->
+  <section class="slide" data-title="ליקויים קוגניטיביים">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ד׳ · קוגניציה, רגש ותפקוד</p>
+      <h2>ליקויים קוגניטיביים – הממד "השקט" של ההפרעה</h2>
+      <div class="cols cols--2-3">
+        <div class="card">
+          <ul>
+            <li>קיימים אצל רוב המטופלים, בממוצע 1–2 סטיות תקן מתחת לאוכלוסייה הכללית.</li>
+            <li>מופיעים <strong>לפני</strong> האפיזודה הפסיכוטית הראשונה ונותרים יציבים יחסית לאורך המהלך.</li>
+            <li>המנבא החזק ביותר של התוצאה התפקודית – יותר מהתסמינים החיוביים (<bdi>Green, 1996</bdi>).</li>
+            <li>אינם מגיבים באופן ממשי לתרופות אנטי-פסיכוטיות; מגיבים חלקית לשיקום קוגניטיבי.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>שבעת התחומים של סוללת <bdi>MATRICS</bdi></h3>
+          <div class="chips">
+            <span class="chip">מהירות עיבוד</span>
+            <span class="chip">קשב וערנות</span>
+            <span class="chip">זיכרון עבודה</span>
+            <span class="chip">למידה מילולית</span>
+            <span class="chip">למידה חזותית</span>
+            <span class="chip">הסקה ופתרון בעיות</span>
+            <span class="chip chip--accent">קוגניציה חברתית</span>
+          </div>
+          <p class="card__foot">קוגניציה חברתית – זיהוי רגשות, תיאוריית המיינד וסגנון ייחוס – מתווכת בין הקוגניציה הבסיסית לבין התפקוד בקהילה.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 10 ===================== -->
+  <section class="slide" data-title="תסמינים אפקטיביים">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ד׳ · קוגניציה, רגש ותפקוד</p>
+      <h2>תסמינים אפקטיביים וסיכון אובדני</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>דיכאון וחרדה</h3>
+          <ul>
+            <li>תסמיני דיכאון מופיעים אצל חלק ניכר מהמטופלים – בפרודרום, במהלך האפיזודה ואחריה ("דיכאון פוסט-פסיכוטי").</li>
+            <li>אבחנה מבדלת מאתגרת: דיכאון ↔ תסמינים שליליים ↔ אקינזיה כתופעת לוואי של נוגדי-פסיכוזה.</li>
+            <li>חרדה חברתית, <bdi>OCD</bdi> ו-<bdi>PTSD</bdi> נלווים לעיתים קרובות, ולעיתים נובעים מהחוויה הפסיכוטית עצמה ומהאשפוז.</li>
+            <li>"פרדוקס הרגש": חוויית הרגש ברגע נתון שמורה ברובה, אך הביטוי החיצוני והציפייה להנאה פגועים.</li>
+          </ul>
+        </div>
+        <div class="card card--alert">
+          <h3>סיכון אובדני</h3>
+          <div class="stat-row stat-row--2">
+            <div class="stat"><span class="stat__label">תמותה מהתאבדות לאורך החיים</span><span class="stat__value"><bdi>≈5%</bdi></span><span class="stat__note"><bdi>Hor &amp; Taylor, 2010</bdi></span></div>
+            <div class="stat"><span class="stat__label">ניסיונות אובדניים</span><span class="stat__value"><bdi>20–40%</bdi></span><span class="stat__note">לפחות ניסיון אחד</span></div>
+          </div>
+          <ul>
+            <li>גורמי סיכון: דיכאון, תובנה גבוהה בשלב מוקדם, שימוש בחומרים, ניסיונות קודמים, התקופה שלאחר שחרור מאשפוז.</li>
+            <li>קלוזאפין היא התרופה היחידה עם ראיות להפחתת התנהגות אובדנית (<bdi>InterSePT</bdi>).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 11 ===================== -->
+  <section class="slide" data-title="ירידה תפקודית">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ד׳ · קוגניציה, רגש ותפקוד</p>
+      <h2>ירידה תפקודית – מהתסמין לחיי היום-יום</h2>
+      <div class="cols cols--3">
+        <div class="card">
+          <h3>תחומי פגיעה</h3>
+          <ul>
+            <li>תעסוקה: שיעורי העסקה תחרותית נמוכים (לרוב 10–20%).</li>
+            <li>מגורים עצמאיים וניהול משק בית.</li>
+            <li>קשרים חברתיים וזוגיות.</li>
+            <li>רכישת השכלה – ההתפרצות בגיל הלימודים קוטעת מסלול.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>מה מנבא תפקוד?</h3>
+          <ul>
+            <li>קוגניציה וקוגניציה חברתית.</li>
+            <li>תסמינים שליליים, ובמיוחד אבוליציה.</li>
+            <li>משך הפסיכוזה הלא-מטופלת (<bdi>DUP</bdi>) – ככל שארוך יותר, התוצאה גרועה יותר.</li>
+            <li>תמיכה משפחתית, תעסוקה נתמכת, היענות לטיפול.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>בריאות גופנית</h3>
+          <ul>
+            <li>תוחלת חיים מקוצרת בכ-15 שנים; הגורם המרכזי – מחלות לב וכלי דם.</li>
+            <li>תסמונת מטבולית: השמנה, סוכרת, דיסליפידמיה – חלקה תרופתית.</li>
+            <li>עישון בשיעורים גבוהים במיוחד.</li>
+            <li>פער בנגישות לטיפול רפואי כללי ("מוות מוקדם ניתן למניעה").</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 12 ===================== -->
+  <section class="slide" data-title="מהלך ופרוגנוזה">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ד׳ · קוגניציה, רגש ותפקוד</p>
+      <h2>מהלך ההפרעה ופרוגנוזה</h2>
+      <ol class="timeline">
+        <li><span class="timeline__phase">פרמורבידי</span><span class="timeline__desc">הבדלים עדינים בקוגניציה, במוטוריקה ובחברתיות בילדות</span></li>
+        <li><span class="timeline__phase">פרודרום</span><span class="timeline__desc">נסיגה חברתית, ירידה בתפקוד, חוויות פסיכוטיות מוחלשות – "מצב סיכון גבוה" (<bdi>CHR</bdi>)</span></li>
+        <li><span class="timeline__phase">אפיזודה ראשונה</span><span class="timeline__desc">תסמינים חיוביים מלאים; התערבות מוקדמת משפרת תוצאה</span></li>
+        <li><span class="timeline__phase">הישנויות וייצוב</span><span class="timeline__desc">מהלך גלי; הפסקת תרופות מעלה סיכון להישנות משמעותית בתוך שנה</span></li>
+        <li><span class="timeline__phase">מהלך ארוך טווח</span><span class="timeline__desc">הטרוגני: מהחלמה ועד מהלך כרוני; ההידרדרות המרבית מתרחשת לרוב בחמש השנים הראשונות</span></li>
+      </ol>
+      <div class="cols">
+        <div class="card">
+          <h3>מנבאי פרוגנוזה טובה</h3>
+          <p>התחלה חדה ומאוחרת, גורם מעורר מזוהה, תפקוד פרמורבידי טוב, תסמינים אפקטיביים בולטים, תמיכה משפחתית, <bdi>DUP</bdi> קצר.</p>
+        </div>
+        <div class="card">
+          <h3>מנבאי פרוגנוזה גרועה</h3>
+          <p>התחלה הדרגתית ומוקדמת, תסמינים שליליים בולטים, ליקוי קוגניטיבי ניכר, שימוש בחומרים, היעדר תובנה, בידוד חברתי. שיעור החלמה (קלינית ותפקודית) במטא-אנליזה: כ-13.5% (<bdi>Jääskeläinen et al., 2013</bdi>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 13 ===================== -->
+  <section class="slide" data-title="טיפול תרופתי">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ה׳ · טיפולים עכשוויים</p>
+      <h2>טיפול תרופתי: אנטי-פסיכוטיים מדור ראשון ושני</h2>
+      <table class="table">
+        <thead>
+          <tr><th></th><th>דור ראשון (<bdi>FGA</bdi>, "טיפיים")</th><th>דור שני (<bdi>SGA</bdi>, "א-טיפיים")</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>דוגמאות</th><td>הלופרידול, כלורפרומזין, פרפנזין</td><td>ריספרידון, אולנזפין, קווטיאפין, אריפיפרזול, קלוזאפין</td></tr>
+          <tr><th>מנגנון</th><td>אנטגוניזם לקולטן <bdi>D2</bdi></td><td>אנטגוניזם <bdi>D2</bdi> + <bdi>5-HT2A</bdi>; אריפיפרזול – אגוניסט חלקי ל-<bdi>D2</bdi></td></tr>
+          <tr><th>יעילות</th><td>טובה לתסמינים חיוביים; מוגבלת לשליליים</td><td>דומה בתסמינים חיוביים; קלוזאפין עדיפה בעמידות לטיפול</td></tr>
+          <tr><th>תופעות לוואי עיקריות</th><td>תופעות אקסטרה-פירמידליות, דיסקינזיה מאוחרת, היפרפרולקטינמיה</td><td>עלייה במשקל, תסמונת מטבולית, סדציה; קלוזאפין – אגרנולוציטוזיס (ניטור ספירת דם)</td></tr>
+          <tr><th>ראיות מרכזיות</th><td colspan="2"><bdi>CATIE (Lieberman et al., 2005)</bdi>: יעילות דומה בין הדורות, שיעורי הפסקה גבוהים בכולם; מטא-אנליזת רשת (<bdi>Huhn et al., 2019</bdi>): הבדלים קטנים ביעילות, גדולים בפרופיל תופעות הלוואי</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote">זריקות ארוכות-טווח (<bdi>LAI</bdi>) מפחיתות הישנויות הנובעות מהיענות חלקית. טיפול ברמיסיה: המשך תרופתי מומלץ לפחות 1–2 שנים לאחר אפיזודה ראשונה.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 14 ===================== -->
+  <section class="slide" data-title="פסיכותרפיה ושיקום">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ה׳ · טיפולים עכשוויים</p>
+      <h2>פסיכותרפיה והתערבויות פסיכו-סוציאליות</h2>
+      <div class="grid-cards">
+        <div class="card"><h3>טיפול קוגניטיבי-התנהגותי לפסיכוזה (<bdi>CBTp</bdi>)</h3><p>עבודה על פרשנות הקולות ומחשבות השווא, הפחתת מצוקה ושיפור התמודדות. גודל אפקט קטן–בינוני על תסמינים חיוביים; מומלץ בהנחיות <bdi>NICE</bdi>.</p></div>
+        <div class="card"><h3>התערבות משפחתית</h3><p>פסיכו-חינוך, הפחתת "רגש מובע" גבוה ופתרון בעיות. מפחיתה הישנויות ואשפוזים חוזרים באופן עקבי.</p></div>
+        <div class="card"><h3>שיקום קוגניטיבי (<bdi>CRT</bdi>)</h3><p>אימון ממוחשב ואסטרטגי לקשב, זיכרון ותפקודים ניהוליים. גודל אפקט בינוני על קוגניציה ועל תפקוד כשמשולב בשיקום (<bdi>Wykes et al., 2011</bdi>).</p></div>
+        <div class="card"><h3>תעסוקה נתמכת (<bdi>IPS</bdi>)</h3><p>השמה מהירה בעבודה תחרותית עם ליווי מתמשך – מכפילה את שיעורי ההעסקה לעומת שיקום מקצועי מסורתי.</p></div>
+        <div class="card"><h3>אימון מיומנויות חברתיות</h3><p>תרגול מובנה של תקשורת, פתרון קונפליקטים וניהול תרופות; משפר מיומנויות אך העברה לחיי היום-יום מוגבלת.</p></div>
+        <div class="card"><h3>התערבות מוקדמת</h3><p>שירותי אפיזודה ראשונה (<bdi>RAISE</bdi>, <bdi>OPUS</bdi>): צוות רב-מקצועי, טיפול משולב ומינון תרופתי נמוך – משפרים תסמינים, תפקוד ואיכות חיים.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 15 ===================== -->
+  <section class="slide" data-title="בריאות דיגיטלית">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ה׳ · טיפולים עכשוויים</p>
+      <h2>התערבויות בריאות דיגיטלית וטכנולוגיה טיפולית</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>כלים קיימים</h3>
+          <ul>
+            <li><strong>מציאות מדומה:</strong> טיפול <bdi>AVATAR</bdi> – דיאלוג עם ייצוג דיגיטלי של "הקול" המטריד; ניסוי מבוקר הראה ירידה במצוקה מהקולות (<bdi>Craig et al., 2018</bdi>). <bdi>gameChange</bdi> – <bdi>VR</bdi> אוטומטי לחרדה אגורפובית בפסיכוזה (<bdi>Freeman et al., 2022</bdi>).</li>
+            <li><strong>ניטור באמצעות סמארטפון:</strong> דגימת חוויה אקולוגית (<bdi>EMA</bdi>) ופנוטיפ דיגיטלי – שינה, ניידות ודפוסי שימוש כסמנים מוקדמים להישנות (<bdi>CrossCheck</bdi>, <bdi>Ben-Zeev et al., 2017</bdi>).</li>
+            <li><strong>טלה-פסיכיאטריה</strong> ומעקב תרופתי מרחוק.</li>
+            <li><strong>למידת מכונה:</strong> ניבוי מעבר לפסיכוזה במצבי סיכון גבוה ושיוך למסלולי טיפול.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>אתגרים ומגבלות</h3>
+          <ul>
+            <li>מעורבות (<bdi>engagement</bdi>) נמוכה לאורך זמן ונשירה מהאפליקציות.</li>
+            <li>פרטיות וריבונות על נתונים – במיוחד כשמעורבות מחשבות רדיפה.</li>
+            <li>הפער הדיגיטלי: גישה למכשירים, אוריינות דיגיטלית, עוני.</li>
+            <li>תיקוף קליני – רוב הכלים טרם נבדקו בניסויים מבוקרים גדולים; סיכון להטיה אלגוריתמית.</li>
+            <li>שילוב במערכת הבריאות: החזר כספי, הכשרת צוותים, אחריות משפטית.</li>
+          </ul>
+          <p class="card__foot">המסר: הטכנולוגיה משלימה את הקשר הטיפולי ואינה מחליפה אותו.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 16 ===================== -->
+  <section class="slide" data-title="הרכיב החישובי">
+    <div class="slide__inner slide__inner--wide">
+      <p class="eyebrow">חלק ו׳ · הרכיב החישובי בפייתון</p>
+      <h2>סולם <bdi>PANSS</bdi> ומבנה הכלי החישובי</h2>
+      <div class="cols cols--2-3">
+        <div class="card card--code">
+          <h3>ארכיטקטורה</h3>
+          <ul class="arch">
+            <li><bdi class="mono">schizophrenia_analysis.py</bdi> – מודל ה-<bdi>PANSS</bdi> (30 פריטים, 1–7), פרופילי טיפול, סימולטור מסלול ומעריך אלגוריתמי.</li>
+            <li><bdi class="mono">main.py</bdi> – ממשק שורת פקודה שמריץ שלושה תרחישים ומייצא <bdi class="mono">metrics.json</bdi>.</li>
+            <li><bdi class="mono">app.js</bdi> – טוען את הקובץ ומצייר את התרשימים בשקופיות 16–18.</li>
+          </ul>
+          <pre class="code" dir="ltr"><code>$ python main.py --weeks 52 --seed 22
+Scenario                    Base  End  Red%  Remission
+First-episode, SGA mono      108   74  43.6  no
+Chronic course, FGA mono     127   96  32.0  no
+Integrated care (SGA+CBTp)   120   71  54.4  sustained
+wrote web/metrics.json</code></pre>
+          <p class="card__foot" id="metricsMeta">טוען נתונים…</p>
+        </div>
+        <div class="card">
+          <div class="chart-head">
+            <h3>ציוני <bdi>PANSS</bdi> לפי ממד</h3>
+            <div class="chart-filters" role="group" aria-label="שלב המדידה">
+              <button class="pill is-active" data-phase="baseline" type="button">בסיס (שבוע 0)</button>
+              <button class="pill" data-phase="endpoint" type="button">סיום המעקב</button>
+              <button class="pill pill--ghost" data-table="domainTable" type="button">תצוגת טבלה</button>
+            </div>
+          </div>
+          <div class="chart" id="domainChart"></div>
+          <div class="legend" id="domainLegend"></div>
+          <div class="table-view" id="domainTable" hidden></div>
+          <p class="card__foot">טווח: חיובי/שלילי 7–49, כללי 16–112. נתונים סינתטיים להמחשה.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 17 ===================== -->
+  <section class="slide" data-title="מסלול תסמינים">
+    <div class="slide__inner slide__inner--wide">
+      <p class="eyebrow">חלק ו׳ · הרכיב החישובי בפייתון</p>
+      <h2>סימולציית מסלול קליני – ציון <bdi>PANSS</bdi> כולל לאורך 52 שבועות</h2>
+      <div class="cols cols--3-1">
+        <div class="card">
+          <div class="chart-head">
+            <h3>מסלול לפי תרחיש טיפולי</h3>
+            <div class="chart-filters">
+              <button class="pill pill--ghost" data-table="trajectoryTable" type="button">תצוגת טבלה</button>
+            </div>
+          </div>
+          <div class="chart chart--tall" id="trajectoryChart"></div>
+          <div class="legend" id="trajectoryLegend"></div>
+          <div class="table-view" id="trajectoryTable" hidden></div>
+        </div>
+        <div class="card">
+          <h3>המודל</h3>
+          <ul class="compact">
+            <li>כל פריט דועך מערך הבסיס לעבר רצפת הסולם לפי בניית אפקט מסדר ראשון: <bdi class="mono">1 − e^(−ln2·t/t½)</bdi>.</li>
+            <li>יעילות נפרדת לכל ממד – נמוכה יותר לתסמינים שליליים.</li>
+            <li>אירועי הישנות סטוכסטיים (<bdi class="mono">hazard</bdi> שבועי) מחזירים חלק מהעודף.</li>
+            <li>רעש מדידה גאוסיאני של המעריך.</li>
+          </ul>
+          <div class="stat-row stat-row--col" id="reductionTiles"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 18 ===================== -->
+  <section class="slide" data-title="הערכה אלגוריתמית">
+    <div class="slide__inner slide__inner--wide">
+      <p class="eyebrow">חלק ו׳ · הרכיב החישובי בפייתון</p>
+      <h2>הערכה אלגוריתמית: תגובה, רמיסיה וחומרה</h2>
+      <div class="cols cols--3-2">
+        <div class="assessments" id="assessmentCards"></div>
+        <div class="card card--code">
+          <h3>כללי ההחלטה</h3>
+          <pre class="code" dir="ltr"><code>reduction = 100 * (base - end) / (base - 30)
+responder_20 = reduction &gt;= 20      # minimal
+responder_50 = reduction &gt;= 50      # much improved
+
+remission_items = P1 P2 P3 N1 N4 N6 G5 G9
+threshold = all(item &lt;= 3)           # Andreasen 2005
+sustained = threshold for &gt;= 26 weeks
+
+severity: &lt;58 minimal | &lt;75 mild
+          &lt;95 moderate | &lt;116 marked
+          else severe                # Leucht 2005</code></pre>
+          <ul class="compact">
+            <li>הפחתת 30 נקודות מהבסיס – כי 30 הוא המינימום של הסולם, לא אפס.</li>
+            <li>דגלים קליניים (העדר תגובה, שליליים מתמשכים, הישנויות חוזרות, דיכאון) מייצגים את ההיגיון של ביקורת מעקב.</li>
+            <li>מגבלה: סימולציה חינוכית, לא כלי אבחוני.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 19 ===================== -->
+  <section class="slide" data-title="אתיקה ועתיד">
+    <div class="slide__inner">
+      <p class="eyebrow">חלק ז׳ · אתיקה, סטיגמה ועתיד</p>
+      <h2>שיקולים אתיים, הפחתת סטיגמה וטכנולוגיה קלינית עתידית</h2>
+      <div class="cols cols--3">
+        <div class="card">
+          <h3>סטיגמה ושפה</h3>
+          <ul>
+            <li>רוב האנשים עם סכיזופרניה אינם אלימים; הם נפגעים מאלימות יותר מהאוכלוסייה הכללית.</li>
+            <li>שפה ממוקדת-אדם: "אדם המתמודד עם סכיזופרניה" ולא "סכיזופרן".</li>
+            <li>סטיגמה עצמית מעכבת פנייה לטיפול ומנבאת תוצאה גרועה יותר.</li>
+            <li>מודל ההחלמה: משמעות, תקווה ושליטה בחיים, גם עם תסמינים.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>אתיקה קלינית</h3>
+          <ul>
+            <li>הסכמה מדעת וכשירות לקבלת החלטות בעת פסיכוזה פעילה.</li>
+            <li>טיפול כפוי ואשפוז בכפייה – איזון בין אוטונומיה להגנה (חוק טיפול בחולי נפש, התשנ״א–1991).</li>
+            <li>פרטיות בנתוני פנוטיפ דיגיטלי ונתוני מיקום.</li>
+            <li>הוגנות אלגוריתמית: מודלים שאומנו על אוכלוסיות מצומצמות עלולים להטות החלטות.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>לאן הולכים?</h3>
+          <ul>
+            <li>פסיכיאטריה מדויקת: סמנים ביולוגיים (<bdi>PET</bdi>, <bdi>EEG</bdi>, גנומיקה) לבחירת טיפול.</li>
+            <li>מנגנונים חדשים: אגוניסטים מוסקריניים (<bdi>xanomeline-trospium</bdi>), מודולטורים של <bdi>TAAR1</bdi>.</li>
+            <li>נוירומודולציה (<bdi>TMS</bdi>, <bdi>tDCS</bdi>) להזיות שמיעה עמידות.</li>
+            <li>כלי <bdi>VR</bdi> ובינה מלאכותית לשיקום – בתנאי תיקוף, שקיפות ושיתוף המטופלים בפיתוח.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 20 ===================== -->
+  <section class="slide slide--end" data-title="סיכום ומקורות">
+    <div class="slide__inner slide__inner--wide">
+      <p class="eyebrow">סיכום · שאלות · מקורות</p>
+      <h2>סיכום, שאלות ומקורות אקדמיים</h2>
+      <div class="cols cols--2-3">
+        <div>
+          <div class="card">
+            <h3>שלוש נקודות לזכור</h3>
+            <ol class="numbered">
+              <li>סכיזופרניה היא הפרעה רב-ממדית: חיובי, שלילי, קוגניטיבי ואפקטיבי – והממדים ה"שקטים" קובעים את התפקוד.</li>
+              <li>הביולוגיה מתכנסת: גנים, גיזום סינפטי, גלוטמט ודופמין – לשרשרת אחת של סליינס חריג.</li>
+              <li>טיפול יעיל הוא משולב: תרופה, פסיכותרפיה, משפחה, שיקום – וטכנולוגיה שמלווה ולא מחליפה.</li>
+            </ol>
+          </div>
+          <div class="card card--qa"><h3>שאלות?</h3><p>תודה על ההקשבה. הקוד, המצגת והנתונים זמינים במאגר הפרויקט.</p></div>
+        </div>
+        <div class="card card--refs">
+          <h3>מקורות נבחרים</h3>
+          <ol class="refs" dir="ltr">
+            <li>American Psychiatric Association. (2022). <em>Diagnostic and statistical manual of mental disorders</em> (5th ed., text rev.).</li>
+            <li>Andreasen, N. C., et al. (2005). Remission in schizophrenia: Proposed criteria and rationale for consensus. <em>American Journal of Psychiatry, 162</em>(3), 441–449.</li>
+            <li>Ben-Zeev, D., et al. (2017). CrossCheck: Integrating self-report, behavioral sensing, and smartphone use to identify digital indicators of psychotic relapse. <em>Psychiatric Rehabilitation Journal, 40</em>(3), 266–275.</li>
+            <li>Craig, T. K. J., et al. (2018). AVATAR therapy for auditory verbal hallucinations in people with psychosis: A single-blind RCT. <em>The Lancet Psychiatry, 5</em>(1), 31–40.</li>
+            <li>Green, M. F. (1996). What are the functional consequences of neurocognitive deficits in schizophrenia? <em>American Journal of Psychiatry, 153</em>(3), 321–330.</li>
+            <li>Howes, O. D., &amp; Kapur, S. (2009). The dopamine hypothesis of schizophrenia: Version III. <em>Schizophrenia Bulletin, 35</em>(3), 549–562.</li>
+            <li>Huhn, M., et al. (2019). Comparative efficacy and tolerability of 32 oral antipsychotics. <em>The Lancet, 394</em>(10202), 939–951.</li>
+            <li>Jääskeläinen, E., et al. (2013). A systematic review and meta-analysis of recovery in schizophrenia. <em>Schizophrenia Bulletin, 39</em>(6), 1296–1306.</li>
+            <li>Jauhar, S., Johnstone, M., &amp; McKenna, P. J. (2022). Schizophrenia. <em>The Lancet, 399</em>(10323), 473–486.</li>
+            <li>Javitt, D. C., &amp; Zukin, S. R. (1991). Recent advances in the phencyclidine model of schizophrenia. <em>American Journal of Psychiatry, 148</em>(10), 1301–1308.</li>
+            <li>Kapur, S. (2003). Psychosis as a state of aberrant salience. <em>American Journal of Psychiatry, 160</em>(1), 13–23.</li>
+            <li>Kay, S. R., Fiszbein, A., &amp; Opler, L. A. (1987). The Positive and Negative Syndrome Scale (PANSS) for schizophrenia. <em>Schizophrenia Bulletin, 13</em>(2), 261–276.</li>
+            <li>Leucht, S., et al. (2005). What does the PANSS mean? <em>Schizophrenia Research, 79</em>(2–3), 231–238.</li>
+            <li>Lieberman, J. A., et al. (2005). Effectiveness of antipsychotic drugs in patients with chronic schizophrenia (CATIE). <em>NEJM, 353</em>(12), 1209–1223.</li>
+            <li>McCutcheon, R. A., Reis Marques, T., &amp; Howes, O. D. (2020). Schizophrenia – An overview. <em>JAMA Psychiatry, 77</em>(2), 201–210.</li>
+            <li>Sekar, A., et al. (2016). Schizophrenia risk from complex variation of complement component 4. <em>Nature, 530</em>, 177–183.</li>
+            <li>Weinberger, D. R., Berman, K. F., &amp; Zec, R. F. (1986). Physiologic dysfunction of dorsolateral prefrontal cortex in schizophrenia. <em>Archives of General Psychiatry, 43</em>(2), 114–124.</li>
+            <li>Wykes, T., et al. (2011). A meta-analysis of cognitive remediation for schizophrenia. <em>American Journal of Psychiatry, 168</em>(5), 472–485.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="nav" aria-label="ניווט במצגת">
+  <button class="nav__btn" id="prevBtn" type="button" aria-label="שקופית קודמת">→</button>
+  <span class="nav__counter">שקופית <bdi id="counter" dir="ltr">1 / 20</bdi></span>
+  <button class="nav__btn" id="nextBtn" type="button" aria-label="שקופית הבאה">←</button>
+  <span class="nav__title" id="slideTitle"></span>
+  <button class="nav__btn nav__btn--fs" id="fsBtn" type="button" aria-label="מסך מלא" title="מסך מלא (F)">⛶</button>
+</nav>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="metrics.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
