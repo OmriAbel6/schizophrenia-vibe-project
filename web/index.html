@@ -19,9 +19,13 @@
   <!-- ===================== 1 ===================== -->
   <section class="slide slide--title" data-title="שער">
     <div class="slide__inner">
-      <p class="eyebrow">פרויקט גמר · הנדסה ופסיכולוגיה · תשפ״ז</p>
-      <h1 class="title">מבוא לסכיזופרניה:<br><span class="accent">פסיכוביולוגיה, תפיסה וטכנולוגיה</span></h1>
-      <p class="lead">ממדים קליניים, נוירוביולוגיים ותפיסתיים – והדגמה חישובית של הערכת תסמינים</p>
+      <div class="meta-bar">
+        <span class="meta-badge"><span class="meta-badge__key">קורס</span><span class="meta-badge__value"><bdi>VIBE CODING</bdi> וסוכני <bdi>AI</bdi></span></span>
+        <span class="meta-badge"><span class="meta-badge__key">מוסד אקדמי</span><span class="meta-badge__value">אוניברסיטת חיפה – חטיבת <bdi>AI</bdi></span></span>
+      </div>
+      <p class="title-kicker">ממדים קליניים · נוירוביולוגיים · תפיסתיים</p>
+      <h1 class="title">סכיזופרניה: <span class="accent">צלילה למוחו של חולה סכיזופרניה</span></h1>
+      <p class="lead" style="margin-inline:auto">מהקריטריונים האבחוניים ונתיבי הדופמין, דרך חוויית ההלוצינציה מגוף ראשון, ועד סימולציה חישובית של השפעת התרופות</p>
       <div class="presenters">
         <div class="presenter"><span class="presenter__role">מגישים</span><span class="presenter__name">עומרי אבל</span></div>
         <div class="presenter"><span class="presenter__role">מגישים</span><span class="presenter__name">אלה אדרי</span></div>
@@ -372,19 +376,31 @@
     <div class="slide__inner slide__inner--wide">
       <p class="eyebrow">חלק ה׳ · טיפולים עכשוויים</p>
       <h2>טיפול תרופתי: אנטי-פסיכוטיים מדור ראשון ושני</h2>
-      <table class="table">
-        <thead>
-          <tr><th></th><th>דור ראשון (<bdi>FGA</bdi>, "טיפיים")</th><th>דור שני (<bdi>SGA</bdi>, "א-טיפיים")</th></tr>
-        </thead>
-        <tbody>
-          <tr><th>דוגמאות</th><td>הלופרידול, כלורפרומזין, פרפנזין</td><td>ריספרידון, אולנזפין, קווטיאפין, אריפיפרזול, קלוזאפין</td></tr>
-          <tr><th>מנגנון</th><td>אנטגוניזם לקולטן <bdi>D2</bdi></td><td>אנטגוניזם <bdi>D2</bdi> + <bdi>5-HT2A</bdi>; אריפיפרזול – אגוניסט חלקי ל-<bdi>D2</bdi></td></tr>
-          <tr><th>יעילות</th><td>טובה לתסמינים חיוביים; מוגבלת לשליליים</td><td>דומה בתסמינים חיוביים; קלוזאפין עדיפה בעמידות לטיפול</td></tr>
-          <tr><th>תופעות לוואי עיקריות</th><td>תופעות אקסטרה-פירמידליות, דיסקינזיה מאוחרת, היפרפרולקטינמיה</td><td>עלייה במשקל, תסמונת מטבולית, סדציה; קלוזאפין – אגרנולוציטוזיס (ניטור ספירת דם)</td></tr>
-          <tr><th>ראיות מרכזיות</th><td colspan="2"><bdi>CATIE (Lieberman et al., 2005)</bdi>: יעילות דומה בין הדורות, שיעורי הפסקה גבוהים בכולם; מטא-אנליזת רשת (<bdi>Huhn et al., 2019</bdi>): הבדלים קטנים ביעילות, גדולים בפרופיל תופעות הלוואי</td></tr>
-        </tbody>
-      </table>
-      <p class="footnote">זריקות ארוכות-טווח (<bdi>LAI</bdi>) מפחיתות הישנויות הנובעות מהיענות חלקית. טיפול ברמיסיה: המשך תרופתי מומלץ לפחות 1–2 שנים לאחר אפיזודה ראשונה.</p>
+      <div class="treat">
+        <div class="card treat__card treat__card--fga">
+          <h3><span class="treat__gen">1</span>דור ראשון (<bdi>FGA</bdi>) – "טיפיים"</h3>
+          <p class="treat__drugs">הלופרידול · כלורפרומזין · פרפנזין</p>
+          <ul>
+            <li><b>מנגנון:</b> חסימה גורפת של קולטני <bdi>D2</bdi>.</li>
+            <li><b>יעילות:</b> טובה לתסמינים חיוביים; מוגבלת לשליליים ולקוגניציה.</li>
+            <li><b>תופעות לוואי:</b> תסמינים אקסטרה-פירמידליים, דיסקינזיה מאוחרת, היפרפרולקטינמיה.</li>
+          </ul>
+        </div>
+        <div class="card treat__card treat__card--sga">
+          <h3><span class="treat__gen">2</span>דור שני (<bdi>SGA</bdi>) – "א-טיפיים"</h3>
+          <p class="treat__drugs">ריספרידון · אולנזפין · קווטיאפין · אריפיפרזול · קלוזאפין</p>
+          <ul>
+            <li><b>מנגנון:</b> חסימת <bdi>D2</bdi> + <bdi>5-HT2A</bdi>; אריפיפרזול – אגוניסט חלקי.</li>
+            <li><b>יעילות:</b> דומה בתסמינים חיוביים; קלוזאפין עדיפה בעמידות לטיפול.</li>
+            <li><b>תופעות לוואי:</b> עלייה במשקל ותסמונת מטבולית; קלוזאפין – ניטור ספירת דם.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="takeaways">
+        <div class="takeaway"><span class="takeaway__icon">≈</span><span><b><bdi>CATIE</bdi> (2005):</b> יעילות דומה בין הדורות; ההבדל המהותי – בפרופיל תופעות הלוואי.</span></div>
+        <div class="takeaway"><span class="takeaway__icon">💉</span><span><b>זריקות ארוכות-טווח (<bdi>LAI</bdi>):</b> מפחיתות הישנויות הנובעות מהיענות חלקית.</span></div>
+        <div class="takeaway"><span class="takeaway__icon">⏱</span><span><b>משך הטיפול:</b> לפחות 1–2 שנים לאחר אפיזודה ראשונה, גם ברמיסיה.</span></div>
+      </div>
     </div>
   </section>
 
