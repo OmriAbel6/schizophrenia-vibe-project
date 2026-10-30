@@ -179,8 +179,44 @@ Follow the mandatory course Git methodology—do NOT push everything in a single
 
 ### Commit 2 – Cream theme, typography, slide 1/3/13
 
-(see the commit for details – summary appended below once executed)
+- `style.css` rewritten (508 lines): tokens `--bg #FAF7F0`, `--bg-2 #F5F2EB`, `--ink #1A1A1A`, `--slate
+  #5A626A`, `--sky #3B82F6`, `--sky-light #60A5FA`; green/red reserved for positive/negative symptoms and
+  pathway charts. Rubik for headings, Assistant for body (Google Fonts).
+- Editorial flow: `.card` blocks are borderless and transparent until hovered; every interactive block
+  (`.card`, `.stat`, `.criterion`, `.chip`, `.btn`, `.pill`, timeline items, flow steps, gauges, panels,
+  nav buttons) uses `transform: translateY(-6px) scale(1.015)` + elevation shadow + sky accent on hover.
+  Slide transitions use `cubic-bezier(0.22, 1, 0.36, 1)` with a 56 px RTL glide.
+- Slide 1: presenters עומרי אבל, אלה אדרי and lecturer ד״ר יורם ראובן סגל in prominent cards.
+- Slide 3: criterion A list rebuilt as isolated number badges inside pill items with `gap: 1.25rem`;
+  items 1–4 styled positive (`#DCFCE7`/`#15803D`), item 5 negative (`#FEE2E2`/`#B91C1C`); slide 4 cards
+  re-skinned the same way.
+- Slide 13: table font `clamp(1.25rem, 2vw, 1.6rem)`, line-height 1.75, wide container; padding tightened
+  after a screenshot showed the table running past the viewport.
+- Verified with headless-Chrome screenshots of slides 1, 3, 4, 5, 13.
 
 ### Commit 3 – First-person POV scene and slides 16–18
 
-(see the commit for details – summary appended below once executed)
+- **Slide 8** (`createPOVScene`): a 5×3×8 m hallway with rug, sideboard, picture and coat stand, a framed
+  door that swings open as the camera approaches, and a night street beyond (pavement, asphalt, five
+  buildings with lit windows, three street lamps). Seven waypoints carry the camera from inside the home,
+  through the doorway, to the street. Distortion strength = intensity × (0.3 + 0.7 × door-proximity):
+  simplex-noise breathing walls and ceiling, randomly flickering ceiling light, a detached floor shadow
+  that drifts and stretches, six peripheral silhouettes that fade out within ~18° of the gaze direction,
+  darting visual fragments, perceptual drift/roll/FOV pulsing, CSS vignette pulse and chromatic fringing
+  (`drop-shadow` red/cyan offsets). Mouse-look over the stage. Controls: "צעד אל מחוץ לדלת" (step), "עוצמת
+  ההזיה והחרדה" slider, "שמע מרחבי" toggle, "הרגעה / איפוס" (returns to the start, intensity 15, audio off).
+  2D-canvas corridor fallback when Three.js is unavailable.
+- **Audio** (`createPOVAudio`): heartbeat (double sine thump, 62–148 BPM with intensity), whispers
+  (band-passed noise bursts hard-panned alternating ±0.85–1.0), muffled footsteps on each step, a door
+  creak when crossing the threshold, a 7.6 kHz tremolo ring and a low street bed. Starts only from the
+  toggle (user gesture); stops when leaving the slide.
+- **Slides 16–18** are code-free. 16: two gauge columns (healthy vs. untreated) with 0–200 % tracks and a
+  100 % baseline, labels ≥ 18 px, fills animate on slide entry; symptom tags. 17: three state buttons drive
+  receptor dials (D2 / 5-HT2A), pathway bars, symptom/side-effect bars, a therapeutic-window chart from
+  the occupancy sweep with a moving marker, and a one-paragraph summary. 18: functioning-over-time curves
+  (untreated dashed red, FGA slate, SGA sky) with milestone circles; hover/focus/click shows a large
+  one-sentence takeaway card.
+- A section-replacement bug (replacing the *previous* section instead of the targeted one) was caught by
+  listing slide titles after the edit; `index.html` was restored from HEAD and the replacement redone.
+- Verified: POV harness clicked start + five steps → `STEPS=5` in the DOM dump and the camera advanced in
+  the SwiftShader render; slides 16–18 screenshots fit the 1440×900 viewport after two compaction passes.

@@ -215,37 +215,30 @@
     <div class="slide__inner slide__inner--wide">
       <p class="eyebrow">חלק ג׳ · הממד התפיסתי</p>
       <h2>סימולציה תלת-ממדית: חוויית ההלוצינציה והעיוות התפיסתי</h2>
-      <div class="sim">
-        <div class="sim__stage" id="simStage" aria-label="סצנה תלת-ממדית המדמה עיוות תפיסתי">
-          <div class="sim__overlay" id="simOverlay">
-            <p>הסצנה ממחישה עיוות פרספקטיבה, גאומטריות צפות ו"סחף תפיסתי". לחצו כדי להפעיל.</p>
-            <button class="btn btn--primary" id="simStart" type="button">הפעלת הסימולציה</button>
+      <div class="pov">
+        <div class="pov__stage" id="povStage" aria-label="סצנה תלת-ממדית מגוף ראשון: יציאה מדלת הבית אל הרחוב">
+          <div class="pov__vignette" id="povVignette" aria-hidden="true"></div>
+          <div class="pov__hud" id="povPhase">בתוך הבית</div>
+          <div class="pov__overlay" id="povOverlay">
+            <p>אתם רואים את העולם דרך עיניו של אדם המתמודד עם סכיזופרניה, רגע לפני שהוא יוצא מדלת ביתו אל הרחוב. הזיזו את העכבר כדי להביט סביב, ולחצו "צעד" כדי להתקדם.</p>
+            <button class="btn btn--primary" id="povStart" type="button">התחלת החוויה</button>
           </div>
         </div>
-        <aside class="sim__controls" aria-label="בקרת הסימולציה">
-          <h3>בקרות</h3>
+        <aside class="pov__controls" aria-label="בקרת החוויה">
+          <h3>בקרת החוויה</h3>
+          <button class="btn btn--primary btn--big" id="povStep" type="button">צעד אל מחוץ לדלת</button>
+          <div class="pov__steps" id="povSteps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <label class="control">
-            <span>עוצמת העיוות <output id="intensityOut">55</output></span>
-            <input type="range" id="intensity" min="0" max="100" value="55" dir="ltr">
+            <span>עוצמת ההזיה והחרדה <output id="povIntensityOut">50</output></span>
+            <input type="range" id="povIntensity" min="0" max="100" value="50" dir="ltr">
           </label>
           <label class="control control--toggle">
-            <input type="checkbox" id="drift" checked>
-            <span>סחף מצלמה ועיוות פרספקטיבה</span>
+            <input type="checkbox" id="povAudio">
+            <span>שמע מרחבי (פעימות לב, לחשושים, חריקות)</span>
           </label>
-          <label class="control control--toggle">
-            <input type="checkbox" id="wireframe">
-            <span>מצב רשת (<bdi>wireframe</bdi>)</span>
-          </label>
-          <label class="control control--toggle">
-            <input type="checkbox" id="audio">
-            <span>הזיות שמיעה (רחש, לחשושים ודרון)</span>
-          </label>
-          <div class="control control--buttons">
-            <button class="btn" id="simReset" type="button">איפוס</button>
-            <button class="btn" id="simPause" type="button">השהיה</button>
-          </div>
-          <p class="note">מה מודגם: עיוות שדה הראייה (שינוי זווית הצפייה), אובייקטים ללא עיגון מרחבי, צבעוניות "סוחפת" ורעש שמיעתי בלתי צפוי – מאפיינים המתוארים בדיווחי מטופלים ובמחקרי סימולציה חינוכיים.</p>
-          <p class="note note--warn">אזהרה: הבהובים ותנועה. ההדגמה היא המחשה חינוכית מופשטת ואינה מייצגת חוויה של אדם ספציפי.</p>
+          <button class="btn" id="povReset" type="button">הרגעה / איפוס</button>
+          <p class="note">מה מודגם: קירות "נושמים", צללים שנפרדים מהגוף ונמתחים, אור תקרה מהבהב, ראייה היקפית שמתעוותת, צלליות בשולי שדה הראייה שנעלמות כשמביטים בהן ישירות – ופעימות לב, לחשושים וצלילים שמלווים חרדה חריפה.</p>
+          <p class="note note--warn">אזהרה: הבהובים, תנועה וצלילים פתאומיים. המחשה חינוכית מופשטת, לא חוויה של אדם ספציפי.</p>
         </aside>
       </div>
     </div>
@@ -442,101 +435,51 @@
   </section>
 
   <!-- ===================== 16 ===================== -->
-  <section class="slide" data-title="הרכיב החישובי">
+  <section class="slide slide--neuro" data-title="סערת הדופמין">
     <div class="slide__inner slide__inner--wide">
-      <p class="eyebrow">חלק ו׳ · הרכיב החישובי בפייתון</p>
-      <h2>סולם <bdi>PANSS</bdi> ומבנה הכלי החישובי</h2>
-      <div class="cols cols--2-3">
-        <div class="card card--code">
-          <h3>ארכיטקטורה</h3>
-          <ul class="arch">
-            <li><bdi class="mono">schizophrenia_analysis.py</bdi> – מודל ה-<bdi>PANSS</bdi> (30 פריטים, 1–7), פרופילי טיפול, סימולטור מסלול ומעריך אלגוריתמי.</li>
-            <li><bdi class="mono">main.py</bdi> – ממשק שורת פקודה שמריץ שלושה תרחישים ומייצא <bdi class="mono">metrics.json</bdi>.</li>
-            <li><bdi class="mono">app.js</bdi> – טוען את הקובץ ומצייר את התרשימים בשקופיות 16–18.</li>
-          </ul>
-          <pre class="code" dir="ltr"><code>$ python main.py --weeks 52 --seed 22
-Scenario                    Base  End  Red%  Remission
-First-episode, SGA mono      108   74  43.6  no
-Chronic course, FGA mono     127   96  32.0  no
-Integrated care (SGA+CBTp)   120   71  54.4  sustained
-wrote web/metrics.json</code></pre>
-          <p class="card__foot" id="metricsMeta">טוען נתונים…</p>
-        </div>
-        <div class="card">
-          <div class="chart-head">
-            <h3>ציוני <bdi>PANSS</bdi> לפי ממד</h3>
-            <div class="chart-filters" role="group" aria-label="שלב המדידה">
-              <button class="pill is-active" data-phase="baseline" type="button">בסיס (שבוע 0)</button>
-              <button class="pill" data-phase="endpoint" type="button">סיום המעקב</button>
-              <button class="pill pill--ghost" data-table="domainTable" type="button">תצוגת טבלה</button>
-            </div>
-          </div>
-          <div class="chart" id="domainChart"></div>
-          <div class="legend" id="domainLegend"></div>
-          <div class="table-view" id="domainTable" hidden></div>
-          <p class="card__foot">טווח: חיובי/שלילי 7–49, כללי 16–112. נתונים סינתטיים להמחשה.</p>
-        </div>
-      </div>
+      <p class="eyebrow">חלק ו׳ · מנוע Neuro-Sim – נתיבי הדופמין</p>
+      <h2>סערת הדופמין במוח: הנתיב המזולימבי מול המזוקורטיקלי</h2>
+      <p class="lead">במוח בריא שני הנתיבים מאוזנים סביב 100%. בהתקף פסיכוטי הנתיב המזולימבי סוער והנתיב המזוקורטיקלי דועך – וכך נולדים בו-זמנית ההזיות והאפתיה.</p>
+      <div class="gauges" id="pathwayGauges" aria-live="polite"></div>
+      <p class="footnote" id="metricsMeta">טוען נתונים…</p>
     </div>
   </section>
 
   <!-- ===================== 17 ===================== -->
-  <section class="slide" data-title="מסלול תסמינים">
+  <section class="slide slide--neuro" data-title="סימולטור התרופות">
     <div class="slide__inner slide__inner--wide">
-      <p class="eyebrow">חלק ו׳ · הרכיב החישובי בפייתון</p>
-      <h2>סימולציית מסלול קליני – ציון <bdi>PANSS</bdi> כולל לאורך 52 שבועות</h2>
-      <div class="cols cols--3-1">
-        <div class="card">
-          <div class="chart-head">
-            <h3>מסלול לפי תרחיש טיפולי</h3>
-            <div class="chart-filters">
-              <button class="pill pill--ghost" data-table="trajectoryTable" type="button">תצוגת טבלה</button>
-            </div>
-          </div>
-          <div class="chart chart--tall" id="trajectoryChart"></div>
-          <div class="legend" id="trajectoryLegend"></div>
-          <div class="table-view" id="trajectoryTable" hidden></div>
-        </div>
-        <div class="card">
-          <h3>המודל</h3>
-          <ul class="compact">
-            <li>כל פריט דועך מערך הבסיס לעבר רצפת הסולם לפי בניית אפקט מסדר ראשון: <bdi class="mono">1 − e^(−ln2·t/t½)</bdi>.</li>
-            <li>יעילות נפרדת לכל ממד – נמוכה יותר לתסמינים שליליים.</li>
-            <li>אירועי הישנות סטוכסטיים (<bdi class="mono">hazard</bdi> שבועי) מחזירים חלק מהעודף.</li>
-            <li>רעש מדידה גאוסיאני של המעריך.</li>
-          </ul>
-          <div class="stat-row stat-row--col" id="reductionTiles"></div>
-        </div>
+      <p class="eyebrow">חלק ו׳ · מנוע Neuro-Sim – השפעת התרופות</p>
+      <h2>סימולטור השפעת התרופות בזמן אמת</h2>
+      <div class="sim-buttons" id="simButtons" role="group" aria-label="בחירת מצב טיפולי">
+        <button class="btn is-active" data-state="psychosis" type="button">ללא טיפול</button>
+        <button class="btn" data-state="fga" type="button">תרופות דור 1</button>
+        <button class="btn" data-state="sga" type="button">תרופות דור 2</button>
+      </div>
+      <div class="sim-grid">
+        <div class="sim-panel"><h3>תפיסת קולטנים</h3><div class="dials" id="simDials"></div></div>
+        <div class="sim-panel"><h3>אות הדופמין בשני הנתיבים</h3><div class="bars" id="simPathways"></div></div>
+        <div class="sim-panel"><h3>תסמינים ותופעות לוואי</h3><div class="bars" id="simSymptoms"></div></div>
+        <div class="sim-panel sim-panel--wide"><h3>חלון טיפולי: תסמינים לעומת תפיסת קולטני D2</h3><div class="chart" id="sweepChart"></div><div class="legend" id="sweepLegend"></div></div>
+        <div class="sim-panel sim-panel--summary"><p id="simSummary"></p></div>
       </div>
     </div>
   </section>
 
   <!-- ===================== 18 ===================== -->
-  <section class="slide" data-title="הערכה אלגוריתמית">
+  <section class="slide slide--neuro" data-title="איזון ואיכות חיים">
     <div class="slide__inner slide__inner--wide">
-      <p class="eyebrow">חלק ו׳ · הרכיב החישובי בפייתון</p>
-      <h2>הערכה אלגוריתמית: תגובה, רמיסיה וחומרה</h2>
-      <div class="cols cols--3-2">
-        <div class="assessments" id="assessmentCards"></div>
-        <div class="card card--code">
-          <h3>כללי ההחלטה</h3>
-          <pre class="code" dir="ltr"><code>reduction = 100 * (base - end) / (base - 30)
-responder_20 = reduction &gt;= 20      # minimal
-responder_50 = reduction &gt;= 50      # much improved
-
-remission_items = P1 P2 P3 N1 N4 N6 G5 G9
-threshold = all(item &lt;= 3)           # Andreasen 2005
-sustained = threshold for &gt;= 26 weeks
-
-severity: &lt;58 minimal | &lt;75 mild
-          &lt;95 moderate | &lt;116 marked
-          else severe                # Leucht 2005</code></pre>
-          <ul class="compact">
-            <li>הפחתת 30 נקודות מהבסיס – כי 30 הוא המינימום של הסולם, לא אפס.</li>
-            <li>דגלים קליניים (העדר תגובה, שליליים מתמשכים, הישנויות חוזרות, דיכאון) מייצגים את ההיגיון של ביקורת מעקב.</li>
-            <li>מגבלה: סימולציה חינוכית, לא כלי אבחוני.</li>
-          </ul>
+      <p class="eyebrow">חלק ו׳ · מנוע Neuro-Sim – מהלך לאורך זמן</p>
+      <h2>איזון מוחי ואיכות חיים לאורך זמן</h2>
+      <div class="recovery">
+        <div>
+          <div class="chart chart--tall" id="recoveryChart"></div>
+          <div class="legend" id="recoveryLegend"></div>
         </div>
+        <aside class="milestone-card" id="milestoneCard">
+          <span class="milestone-card__week">רחפו מעל נקודת ציון</span>
+          <div class="milestone-card__title">מה קורה בכל שלב?</div>
+          <p class="milestone-card__text">כל עיגול על העקומה הוא אבן דרך קלינית. רחפו מעליו כדי לקרוא במשפט אחד מה השתנה במוח ובחיי היום-יום.</p>
+        </aside>
       </div>
     </div>
   </section>
