@@ -78,8 +78,36 @@ Follow the mandatory course Git workflow—do NOT combine everything into one co
 
 ### Stage 1 – slide 1 hierarchy and vertical distribution
 
-(appended after execution)
+- Slide 1: no colons – `h1.title--main` "סכיזופרניה" (gradient navy→cobalt, up to 6.6rem) over the
+  `.title-sub` "צלילה למוחו של חולה סכיזופרניה"; metadata badges for course and institution above, and
+  stronger badges for "מגישים: עומרי אבל & אלה אדרי" and "מרצה: ד״ר יורם ראובן סגל" below the lead.
+- Every other slide's eyebrow + H2 were wrapped in `<header class="slide__head">` (19 slides) so the
+  container can space its blocks evenly.
+- `.slide` is now `display: flex; flex-direction: column; justify-content: center; align-items: center;
+  min-height: 100vh; padding: 2rem …`; `.slide__inner` is a flex column with `justify-content: center`,
+  `min-height: calc(100vh − 6.6rem)` and a viewport-relative gap, so content is centred and spread rather
+  than clustered at the top. Per-slide "start" anchors from earlier iterations were removed.
+- Twelve representative slides were screenshotted at 1440×900: all centred, none overflow.
 
 ### Stage 2 – brain bridge and medical micro-animations
 
-(appended after execution)
+- **Brain bridge (19 → 20)**: a full-screen overlay (`#brainBridge`) with a hand-drawn SVG brain
+  (gradient hemispheres, white gyri, cerebellum, stem, glow filter) that beats (`brainBeat`, scale) and
+  shakes (`brainShake`, translate/rotate), six sparkling synapse dots, a moving ECG trace, drifting nodes,
+  the title "מוח רועד", a one-line caption, a progress bar and a skip hint. It is shown by the slide-20
+  enter hook only when arriving from slide 19 (the hook now receives the previous slide number), runs for
+  4.2 s and closes on click or any key. Slide 19 ends with a pulsing hint line. It is a CSS/SVG animation
+  rather than a GIF file, which keeps it crisp at any resolution and respects `prefers-reduced-motion`.
+- **Micro-animations** (all inside `@media (prefers-reduced-motion: no-preference)`):
+  staggered `fadeUp` on every card, metric, pill, node and panel when its slide becomes active (`--i`
+  indices set by `initDecorations()` on grid/flex children); gentle `floatY` on stat tiles, data pills,
+  dials, chips and badges (uses the `translate` property so hover `transform` still works); `glowPulse`
+  on values and the thank-you title; `barGlow` on gauge/bar fills and primary buttons; rotating dashed
+  D2/5-HT2A receptor rings around the dials (`spin` / `spinBack`); SVG series lines draw in on slide entry
+  (`pathLength="1"` + `stroke-dashoffset`), including the dashed untreated line which restores its dash
+  pattern after drawing; an animated ECG waveform in the suicide-risk card; floating biological nodes
+  with dashed halos and faint connectors injected behind slides 1, 5, 6, 7, 16, 17, 18 and 19.
+- Montserrat (from the supplied inspiration) is loaded for numeric display values (stat, gauge, dial and
+  bar values) to echo the infographic's percent rings.
+- Fix found in review: the rotating rings orbited instead of spinning because the `rotate` property is
+  applied before `transform: translateX(-50%)`; the rings are now positioned with `left: 0; width: 100%`.

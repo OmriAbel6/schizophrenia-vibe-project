@@ -7,7 +7,7 @@
   <meta name="description" content="מצגת אקדמית אינטראקטיבית בת 20 שקופיות על סכיזופרניה – ממדים קליניים, נוירוביולוגיים ותפיסתיים, כולל סימולציה תלת-ממדית ורכיב חישובי בפייתון.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Assistant:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-palette="#15803d,#3b82f6,#b91c1c">
@@ -583,6 +583,7 @@
           </ul>
         </div>
       </div>
+      <p class="bridge-hint"><span class="bridge-hint__pulse" aria-hidden="true"></span>לפני הסיכום – הפתעה קטנה: הקישו ← כדי להמשיך</p>
     </div>
   </section>
 
@@ -621,6 +622,52 @@
   </section>
 
 </main>
+
+<div class="brain-bridge" id="brainBridge" hidden role="dialog" aria-label="מוח רועד – מעבר לסיכום">
+  <div class="brain-bridge__nodes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="brain-bridge__inner">
+    <div class="brain-wrap">
+      <svg class="brain" viewBox="0 0 240 210" aria-hidden="true">
+        <defs>
+          <linearGradient id="brainGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0EA5E9"/><stop offset="0.55" stop-color="#0284C7"/><stop offset="1" stop-color="#0D9488"/>
+          </linearGradient>
+          <filter id="brainGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g class="brain__body" filter="url(#brainGlow)">
+          <path class="brain__outline" fill="url(#brainGrad)" d="M40 120 C20 110 18 80 36 68 C30 48 50 32 70 40 C80 22 108 20 118 36 C132 20 162 24 168 44 C190 40 210 62 200 82 C220 96 214 124 194 130 C196 150 172 162 156 150 C150 170 120 172 110 156 C92 170 64 162 62 142 C44 146 32 136 40 120 Z"/>
+          <path class="brain__stem" fill="#0284C7" d="M150 150 C158 162 160 176 150 196 C140 190 136 174 142 160 Z"/>
+          <path class="brain__cerebellum" fill="#0EA5E9" d="M156 150 C166 160 188 158 196 146 C190 136 168 134 156 150 Z"/>
+          <g class="brain__gyri" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" opacity="0.75">
+            <path d="M118 36 C112 70 118 100 112 156"/>
+            <path d="M56 78 C70 70 84 86 96 76"/>
+            <path d="M50 108 C66 98 80 114 94 104"/>
+            <path d="M70 134 C84 124 98 140 108 128"/>
+            <path d="M136 64 C150 56 164 72 178 62"/>
+            <path d="M134 96 C150 86 166 102 184 92"/>
+            <path d="M140 128 C154 118 170 134 186 124"/>
+            <path d="M44 96 C52 92 56 100 62 96"/>
+          </g>
+        </g>
+        <g class="brain__sparks" fill="#FFFFFF">
+          <circle cx="30" cy="60" r="4"/><circle cx="212" cy="58" r="3.5"/><circle cx="208" cy="140" r="4"/>
+          <circle cx="26" cy="140" r="3"/><circle cx="120" cy="12" r="3.5"/><circle cx="178" cy="190" r="3"/>
+        </g>
+      </svg>
+      <svg class="ecg ecg--bridge" viewBox="0 0 600 80" preserveAspectRatio="none" aria-hidden="true">
+        <path pathLength="1" d="M0 40 H120 L140 40 L152 18 L166 64 L180 30 L190 40 H300 L320 40 L332 14 L346 66 L360 32 L370 40 H480 L500 40 L512 18 L526 62 L540 30 L550 40 H600"/>
+      </svg>
+    </div>
+    <div class="brain-bridge__text">
+      <div class="brain-bridge__title">מוח רועד</div>
+      <p class="brain-bridge__sub">רגע לפני הסיכום – המוח שחווינו מבפנים: סערת דופמין, הזיות, חרדה – ואיזון שאפשר להחזיר.</p>
+      <span class="brain-bridge__skip">לחצו או הקישו על מקש כדי להמשיך לסיכום</span>
+    </div>
+    <div class="brain-bridge__progress"><i></i></div>
+  </div>
+</div>
 
 <nav class="nav" aria-label="ניווט במצגת">
   <button class="nav__btn" id="prevBtn" type="button" aria-label="שקופית קודמת">→</button>

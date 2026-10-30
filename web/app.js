@@ -49,7 +49,7 @@
     nextBtn.disabled = next === TOTAL - 1;
     history.replaceState(null, '', `#${next + 1}`);
     if (previous >= 0 && hooks.onLeave[previous + 1]) hooks.onLeave[previous + 1]();
-    if (hooks.onEnter[next + 1]) hooks.onEnter[next + 1]();
+    if (hooks.onEnter[next + 1]) hooks.onEnter[next + 1](previous + 1);
   }
 
   const goNext = () => goTo(current + 1);
@@ -665,7 +665,7 @@
 
     function dial(label, sub) {
       const d = el('div', 'dial');
-      d.innerHTML = `<svg viewBox="0 0 100 100"><path class="dial__arc" d="M 20.3 79.7 A 42 42 0 1 1 79.7 79.7"/>
+      d.innerHTML = `<svg class="dial__ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/></svg><svg class="dial__ring dial__ring--outer" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5"/></svg><svg viewBox="0 0 100 100"><path class="dial__arc" d="M 20.3 79.7 A 42 42 0 1 1 79.7 79.7"/>
         <path class="dial__fill" d="M 20.3 79.7 A 42 42 0 1 1 79.7 79.7" stroke-dasharray="${ARC}" stroke-dashoffset="${ARC}"/>
         <text class="dial__value" x="50" y="58" text-anchor="middle">0%</text></svg>
         <div class="dial__label">${label}</div><div class="dial__sub">${sub}</div>`;
@@ -727,7 +727,7 @@
     const series = [['positive', COLORS.pos, 'הזיות'], ['eps', COLORS.sky, 'תופעות לוואי מוטוריות'], ['negative', COLORS.neg, 'אפתיה']];
     const paths = {};
     series.forEach(([k, color]) => {
-      paths[k] = svgEl('path', { class: 'series-line', stroke: color, d: '' }); svg.appendChild(paths[k]);
+      paths[k] = svgEl('path', { class: 'series-line', stroke: color, d: '', pathLength: 1 }); svg.appendChild(paths[k]);
     });
     const marker = svgEl('line', { class: 'marker-line', y1: m.top, y2: m.top + ph, x1: x(0), x2: x(0) }); svg.appendChild(marker);
     const markerLabel = svgEl('text', { class: 'end-label', y: m.top + ph * 0.5, 'text-anchor': 'start', 'font-size': 12, 'paint-order': 'stroke', stroke: '#FFFFFF', 'stroke-width': 5, 'stroke-linejoin': 'round' }, ''); svg.appendChild(markerLabel);
@@ -786,7 +786,9 @@
     series.forEach((ser) => {
       const s = stateByKey(metrics, ser.key);
       const pts = s.timeline.map((p) => `${x(p.week).toFixed(1)},${y(p.functioning).toFixed(1)}`);
-      svg.appendChild(svgEl('path', { class: `series-line${ser.dashed ? ' series-line--dashed' : ''}`, stroke: ser.color, d: `M${pts.join(' L')}` }));
+      const line = svgEl('path', { class: `series-line${ser.dashed ? ' series-line--dashed' : ''}`, stroke: ser.color, d: `M${pts.join(' L')}`, pathLength: 1 });
+      if (ser.dashed) line.addEventListener('animationend', () => line.classList.add('is-drawn'));
+      svg.appendChild(line);
       const end = s.timeline[s.timeline.length - 1];
       const lbl = svgEl('text', { class: 'end-label', x: x(end.week) + 10, y: y(end.functioning) + 4 }, `${ser.label} · ${fmt(end.functioning)}`);
       endLabels.push(lbl); svg.appendChild(lbl);
@@ -864,7 +866,72 @@
     if (list) list.addEventListener('mouseleave', () => nodes.forEach((n) => { if (!n.classList.contains('is-active')) n.classList.remove('is-lit'); }));
   }
 
+
   /* ------------------------------------------------------------------ */
+  /* Medical micro-animations: floating nodes, stagger indices, ECG,     */
+  /* and the brain bridge between slides 19 and 20                       */
+  /* ------------------------------------------------------------------ */
+  const ECG_PATH = 'M0 40 H120 L140 40 L152 18 L166 64 L180 30 L190 40 H300 L320 40 L332 14 L346 66 L360 32 L370 40 H480 L500 40 L512 18 L526 62 L540 30 L550 40 H600';
+
+  function initDecorations() {
+    // Stagger indices for entry animations.
+    const groups = '.cols, .grid-cards, .criteria, .timeline, .takeaways, .summary-points, .flowchart, .gauges, .sim-grid, .stat-row, .symptom-tags, .symptom-list, .chips, .meta-bar, .closing__side, .assessments, .presenters, .pov';
+    document.querySelectorAll(groups).forEach((group) => {
+      Array.from(group.children).forEach((child, i) => child.style.setProperty('--i', i));
+    });
+    // Floating biological nodes on the title, neurobiology and Neuro-Sim slides.
+    const seeded = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+    [1, 5, 6, 7, 16, 17, 18, 19].forEach((n) => {
+      const slide = slides[n - 1]; if (!slide) return;
+      const bg = document.createElement('div'); bg.className = 'bio-bg'; bg.setAttribute('aria-hidden', 'true');
+      for (let i = 0; i < 9; i++) {
+        const node = document.createElement('span'); node.className = 'bio-node';
+        const size = 10 + seeded() * 34;
+        node.style.cssText = `left:${(seeded() * 96).toFixed(1)}%;top:${(seeded() * 90).toFixed(1)}%;width:${size.toFixed(0)}px;height:${size.toFixed(0)}px;--dur:${(14 + seeded() * 14).toFixed(1)}s;--delay:${(-seeded() * 20).toFixed(1)}s;--node-color:${i % 3 === 0 ? 'rgba(13,148,136,0.5)' : 'rgba(14,165,233,0.55)'};--node-glow:${i % 3 === 0 ? 'rgba(13,148,136,0.3)' : 'rgba(14,165,233,0.35)'}`;
+        bg.appendChild(node);
+      }
+      for (let i = 0; i < 4; i++) {
+        const link = document.createElement('span'); link.className = 'bio-link';
+        link.style.cssText = `left:${(seeded() * 90).toFixed(1)}%;top:${(seeded() * 90).toFixed(1)}%;width:${(80 + seeded() * 160).toFixed(0)}px;rotate:${(seeded() * 360).toFixed(0)}deg`;
+        bg.appendChild(link);
+      }
+      slide.insertBefore(bg, slide.firstChild);
+    });
+    // Heartbeat waveform inside the suicide-risk card (slide 10).
+    const alertCard = document.querySelector('.card--alert h3');
+    if (alertCard) {
+      const ecg = svgEl('svg', { class: 'ecg ecg--inline', viewBox: '0 0 600 80', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
+      ecg.appendChild(svgEl('path', { d: ECG_PATH, pathLength: 1 }));
+      alertCard.insertAdjacentElement('afterend', ecg);
+    }
+  }
+
+  function initBrainBridge() {
+    const bridge = document.getElementById('brainBridge');
+    if (!bridge) return;
+    const DURATION = 4200;
+    let timer = null;
+    const hide = () => {
+      if (bridge.hidden) return;
+      clearTimeout(timer); bridge.hidden = true; bridge.classList.remove('is-on');
+    };
+    const show = () => {
+      bridge.hidden = false; bridge.style.setProperty('--bridge-ms', `${DURATION}ms`);
+      requestAnimationFrame(() => bridge.classList.add('is-on'));
+      timer = setTimeout(hide, DURATION);
+    };
+    bridge.addEventListener('click', hide);
+    document.addEventListener('keydown', (e) => { if (!bridge.hidden && e.key !== 'Shift') { hide(); } }, true);
+    const prevEnter = hooks.onEnter[20];
+    hooks.onEnter[20] = (from) => {
+      if (prevEnter) prevEnter(from);
+      if (from === 19 && !reducedMotion) show();
+    };
+  }
+
+  /* ------------------------------------------------------------------ */
+  initDecorations();
+  initBrainBridge();
   initFlowchart();
   initPOV();
   initNeuroSim();

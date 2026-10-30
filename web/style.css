@@ -39,6 +39,7 @@
   --font-head: "Rubik", "Heebo", system-ui, sans-serif;
   --font-body: "Assistant", "Rubik", system-ui, sans-serif;
   --mono: ui-monospace, "JetBrains Mono", Menlo, monospace;
+  --font-num: "Montserrat", "Rubik", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -98,6 +99,7 @@ pre.code {
   overflow: hidden;
 }
 .slide.is-active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; z-index: 2; }
+.slide > .slide__inner { position: relative; z-index: 1; }
 .slide.is-prev { transform: translateX(56px); }
 
 .slide__inner {
@@ -234,7 +236,7 @@ em { color: var(--body); font-style: normal; }
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
 }
 .stat__label { color: var(--slate); font-size: 0.82em; }
-.stat__value { font-family: var(--font-head); font-size: 1.7em; font-weight: 600; line-height: 1.2; color: var(--ink); }
+.stat__value { font-family: var(--font-num); font-size: 1.7em; font-weight: 600; line-height: 1.2; color: var(--ink); }
 .stat__note { color: var(--slate); font-size: 0.78em; }
 .stat__delta { font-size: 0.8em; color: var(--slate); }
 .stat__delta--good { color: var(--pos); }
@@ -489,7 +491,7 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
 .gauge + .gauge { margin-top: 0.1rem; }
 .gauge__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .gauge__label { font-family: var(--font-head); font-weight: 600; font-size: clamp(18px, 1.4vw, 22px); }
-.gauge__value { font-family: var(--font-head); font-weight: 700; font-size: clamp(22px, 2.2vw, 34px); unicode-bidi: isolate; }
+.gauge__value { font-family: var(--font-num); font-weight: 700; font-size: clamp(22px, 2.2vw, 34px); unicode-bidi: isolate; }
 .gauge__drives { color: var(--slate); font-size: clamp(16px, 1.2vw, 18px); margin: 0 0 0.35rem; }
 .gauge__track { position: relative; height: 26px; border-radius: 13px; background: var(--bg-2); overflow: visible; direction: ltr; }
 .gauge__fill { height: 100%; width: 0; border-radius: 13px; transition: width 1.4s var(--ease); }
@@ -524,18 +526,21 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
 }
 .sim-panel h3 { font-size: 1.08em; margin-bottom: 0.6rem; }
 .dials { display: flex; justify-content: space-around; gap: 1rem; }
-.dial { text-align: center; width: 6rem; }
+.dial { text-align: center; width: 6rem; position: relative; }
+.dial__ring { position: absolute; left: 0; top: 0; width: 100%; height: auto; aspect-ratio: 1; pointer-events: none; transform-origin: 50% 50%; }
+.dial__ring circle { fill: none; stroke: var(--sky-light); stroke-width: 1.5; stroke-dasharray: 4 7; opacity: 0.55; }
+.dial__ring--outer circle { stroke: var(--teal); stroke-dasharray: 2 9; opacity: 0.4; }
 .dial svg { width: 100%; height: auto; display: block; }
 .dial__arc { fill: none; stroke: var(--bg-2); stroke-width: 12; stroke-linecap: round; }
 .dial__fill { fill: none; stroke: var(--sky); stroke-width: 12; stroke-linecap: round; transition: stroke-dashoffset 1.2s var(--ease); }
-.dial__value { font-family: var(--font-head); font-weight: 700; font-size: 1.55em; fill: var(--ink); }
+.dial__value { font-family: var(--font-num); font-weight: 700; font-size: 1.45em; fill: var(--ink); }
 .dial__label { font-weight: 600; font-size: 1em; margin-top: 0.1rem; }
 .dial__sub { color: var(--slate); font-size: 0.85em; }
 .bars { display: flex; flex-direction: column; gap: 0.55rem; }
 .bar-row { display: grid; grid-template-columns: 7.6rem 1fr 2.6rem; align-items: center; gap: 0.8rem; font-size: clamp(16px, 1.15vw, 18px); font-weight: 600; }
 .bar-row__track { height: 18px; border-radius: 9px; background: var(--bg-2); position: relative; direction: ltr; overflow: hidden; }
 .bar-row__fill { height: 100%; width: 0; border-radius: 9px; transition: width 1.1s var(--ease); }
-.bar-row__value { font-family: var(--font-head); font-weight: 700; unicode-bidi: isolate; text-align: left; direction: ltr; }
+.bar-row__value { font-family: var(--font-num); font-weight: 700; unicode-bidi: isolate; text-align: left; direction: ltr; }
 .bar-row__track--pathway { height: 22px; border-radius: 11px; }
 .bar-row__track--pathway::after { content: ""; position: absolute; top: -4px; bottom: -4px; left: 50%; width: 2px; background: var(--ink); }
 .sim-summary { display: none; margin: 1.2rem 0 0; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.6; color: var(--ink); padding: 0.9rem 1.2rem; border-radius: 14px; background: var(--sky-wash); border-inline-start: 4px solid var(--sky); }
@@ -619,4 +624,118 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
 @media (prefers-reduced-motion: reduce) {
   .slide, .progress__bar, .gauge__fill, .bar-row__fill, .dial__fill { transition: none; }
   .card:hover, .stat:hover, .criterion:hover, .btn:hover, .pill:hover, .nav__btn:hover { transform: none; }
+}
+
+/* ==========================================================================
+   Medical micro-animations – floating nodes, pulsing glows, draw-ins
+   ========================================================================== */
+@keyframes fadeUp { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
+@keyframes floatY { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+@keyframes glowPulse { 0%, 100% { filter: drop-shadow(0 0 0 rgba(2, 132, 199, 0)); } 50% { filter: drop-shadow(0 0 10px rgba(2, 132, 199, 0.45)); } }
+@keyframes barGlow { 0%, 100% { box-shadow: 0 0 0 rgba(2, 132, 199, 0); } 50% { box-shadow: 0 0 14px rgba(2, 132, 199, 0.35); } }
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes spinBack { to { rotate: -360deg; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes ecgMove { to { stroke-dashoffset: -1; } }
+@keyframes nodeDrift {
+  0% { translate: 0 0; } 25% { translate: 14px -22px; } 50% { translate: -10px -36px; } 75% { translate: -22px -12px; } 100% { translate: 0 0; }
+}
+@keyframes brainBeat { 0%, 100% { scale: 1; } 14% { scale: 1.09; } 28% { scale: 1; } 42% { scale: 1.06; } 56% { scale: 1; } }
+@keyframes brainShake {
+  0%, 100% { translate: 0 0; rotate: 0deg; } 8% { translate: -4px 2px; rotate: -1.6deg; } 16% { translate: 4px -2px; rotate: 1.6deg; }
+  24% { translate: -3px -1px; rotate: -1deg; } 32% { translate: 3px 2px; rotate: 1.2deg; } 40% { translate: -2px 1px; rotate: -0.6deg; }
+  48% { translate: 2px -2px; rotate: 0.8deg; } 60% { translate: -1px 0; rotate: -0.3deg; } 72% { translate: 1px 1px; rotate: 0.3deg; }
+}
+@keyframes sparkle { 0%, 100% { opacity: 0.2; scale: 0.7; } 50% { opacity: 1; scale: 1.3; } }
+@keyframes bridgeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes progressFill { from { width: 0; } to { width: 100%; } }
+@keyframes hintPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.5); } 70% { box-shadow: 0 0 0 10px rgba(2, 132, 199, 0); } }
+
+/* Floating biological nodes (decorative background layer) */
+.bio-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.bio-node {
+  position: absolute; border-radius: 50%; display: block;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9), var(--node-color, rgba(14, 165, 233, 0.55)) 55%, transparent 72%);
+  box-shadow: 0 0 24px var(--node-glow, rgba(14, 165, 233, 0.35));
+  opacity: 0.55;
+}
+.bio-node::after { content: ""; position: absolute; inset: -40%; border-radius: 50%; border: 1px dashed var(--node-color, rgba(14, 165, 233, 0.4)); opacity: 0.6; }
+.bio-link { position: absolute; height: 1px; transform-origin: 0 50%; background: linear-gradient(90deg, rgba(2, 132, 199, 0.35), transparent); opacity: 0.6; }
+
+/* ECG waveform */
+.ecg { width: 100%; height: 44px; display: block; }
+.ecg path { fill: none; stroke: var(--sky); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 0.6 0.4; }
+.ecg--inline { height: 34px; margin: 0.3rem 0 0.4rem; opacity: 0.85; }
+.ecg--inline path { stroke: var(--neg); }
+
+/* Slide 19 hint */
+.bridge-hint { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--slate); font-size: 0.92em; margin: 0; align-self: center; }
+.bridge-hint__pulse { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--sky); }
+
+/* Brain bridge overlay (slides 19 → 20) */
+.brain-bridge {
+  position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; cursor: pointer;
+  background: radial-gradient(900px 600px at 50% 40%, rgba(14, 165, 233, 0.25), transparent 60%), linear-gradient(160deg, #0B1324 0%, #0F172A 55%, #0B2A33 100%);
+  color: #fff; overflow: hidden;
+}
+.brain-bridge[hidden] { display: none; }
+.brain-bridge__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; text-align: center; padding: 2rem; }
+.brain-wrap { position: relative; width: min(46vw, 380px); }
+.brain { width: 100%; height: auto; display: block; }
+.brain__body { transform-origin: 50% 50%; transform-box: fill-box; }
+.brain__sparks circle { transform-origin: center; transform-box: fill-box; }
+.brain-bridge__title { font-family: var(--font-head); font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700; letter-spacing: -0.01em; }
+.brain-bridge__sub { max-width: 46ch; margin: 0 auto; color: rgba(255, 255, 255, 0.85); font-size: 1.1em; line-height: 1.6; }
+.brain-bridge__skip { color: rgba(255, 255, 255, 0.6); font-size: 0.85em; }
+.brain-bridge__progress { width: min(60vw, 420px); height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.15); overflow: hidden; }
+.brain-bridge__progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--sky-light), var(--teal)); }
+.brain-bridge__nodes i {
+  position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(14, 165, 233, 0.9); box-shadow: 0 0 30px rgba(14, 165, 233, 0.8);
+}
+.brain-bridge__nodes i:nth-child(1) { left: 12%; top: 22%; } .brain-bridge__nodes i:nth-child(2) { left: 80%; top: 18%; width: 9px; height: 9px; }
+.brain-bridge__nodes i:nth-child(3) { left: 70%; top: 76%; } .brain-bridge__nodes i:nth-child(4) { left: 18%; top: 72%; width: 10px; height: 10px; }
+.brain-bridge__nodes i:nth-child(5) { left: 50%; top: 8%; width: 7px; height: 7px; } .brain-bridge__nodes i:nth-child(6) { left: 90%; top: 50%; }
+.brain-bridge__nodes i:nth-child(7) { left: 6%; top: 48%; width: 8px; height: 8px; } .brain-bridge__nodes i:nth-child(8) { left: 40%; top: 90%; width: 11px; height: 11px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Staggered fade-in of every card / metric on slide entry */
+  .slide.is-active .card, .slide.is-active .stat, .slide.is-active .criterion, .slide.is-active .timeline li,
+  .slide.is-active .flow-node, .slide.is-active .gauge-col, .slide.is-active .sim-panel, .slide.is-active .takeaway,
+  .slide.is-active .summary-points li, .slide.is-active .meta-badge, .slide.is-active .chip, .slide.is-active .symptom-tag,
+  .slide.is-active .symptom-list li, .slide.is-active .thanks, .slide.is-active .milestone-card, .slide.is-active .btn--pdf,
+  .slide.is-active .presenter, .slide.is-active .pov__stage, .slide.is-active .pov__controls {
+    animation: fadeUp 0.75s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+  }
+  /* Gentle floating of metric containers and data pills (uses `translate`, so hover `transform` still works) */
+  .stat, .symptom-tag, .dial, .chip, .meta-badge, .gauge-col, .takeaway__icon, .summary-point__icon, .bridge-hint__pulse {
+    animation-name: fadeUp, floatY; animation-duration: 0.75s, 6.5s; animation-timing-function: var(--ease), ease-in-out;
+    animation-iteration-count: 1, infinite; animation-fill-mode: both, none; animation-delay: calc(var(--i, 0) * 90ms + 120ms), calc(var(--i, 0) * 420ms);
+  }
+  .bridge-hint__pulse { animation: hintPulse 1.8s ease-out infinite; }
+  /* Pulsing glows on values, fills and primary buttons */
+  .stat__value, .gauge__value, .dial__value, .thanks__title { animation: glowPulse 3.6s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 300ms); }
+  .gauge__fill, .bar-row__fill, .btn--primary, .progress__bar { animation: barGlow 3.2s ease-in-out infinite; }
+  .btn--pdf { animation: fadeUp 0.75s var(--ease) both, barGlow 3.2s ease-in-out infinite; }
+  /* Rotating receptor rings */
+  .dial__ring { animation: spin 16s linear infinite; }
+  .dial__ring--outer { animation: spinBack 26s linear infinite; }
+  /* SVG data connectors draw in on slide entry */
+  .slide.is-active .chart .series-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s var(--ease) forwards; animation-delay: 0.3s; }
+  .slide.is-active .chart .series-line--dashed { animation: draw 1.6s var(--ease) forwards, none; }
+  .slide.is-active .chart .series-line--dashed.is-drawn { stroke-dasharray: 0.012 0.01; }
+  .ecg path { animation: ecgMove 2.4s linear infinite; }
+  /* Floating biological nodes */
+  .bio-node { animation: nodeDrift var(--dur, 18s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
+  /* Brain bridge */
+  .brain-bridge.is-on { animation: bridgeIn 0.5s ease-out both; }
+  .brain-wrap { animation: brainShake 1.1s ease-in-out infinite; }
+  .brain__body { animation: brainBeat 1.25s ease-in-out infinite; }
+  .brain__sparks circle { animation: sparkle 1.6s ease-in-out infinite; }
+  .brain__sparks circle:nth-child(2) { animation-delay: 0.3s; } .brain__sparks circle:nth-child(3) { animation-delay: 0.6s; }
+  .brain__sparks circle:nth-child(4) { animation-delay: 0.9s; } .brain__sparks circle:nth-child(5) { animation-delay: 1.2s; } .brain__sparks circle:nth-child(6) { animation-delay: 0.45s; }
+  .brain-bridge.is-on .brain-bridge__progress i { animation: progressFill var(--bridge-ms, 4000ms) linear forwards; }
+  .brain-bridge__nodes i { animation: nodeDrift 9s ease-in-out infinite, sparkle 2.2s ease-in-out infinite; }
+  .brain-bridge__nodes i:nth-child(odd) { animation-delay: -3s, -0.7s; }
+  .brain-bridge__text > * { animation: fadeUp 0.8s var(--ease) both; }
+  .brain-bridge__sub { animation-delay: 0.35s !important; } .brain-bridge__skip { animation-delay: 0.7s !important; }
 }
