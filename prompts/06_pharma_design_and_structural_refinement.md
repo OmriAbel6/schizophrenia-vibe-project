@@ -132,4 +132,25 @@ Follow the mandatory course Git workflow—do NOT combine everything into one co
 
 ### Stage 2 – slide 5 flowchart, references PDF, slide 20
 
-(appended after execution)
+- **Slide 5**: the four explanatory bullets now sit in a two-column text block; below it an `<ol
+  class="flowchart">` lays the four nodes out with `display: flex; flex-direction: row; align-items:
+  stretch; justify-content: space-between` (first node at the right, flow right-to-left). Connectors are
+  CSS pseudo-elements (track + arrow head); each node holds a `.flow-line` span that grows to full width
+  when the node is hovered, focused or clicked, while the step badge switches to the cobalt→teal gradient
+  and the hidden `.flow-node__insight` badge expands (max-height/opacity transition). Clicking keeps the
+  node active and lights every earlier connector (`is-lit`); keyboard users can tab to nodes and press
+  Enter/Space.
+- **`python/generate_references_pdf.py`**: a standard-library PDF 1.4 writer (catalog, page tree, pages,
+  Helvetica / Helvetica-Bold with WinAnsi encoding, content streams, xref table and trailer) with real
+  Helvetica AFM widths for word wrapping. It renders 24 references in five sections (diagnosis,
+  neurobiology, cognition, pharmacology/measurement, digital health), with a title block, section rules
+  and page footers. Output: `web/references.pdf`, two pages. Headings are in English because the base-14
+  fonts carry no Hebrew glyphs; all citations are Latin-script anyway.
+- **Slide 20**: the raw bibliography was removed. The slide now has a three-point "סיכום קצר"
+  (neurobiology, subjective experience, targeted treatment), a cobalt PDF button
+  ("לצפייה והורדת רשימת המקורות המלאה (PDF)", `target="_blank"`), the "שאלות ודיון (Q&A)" card and a
+  gradient "תודה על ההקשבה!" panel with the presenters' names, course, institution and lecturer.
+- `app.js`: chart colour constants moved to the new system (emerald `#059669` strokes, cobalt `#0284C7`,
+  rose `#E11D48`, teal for functioning); the flowchart interaction was added as `initFlowchart()`.
+- Verified with headless-Chrome screenshots of slides 5 (node 3 clicked), 17 and 20, and a Quick Look
+  render of `references.pdf`.

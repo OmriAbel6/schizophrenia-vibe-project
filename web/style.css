@@ -262,15 +262,56 @@ em { color: var(--body); font-style: normal; }
 .symptom-key i.is-pos { background: var(--pos-fill); }
 .symptom-key i.is-neg { background: var(--neg-fill); }
 
-/* Flow (slide 5) ----------------------------------------------------------- */
-.flow { display: flex; flex-direction: column; gap: 0.3rem; }
-.flow__step {
-  background: var(--paper); border: 1px solid var(--rule); border-radius: 14px;
-  padding: 0.65rem 0.95rem; font-weight: 600; box-shadow: var(--shadow);
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+/* Slide 5 – text block above, horizontal interactive flowchart below ---------- */
+.slide--flow { place-items: start center; padding-top: 2.6rem; }
+.flow-text ul { columns: 2; column-gap: 2.6rem; padding-inline-start: 1.1rem; font-size: 0.98em; }
+.flow-text li { break-inside: avoid; margin-bottom: 0.45rem; }
+.flow-title { margin: 1.2rem 0 0.8rem; font-size: 1.1em; }
+.flow-hint { color: var(--slate); font-weight: 400; font-size: 0.85em; font-family: var(--font-body); }
+.flowchart {
+  display: flex; flex-direction: row; align-items: stretch; justify-content: space-between;
+  gap: 0; list-style: none; padding: 0; margin: 0;
 }
-.flow__step small { color: var(--slate); font-weight: 400; }
-.flow__arrow { color: var(--sky); text-align: center; line-height: 1; transform: rotate(-90deg); font-size: 1.3em; }
+.flow-node {
+  position: relative; flex: 1 1 0; min-width: 0; margin: 0;
+  padding: 1rem 1.1rem 1rem; border-radius: 16px; cursor: pointer;
+  background: var(--paper); border: 1px solid var(--rule); box-shadow: var(--shadow);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s, background 0.35s;
+}
+.flow-node + .flow-node { margin-inline-start: 3.2rem; }
+/* Connector: a track plus a directional arrow head, flowing right-to-left. */
+.flow-node + .flow-node::before {
+  content: ""; position: absolute; top: 2.1rem; inset-inline-end: calc(100% + 0.35rem); width: 2.5rem; height: 3px;
+  border-radius: 2px; background: var(--rule);
+}
+.flow-node + .flow-node::after {
+  content: ""; position: absolute; top: calc(2.1rem - 5px); inset-inline-end: calc(100% + 0.25rem);
+  border: 6.5px solid transparent; border-inline-end: 9px solid var(--rule); border-inline-start: 0;
+  transition: border-color 0.35s;
+}
+.flow-node .flow-line { position: absolute; top: 2.1rem; inset-inline-end: calc(100% + 0.35rem); width: 0; height: 3px; border-radius: 2px; background: linear-gradient(270deg, var(--sky), var(--teal)); transition: width 0.55s var(--ease); z-index: 1; }
+.flow-node__step {
+  display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 10px; margin-bottom: 0.45rem;
+  font-family: var(--font-head); font-weight: 700; color: #fff; background: var(--slate); transition: background 0.35s, transform 0.35s var(--ease);
+}
+.flow-node__title { display: block; font-family: var(--font-head); font-weight: 600; color: var(--ink); font-size: 1.05em; line-height: 1.25; }
+.flow-node__sub { display: block; color: var(--slate); font-size: 0.86em; margin-top: 0.2rem; }
+.flow-node__insight {
+  display: block; margin-top: 0.7rem; padding: 0.55rem 0.75rem; border-radius: 10px; font-size: 0.86em; line-height: 1.45;
+  background: var(--teal-wash); border: 1px solid rgba(13, 148, 136, 0.35); color: var(--body);
+  max-height: 0; opacity: 0; overflow: hidden; padding-top: 0; padding-bottom: 0; margin-top: 0; border-width: 0;
+  transition: max-height 0.5s var(--ease), opacity 0.4s, padding 0.4s, margin 0.4s;
+}
+.flow-node:hover, .flow-node:focus-visible, .flow-node.is-active {
+  transform: translateY(-6px) scale(1.015); box-shadow: var(--shadow-hover); border-color: var(--sky-light); background: #fff; outline: none;
+}
+.flow-node:hover .flow-node__step, .flow-node:focus-visible .flow-node__step, .flow-node.is-active .flow-node__step { background: linear-gradient(135deg, var(--sky), var(--teal)); transform: scale(1.08); }
+.flow-node:hover .flow-node__insight, .flow-node:focus-visible .flow-node__insight, .flow-node.is-active .flow-node__insight {
+  max-height: 9rem; opacity: 1; padding-top: 0.55rem; padding-bottom: 0.55rem; margin-top: 0.7rem; border-width: 1px;
+}
+.flow-node:hover .flow-line, .flow-node:focus-visible .flow-line, .flow-node.is-active .flow-line { width: 2.5rem; }
+.flow-node:hover + .flow-node::after, .flow-node.is-active + .flow-node::after { border-inline-end-color: var(--sky); }
+.flow-node.is-lit::before { background: var(--sky-light); }
 
 /* Chips (slide 9) ---------------------------------------------------------- */
 .chips { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 0.4rem 0 0.5rem; }
@@ -497,10 +538,32 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
 .milestone-card__text { font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.6; margin: 0; }
 .milestone-card__state { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.9rem; color: var(--slate); font-weight: 600; font-size: 0.9em; }
 
-/* References (slide 20) ---------------------------------------------------- */
-.card--refs { max-height: 62vh; overflow: auto; background: var(--paper); border-color: var(--rule); }
+/* Slide 20 – summary, Q&A, thanks, PDF ------------------------------------ */
+.closing { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1.6rem 2.2rem; align-items: start; }
+.closing__summary h3 { font-size: 1.2em; margin-bottom: 0.8rem; }
+.summary-points { list-style: none; padding: 0; margin: 0 0 1.3rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.summary-points li {
+  display: flex; gap: 0.9rem; align-items: flex-start; padding: 0.9rem 1.1rem; border-radius: 16px;
+  background: var(--paper); border: 1px solid var(--rule); box-shadow: var(--shadow); margin: 0; font-size: 1.02em; line-height: 1.55;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+}
+.summary-points li:hover { transform: translateY(-6px) scale(1.015); box-shadow: var(--shadow-hover); border-color: var(--sky-light); }
+.summary-points b { color: var(--ink); }
+.summary-point__icon { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 12px; display: grid; place-items: center; font-size: 1.2em; background: linear-gradient(135deg, var(--sky-wash), var(--teal-wash)); }
+.btn--pdf { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 1.05em; padding: 0.85rem 1.5rem; text-decoration: none; box-shadow: 0 14px 30px -10px rgba(2, 132, 199, 0.45); }
+.btn--pdf__icon { font-size: 1.2em; }
+.closing__side { display: flex; flex-direction: column; gap: 1.2rem; }
+.card--qa { text-align: right; }
+.card--qa::before { display: block; background: var(--teal); }
+.thanks {
+  text-align: center; padding: 1.6rem 1.4rem; border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--sky), var(--teal)); color: #fff; box-shadow: 0 20px 40px -16px rgba(2, 132, 199, 0.5);
+}
+.thanks__title { font-family: var(--font-head); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; line-height: 1.15; }
+.thanks__names { font-family: var(--font-head); font-size: 1.25em; font-weight: 600; margin-top: 0.5rem; }
+.thanks__meta { font-size: 0.85em; opacity: 0.9; margin-top: 0.5rem; }
+.card--refs { max-height: 62vh; overflow: auto; }
 .refs { font-size: 0.76em; color: var(--slate); text-align: left; padding-inline-start: 1.4rem; }
-.refs li { margin-bottom: 0.35rem; }
 
 /* Bottom nav --------------------------------------------------------------- */
 .nav {
@@ -530,7 +593,11 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
   .pov__stage { height: 48vh; }
   .slide { place-items: start center; padding: 2.4rem 16px 5rem; }
   .card--refs { max-height: none; }
-  .treat, .takeaways { grid-template-columns: 1fr; }
+  .treat, .takeaways, .closing { grid-template-columns: 1fr; }
+  .flowchart { flex-direction: column; gap: 1rem; }
+  .flow-node + .flow-node { margin-inline-start: 0; }
+  .flow-node + .flow-node::before, .flow-node + .flow-node::after, .flow-node .flow-line { display: none; }
+  .flow-text ul { columns: 1; }
   .bar-row { grid-template-columns: 7rem 1fr 3rem; }
 }
 

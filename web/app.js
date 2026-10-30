@@ -12,7 +12,7 @@
   const TOTAL = 20;
   const SIM_SLIDE = 8;
   const GAUGE_SLIDE = 16;
-  const COLORS = { pos: '#15803D', neg: '#B91C1C', sky: '#3B82F6', skyLight: '#60A5FA', slate: '#5A626A', ink: '#1A1A1A' };
+  const COLORS = { pos: '#059669', posFill: '#10B981', neg: '#E11D48', sky: '#0284C7', skyLight: '#0EA5E9', teal: '#0D9488', slate: '#64748B', ink: '#0F172A' };
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------ */
@@ -687,7 +687,7 @@
       mesolimbic: barRow('מזולימבי', COLORS.pos, 200), mesocortical: barRow('מזוקורטיקלי', COLORS.neg, 200),
       hallucinations: barRow('הזיות', COLORS.pos, 100), anxiety: barRow('חרדה', COLORS.pos, 100),
       negative: barRow('אפתיה והשטחה', COLORS.neg, 100), eps: barRow('תופעות לוואי מוטוריות', COLORS.sky, 100),
-      functioning: barRow('תפקוד יומיומי', COLORS.skyLight, 100),
+      functioning: barRow('תפקוד יומיומי', COLORS.teal, 100),
     };
     pathways.append(rows.mesolimbic, rows.mesocortical);
     symptoms.append(rows.hallucinations, rows.anxiety, rows.negative, rows.eps, rows.functioning);
@@ -730,7 +730,7 @@
       paths[k] = svgEl('path', { class: 'series-line', stroke: color, d: '' }); svg.appendChild(paths[k]);
     });
     const marker = svgEl('line', { class: 'marker-line', y1: m.top, y2: m.top + ph, x1: x(0), x2: x(0) }); svg.appendChild(marker);
-    const markerLabel = svgEl('text', { class: 'end-label', y: m.top + ph * 0.5, 'text-anchor': 'start', 'font-size': 12, 'paint-order': 'stroke', stroke: '#FAF7F0', 'stroke-width': 5, 'stroke-linejoin': 'round' }, ''); svg.appendChild(markerLabel);
+    const markerLabel = svgEl('text', { class: 'end-label', y: m.top + ph * 0.5, 'text-anchor': 'start', 'font-size': 12, 'paint-order': 'stroke', stroke: '#FFFFFF', 'stroke-width': 5, 'stroke-linejoin': 'round' }, ''); svg.appendChild(markerLabel);
     const hit = svgEl('rect', { x: m.left, y: m.top, width: pw, height: ph, fill: 'transparent' });
     let currentDrug = 'fga';
     hit.addEventListener('mousemove', (e) => {
@@ -845,7 +845,27 @@
     });
   }
 
+
   /* ------------------------------------------------------------------ */
+  /* Slide 5 – horizontal interactive flowchart                          */
+  /* ------------------------------------------------------------------ */
+  function initFlowchart() {
+    const nodes = Array.from(document.querySelectorAll('#dopamineFlow .flow-node'));
+    nodes.forEach((node, i) => {
+      if (i > 0) { const line = document.createElement('span'); line.className = 'flow-line'; node.appendChild(line); }
+      const activate = () => {
+        nodes.forEach((n) => n.classList.toggle('is-active', n === node));
+        nodes.forEach((n, k) => n.classList.toggle('is-lit', k <= i));
+      };
+      node.addEventListener('click', activate);
+      node.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+    });
+    const list = document.getElementById('dopamineFlow');
+    if (list) list.addEventListener('mouseleave', () => nodes.forEach((n) => { if (!n.classList.contains('is-active')) n.classList.remove('is-lit'); }));
+  }
+
+  /* ------------------------------------------------------------------ */
+  initFlowchart();
   initPOV();
   initNeuroSim();
   goTo(readHash());
