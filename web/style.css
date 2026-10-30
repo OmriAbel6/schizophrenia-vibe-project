@@ -89,9 +89,9 @@ pre.code {
 .deck { position: fixed; inset: 0; }
 
 .slide {
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  padding: 3rem 5vw 4.4rem;
+  position: absolute; inset: 0; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 2rem 5vw 4.2rem;
   opacity: 0; visibility: hidden;
   transform: translateX(-56px);
   transition: opacity 0.65s var(--ease), transform 0.75s var(--ease), visibility 0s linear 0.75s;
@@ -100,8 +100,18 @@ pre.code {
 .slide.is-active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; z-index: 2; }
 .slide.is-prev { transform: translateX(56px); }
 
-.slide__inner { width: min(1120px, 100%); }
+.slide__inner {
+  width: min(1120px, 100%);
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: calc(100vh - 6.6rem);
+  gap: clamp(1.1rem, 2.6vh, 2.2rem);
+}
 .slide__inner--wide { width: min(1360px, 100%); }
+.slide__inner > * { margin-top: 0; margin-bottom: 0; }
+.slide__head { display: flex; flex-direction: column; gap: 0.35rem; }
+.slide__head .eyebrow, .slide__head h2 { margin: 0; }
+.slide__head h2 { padding-bottom: 0.55rem; }
+.slide--sim .slide__inner, .slide--neuro .slide__inner { gap: clamp(0.8rem, 1.8vh, 1.3rem); }
 
 /* Typography --------------------------------------------------------------- */
 h1, h2, h3, .title { font-family: var(--font-head); letter-spacing: -0.01em; color: var(--ink); }
@@ -110,6 +120,10 @@ h1, h2, h3, .title { font-family: var(--font-head); letter-spacing: -0.01em; col
   font-weight: 500; font-size: 0.85em;
 }
 h1.title { font-size: clamp(2.1rem, 4.2vw, 3.7rem); line-height: 1.12; margin: 0.4rem 0 0.9rem; font-weight: 700; }
+h1.title--main { font-size: clamp(3.4rem, 7.5vw, 6.6rem); line-height: 1; letter-spacing: -0.02em; margin: 0; background: linear-gradient(135deg, var(--ink) 0%, var(--sky) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.title-sub { font-family: var(--font-head); font-size: clamp(1.35rem, 2.5vw, 2.1rem); font-weight: 600; color: var(--sky); margin: 0; }
+.lead--center { margin-inline: auto; }
+.slide--title .slide__inner { gap: clamp(0.8rem, 1.8vh, 1.3rem); }
 h2 {
   font-size: clamp(1.6rem, 2.7vw, 2.35rem); margin: 0 0 1.2rem; font-weight: 600; line-height: 1.18;
   position: relative; padding-bottom: 0.6rem;
@@ -181,7 +195,12 @@ em { color: var(--body); font-style: normal; }
 
 /* Title slide -------------------------------------------------------------- */
 .slide--title .slide__inner { text-align: center; }
-.meta-bar { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin: 0 0 1.4rem; }
+.meta-bar { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin: 0; }
+.meta-bar--people { gap: 1rem; }
+.meta-badge--strong { font-size: 1.05em; padding: 0.7rem 1.4rem; }
+.meta-badge--strong .meta-badge__value { font-size: 1.1em; }
+.meta-badge--lecturer { background: linear-gradient(135deg, rgba(2, 132, 199, 0.08), rgba(13, 148, 136, 0.08)); }
+.amp { color: var(--teal); font-weight: 400; margin: 0 0.15em; }
 .meta-badge {
   display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.45rem 1.1rem; border-radius: 999px;
   background: var(--paper); border: 1px solid var(--rule); box-shadow: var(--shadow);
@@ -263,10 +282,9 @@ em { color: var(--body); font-style: normal; }
 .symptom-key i.is-neg { background: var(--neg-fill); }
 
 /* Slide 5 – text block above, horizontal interactive flowchart below ---------- */
-.slide--flow { place-items: start center; padding-top: 2.6rem; }
 .flow-text ul { columns: 2; column-gap: 2.6rem; padding-inline-start: 1.1rem; font-size: 0.98em; }
 .flow-text li { break-inside: avoid; margin-bottom: 0.45rem; }
-.flow-title { margin: 1.2rem 0 0.8rem; font-size: 1.1em; }
+.flow-title { margin: 0 0 0.8rem; font-size: 1.1em; }
 .flow-hint { color: var(--slate); font-weight: 400; font-size: 0.85em; font-family: var(--font-body); }
 .flowchart {
   display: flex; flex-direction: row; align-items: stretch; justify-content: space-between;
@@ -325,7 +343,7 @@ em { color: var(--body); font-style: normal; }
 /* Timeline (slide 12) ------------------------------------------------------ */
 .timeline {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem;
-  list-style: none; padding: 0; margin: 0.6rem 0 1.6rem; counter-reset: phase;
+  list-style: none; padding: 0; margin: 0.6rem 0 0; counter-reset: phase;
 }
 .timeline li {
   position: relative; background: var(--paper); border: 1px solid var(--rule); border-radius: 16px;
@@ -354,13 +372,11 @@ em { color: var(--body); font-style: normal; }
 .treat__card ul { padding-inline-start: 1.1rem; }
 .treat__card li { margin-bottom: 0.35rem; }
 .treat__card li b { color: var(--ink); font-weight: 600; }
-.takeaways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.3rem; }
+.takeaways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .takeaway { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.8rem 1rem; border-radius: 14px; background: var(--paper); border: 1px solid var(--rule); box-shadow: var(--shadow); font-size: 1.02rem; line-height: 1.5; transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s; }
 .takeaway:hover { transform: translateY(-6px) scale(1.015); box-shadow: var(--shadow-hover); border-color: var(--sky-light); }
 .takeaway__icon { flex: none; width: 2rem; height: 2rem; border-radius: 10px; display: grid; place-items: center; background: var(--sky-wash); color: var(--sky); font-family: var(--font-head); font-weight: 700; }
 .takeaway b { color: var(--ink); }
-.slide--treatments { place-items: start center; padding-top: 2.6rem; }
-.slide--treatments h2 { margin-bottom: 0.9rem; }
 
 /* Arch list ---------------------------------------------------------------- */
 .arch li { font-size: 0.92em; }
@@ -501,8 +517,6 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
 .sim-panel--summary { display: flex; align-items: center; font-size: clamp(1.02rem, 1.4vw, 1.25rem); line-height: 1.6; background: var(--sky-wash); border-color: rgba(59, 130, 246, 0.3); }
 .sim-panel--summary p { margin: 0; }
 .sim-panel .chart { aspect-ratio: 4.3 / 1; }
-.slide--neuro { place-items: start center; padding-top: 2.6rem; }
-.slide--neuro h2 { margin-bottom: 0.9rem; }
 .slide--neuro .lead { margin-bottom: 0.8rem; font-size: 1.02em; max-width: none; }
 .sim-panel {
   padding: 0.85rem 1.1rem; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--rule);
@@ -591,7 +605,8 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
   .timeline { grid-template-columns: 1fr; }
   .pov { grid-template-columns: 1fr; height: auto; }
   .pov__stage { height: 48vh; }
-  .slide { place-items: start center; padding: 2.4rem 16px 5rem; }
+  .slide { justify-content: flex-start; padding: 2.4rem 16px 5rem; overflow: auto; }
+  .slide__inner { min-height: 0; }
   .card--refs { max-height: none; }
   .treat, .takeaways, .closing { grid-template-columns: 1fr; }
   .flowchart { flex-direction: column; gap: 1rem; }
