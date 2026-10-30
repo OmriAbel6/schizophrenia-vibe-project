@@ -1,0 +1,4 @@
+# The analysis tool uses only the Python standard library (Python >= 3.9).
+# Development / linting helpers (optional):
+flake8>=7.0
+black>=24.0
