@@ -112,4 +112,12 @@ Follow the mandatory course Git workflow—do NOT combine everything into one co
 
 ### Stage 2 – slide 1 centring and brain transition clean-up
 
-(appended after execution)
+- Slide 1: kicker, "סכיזופרניה", "צלילה למוחו של חולה סכיזופרניה" and the lead are wrapped in
+  `.title-stack` (`display: flex; flex-direction: column; align-items: center; text-align: center`); every
+  child has `margin: 0; padding: 0; width: 100%`, and the lead keeps `margin-inline: auto`, so all four
+  lines share one centre axis.
+- Brain transition: the "מוח רועד" title, caption and skip hint were removed from the overlay; it now shows
+  only the animated brain, its ECG trace, the drifting nodes and the thin progress bar. The overlay's
+  accessible label and the slide-19 hint were shortened accordingly. Click or any key still dismisses it.
+- `git add web/index.html README.md prompts/` – this log is included with the stage so the repository
+  history stays self-describing.
