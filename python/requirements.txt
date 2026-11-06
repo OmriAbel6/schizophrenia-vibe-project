@@ -1,4 +1,13 @@
-# The analysis tool uses only the Python standard library (Python >= 3.9).
-# Development / linting helpers (optional):
-flake8>=7.0
-black>=24.0
+# Live AI patient agent (python/main.py) – Python >= 3.9
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+openai>=1.30
+
+# Supporting modules use the standard library only:
+#   schizophrenia_analysis.py   – Neuro-Sim dopamine model (served at /api/neuro-sim)
+#   generate_references_pdf.py  – writes web/references.pdf
+
+# Optional linting:
+# flake8>=7.0
+# black>=24.0
