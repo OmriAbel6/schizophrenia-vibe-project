@@ -82,4 +82,24 @@ Execute these commands sequentially using your terminal capabilities. Do NOT com
 
 ### Commit 2 – tiles UI and the two deep-dive slides
 
-(appended after execution)
+- **Slide 5 – positive symptoms deep dive**: three glass cards (הזיות, מחשבות שווא, פרנויה), each with a
+  definition, an inline SVG motif (animated voice waveform, a belief network with a glowing core, a
+  sweeping paranoia radar with blips) and impact pills; below, a "מד השיבוש" with four life domains
+  (sleep, study/work, trust in relatives, reality testing) whose emerald fills animate on slide entry.
+- **Slide 6 – negative symptoms deep dive**: four rose-edged glass cards (אבוליציה, אנהדוניה, השטחה
+  רגשית, אלוגיה) with declining mini bar motifs; below, shrinking concentric social circles (community →
+  work → friends → family, outer rings fading in turn) beside a four-step cascade (symptoms → withdrawal →
+  isolation → functional decline) built with the flowchart component in a rose variant; a one-line footnote
+  on treatment response and Green (1996).
+- **Chat slide (now 18)**: the free-text form and quick suggestions are gone; a 5×2 liquid-glass tile grid
+  renders the ten questions (from `GET /api/questions` when the server answers, otherwise from
+  `window.PATIENT_DIALOGUE` in `web/dialogue.js`). A click posts `{question_id, clinical_state}`; the reply
+  is labelled "מהשרת" or "מאגר מקומי"; tiles already asked in the current state get a subtle mark; repeated
+  clicks rotate variants on both paths. Status: green "מחובר לשרת · 10 שאלות" or amber "ללא שרת · מאגר
+  מקומי זהה".
+- `app.js`: `TOTAL = 20`, POV slide 10, chat 18, finale 20 (brain bridge on 19→20), floating nodes on
+  1/7/8/9/18/19, stagger indices for the new grids.
+- Verified with headless Chrome: 20 titles in order; slides 5, 6, 10, 20 fit at 1440×900; served from the
+  backend, the "voices" tile answered in the untreated state, the toggle switched and the same tile gave
+  the treated answer; with the server stopped and the page opened from `file://`, the medication tile
+  answered from the local bank and the status showed the amber "ללא שרת" state.

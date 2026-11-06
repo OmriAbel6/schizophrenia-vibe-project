@@ -943,3 +943,94 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
   .slide.is-active .chat { animation: fadeUp 0.8s var(--ease) both; }
 }
 @media (max-width: 1000px) { .chat__messages { height: 44vh; } .msg { max-width: 92%; } }
+
+/* ==========================================================================
+   Slides 5–6 – symptom deep dives (liquid-glass infographics)
+   ========================================================================== */
+.slide--deep .slide__inner { gap: clamp(0.8rem, 1.8vh, 1.3rem); }
+.deep-grid { display: grid; gap: 1rem; }
+.deep-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.deep-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.deep-card {
+  display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem 1.1rem 0.9rem; border-radius: var(--radius);
+  background: var(--paper); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 3px solid var(--pos-fill);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s;
+}
+.deep-card:hover { transform: translateY(-6px) scale(1.015); box-shadow: var(--shadow-hover); background: var(--glass-strong); }
+.deep-card--neg { border-top-color: var(--neg-fill); }
+.deep-card__top { display: flex; align-items: center; gap: 0.6rem; }
+.deep-card__top h3 { margin: 0; font-size: 1.12em; }
+.deep-card__icon { width: 2.3rem; height: 2.3rem; border-radius: 12px; display: grid; place-items: center; font-size: 1.15rem; background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.9); }
+.deep-card__def { margin: 0; color: var(--body); font-size: 0.93em; line-height: 1.5; min-height: 3.6em; }
+.deep-viz { width: 100%; height: 56px; display: block; direction: ltr; }
+.viz-wave { fill: none; stroke: var(--pos); stroke-width: 2.2; stroke-linecap: round; }
+.viz-wave--ghost { stroke: var(--teal); opacity: 0.45; }
+.viz-net line { stroke: var(--pos); stroke-width: 1.4; opacity: 0.7; }
+.viz-net circle { fill: #fff; stroke: var(--pos); stroke-width: 2; }
+.viz-net__core { fill: var(--pos-fill); stroke: #fff; }
+.viz-radar circle { fill: none; stroke: var(--pos); stroke-width: 1.3; opacity: 0.6; }
+.viz-radar__sweep { fill: rgba(16, 185, 129, 0.35); stroke: none; transform-origin: 110px 30px; transform-box: view-box; }
+.viz-radar__blip { fill: var(--neg-fill); stroke: none; }
+.deep-impact { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.deep-pill { font-size: 0.78em; font-weight: 600; padding: 0.22rem 0.65rem; border-radius: 999px; background: rgba(236, 253, 245, 0.7); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--pos); }
+.deep-card--neg .deep-pill { background: rgba(255, 241, 242, 0.7); border-color: rgba(225, 29, 72, 0.3); color: var(--neg); }
+.deep-bars { display: flex; align-items: flex-end; gap: 0.35rem; height: 52px; margin-top: auto; padding-top: 0.3rem; }
+.deep-bars i { flex: 1; height: var(--h); border-radius: 6px 6px 3px 3px; background: linear-gradient(180deg, #FB7185, var(--neg-fill)); opacity: 0.85; }
+.deep-bars i:nth-child(1) { opacity: 0.35; } .deep-bars i:nth-child(2) { opacity: 0.55; } .deep-bars i:nth-child(3) { opacity: 0.75; }
+
+.deep-meter { padding: 0.9rem 1.2rem; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); }
+.deep-meter__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.deep-meter__head h3 { margin: 0; font-size: 1.02em; }
+.deep-meter__note { color: var(--slate); font-size: 0.8em; }
+.deep-meter__rows { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
+.deep-meter__row { display: grid; grid-template-columns: 7.5rem 1fr 3.4rem; align-items: center; gap: 0.7rem; font-size: 0.92em; font-weight: 600; }
+.deep-meter__row b { color: var(--neg); font-size: 0.85em; }
+.deep-meter__track { height: 12px; border-radius: 6px; background: rgba(255, 255, 255, 0.6); overflow: hidden; direction: ltr; }
+.deep-meter__fill { height: 100%; width: 0; border-radius: 6px; transition: width 1.4s var(--ease); }
+.deep-meter__fill--pos { background: linear-gradient(90deg, #34D399, var(--pos-fill)); }
+.slide.is-active .deep-meter__fill { width: calc(var(--w, 0) * 1%); }
+
+.deep-bottom { display: grid; grid-template-columns: 240px 1fr; gap: 1.6rem; align-items: center; }
+.deep-rings svg { width: 220px; height: 220px; display: block; margin: 0 auto; overflow: visible; }
+.deep-rings .ring { fill: rgba(225, 29, 72, 0.06); stroke: var(--neg-fill); stroke-width: 1.4; }
+.deep-rings .ring--4 { opacity: 0.25; stroke-dasharray: 4 6; } .deep-rings .ring--3 { opacity: 0.45; stroke-dasharray: 6 5; } .deep-rings .ring--2 { opacity: 0.7; } .deep-rings .ring--1 { fill: rgba(225, 29, 72, 0.35); }
+.ring-label { font-family: var(--font-body); font-size: 11px; fill: var(--slate); font-weight: 600; }
+.ring-label--core { fill: var(--ink); font-size: 12px; }
+.deep-rings__caption { margin: 0.3rem 0 0; text-align: center; color: var(--slate); font-size: 0.85em; }
+.flowchart--neg .flow-node { padding: 0.8rem 0.9rem; cursor: default; }
+.flowchart--neg .flow-node + .flow-node { margin-inline-start: 2.4rem; }
+.flowchart--neg .flow-node + .flow-node::before { width: 1.8rem; background: rgba(225, 29, 72, 0.35); }
+.flowchart--neg .flow-node + .flow-node::after { border-inline-end-color: rgba(225, 29, 72, 0.6); }
+.flowchart--neg .flow-node__step { background: linear-gradient(135deg, var(--neg-fill), #FB7185); }
+.flowchart--neg .flow-node:hover .flow-node__step { background: linear-gradient(135deg, var(--neg-fill), #FB7185); }
+.deep-foot { margin: 0; font-size: 0.85em; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .viz-radar__sweep { animation: spin 4s linear infinite; }
+  .viz-radar__blip { animation: sparkle 1.6s ease-in-out infinite; }
+  .viz-wave { stroke-dasharray: 6 4; animation: ecgMove 2.6s linear infinite; }
+  .slide.is-active .deep-rings .ring--4 { animation: ringFade 6s ease-in-out infinite; }
+  .slide.is-active .deep-rings .ring--3 { animation: ringFade 6s ease-in-out infinite 1.2s; }
+  .slide.is-active .deep-rings .ring--2 { animation: ringFade 6s ease-in-out infinite 2.4s; }
+  .slide.is-active .deep-card { animation: fadeUp 0.8s var(--ease) both; animation-delay: calc(var(--i, 0) * 110ms + 80ms); }
+}
+@keyframes ringFade { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.12; } }
+@media (max-width: 1000px) { .deep-grid--3, .deep-grid--4, .deep-bottom, .deep-meter__rows { grid-template-columns: 1fr; } }
+
+/* Chat – question tiles (replace the free-text input) ------------------------- */
+.tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.55rem; }
+.tile {
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.75rem; border-radius: 16px; cursor: pointer; text-align: right;
+  font: inherit; font-family: var(--font-head); font-weight: 600; font-size: 0.86em; color: var(--ink); line-height: 1.3;
+  background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.75); box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s, border-color 0.35s, opacity 0.3s;
+}
+.tile:hover:not([disabled]) { transform: translateY(-4px) scale(1.015); box-shadow: var(--shadow-hover); background: var(--glass-strong); border-color: var(--sky-light); }
+.tile[disabled] { opacity: 0.55; cursor: wait; }
+.tile.is-asked { border-color: rgba(2, 132, 199, 0.35); background: rgba(224, 242, 254, 0.5); }
+.tile__icon { width: 1.9rem; height: 1.9rem; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 1rem; background: rgba(255, 255, 255, 0.8); }
+.chat__messages { height: min(32vh, 300px); }
+@media (max-width: 1000px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
