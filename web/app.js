@@ -58,6 +58,7 @@
   const goPrev = () => goTo(current - 1);
   nextBtn.addEventListener('click', goNext);
   prevBtn.addEventListener('click', goPrev);
+  document.getElementById('homeBtn').addEventListener('click', () => goTo(0));
 
   document.addEventListener('keydown', (e) => {
     const tag = (e.target.tagName || '').toLowerCase();
@@ -546,6 +547,8 @@
     const stepsEl = document.getElementById('povSteps');
     const startBtn = document.getElementById('povStart');
     const stepBtn = document.getElementById('povStep');
+    const filmBtn = document.getElementById('povFilm');
+    const timerEl = document.getElementById('povTimer');
     const intensity = document.getElementById('povIntensity');
     const intensityOut = document.getElementById('povIntensityOut');
     const audioToggle = document.getElementById('povAudio');
@@ -572,6 +575,35 @@
       return scene;
     }
     startBtn.addEventListener('click', () => { overlay.hidden = true; ensureScene().start(); });
+
+    // Film mode: a 15-second, fully automated Three.js animated short with sound –
+    // the camera walks from the home through the door to the street on its own.
+    const FILM_SECONDS = 15;
+    let filmTimers = [];
+    function stopFilm(finished) {
+      filmTimers.forEach(clearTimeout); filmTimers = [];
+      timerEl.hidden = true; timerEl.classList.remove('is-live');
+      filmBtn.disabled = false; filmBtn.textContent = finished ? '▶ להקרין שוב (15 שניות)' : '▶ סרט אנימציה (15 שניות, עם סאונד)';
+      if (finished && audio.active) { audio.stop(); audioToggle.checked = false; }
+    }
+    function playFilm() {
+      overlay.hidden = true;
+      const s = ensureScene(); s.reset(); s.start();
+      intensity.value = 65; intensityOut.value = 65; s.setIntensity(0.65); audio.setIntensity(0.65);
+      if (!audio.active && audio.start()) audioToggle.checked = true;   // user gesture → sound allowed
+      filmBtn.disabled = true; filmBtn.textContent = '…מקרין';
+      timerEl.hidden = false; timerEl.classList.add('is-live');
+      const steps = s.stepsTotal; const stepEvery = (FILM_SECONDS * 1000 - 1500) / steps;
+      for (let i = 1; i <= steps; i++) filmTimers.push(setTimeout(() => s.step(), 800 + (i - 1) * stepEvery));
+      const started = performance.now();
+      const tick = () => {
+        const left = Math.max(0, FILM_SECONDS - (performance.now() - started) / 1000);
+        timerEl.textContent = `00:${String(Math.ceil(left)).padStart(2, '0')}`;
+        if (left > 0) filmTimers.push(setTimeout(tick, 250)); else stopFilm(true);
+      };
+      tick();
+    }
+    filmBtn.addEventListener('click', playFilm);
     stepBtn.addEventListener('click', () => { overlay.hidden = true; ensureScene().start(); scene.step(); });
     intensity.addEventListener('input', () => {
       intensityOut.value = intensity.value; const v = intensity.value / 100;
@@ -582,6 +614,7 @@
       else audio.stop();
     });
     resetBtn.addEventListener('click', () => {
+      stopFilm(false);
       intensity.value = reducedMotion ? 10 : 15; intensityOut.value = intensity.value;
       audio.stop(); audioToggle.checked = false;
       if (scene) { scene.setIntensity(intensity.value / 100); scene.reset(); }
@@ -592,7 +625,7 @@
       if (document.hidden) scene.stop(); else if (current === SIM_SLIDE - 1 && overlay.hidden) scene.start();
     });
     hooks.onEnter[SIM_SLIDE] = () => { if (scene && overlay.hidden) scene.start(); };
-    hooks.onLeave[SIM_SLIDE] = () => { if (scene) scene.stop(); if (audio.active) { audio.stop(); audioToggle.checked = false; } };
+    hooks.onLeave[SIM_SLIDE] = () => { stopFilm(false); if (scene) scene.stop(); if (audio.active) { audio.stop(); audioToggle.checked = false; } };
   }
 
   /* ------------------------------------------------------------------ */

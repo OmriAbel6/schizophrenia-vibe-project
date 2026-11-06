@@ -357,6 +357,7 @@
         <div class="pov__stage" id="povStage" aria-label="סצנה תלת-ממדית מגוף ראשון: יציאה מדלת הבית אל הרחוב">
           <div class="pov__vignette" id="povVignette" aria-hidden="true"></div>
           <div class="pov__hud" id="povPhase">בתוך הבית</div>
+          <div class="pov__hud pov__hud--timer" id="povTimer" hidden>00:15</div>
           <div class="pov__overlay" id="povOverlay">
             <p>אתם רואים את העולם דרך עיניו של אדם המתמודד עם סכיזופרניה, רגע לפני שהוא יוצא מדלת ביתו אל הרחוב. הזיזו את העכבר כדי להביט סביב, ולחצו "צעד" כדי להתקדם.</p>
             <button class="btn btn--primary" id="povStart" type="button">התחלת החוויה</button>
@@ -364,7 +365,8 @@
         </div>
         <aside class="pov__controls" aria-label="בקרת החוויה">
           <h3>בקרת החוויה</h3>
-          <button class="btn btn--primary btn--big" id="povStep" type="button">צעד אל מחוץ לדלת</button>
+          <button class="btn btn--primary btn--big" id="povFilm" type="button">▶ סרט אנימציה (15 שניות, עם סאונד)</button>
+          <button class="btn btn--big" id="povStep" type="button">צעד אל מחוץ לדלת</button>
           <div class="pov__steps" id="povSteps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <label class="control">
             <span>עוצמת ההזיה והחרדה <output id="povIntensityOut">50</output></span>
@@ -751,6 +753,7 @@
 </div>
 
 <nav class="nav" aria-label="ניווט במצגת">
+  <button class="nav__btn nav__btn--home" id="homeBtn" type="button" aria-label="שקופית הפתיחה" title="בית (Home)">⌂</button>
   <button class="nav__btn" id="prevBtn" type="button" aria-label="שקופית קודמת">→</button>
   <span class="nav__counter">שקופית <bdi id="counter" dir="ltr">1 / 20</bdi></span>
   <button class="nav__btn" id="nextBtn" type="button" aria-label="שקופית הבאה">←</button>

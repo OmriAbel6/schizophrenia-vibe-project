@@ -1034,3 +1034,9 @@ input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--sk
 .tile__icon { width: 1.9rem; height: 1.9rem; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 1rem; background: rgba(255, 255, 255, 0.8); }
 .chat__messages { height: min(32vh, 300px); }
 @media (max-width: 1000px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+
+/* Home button and the 3D film timer -------------------------------------------- */
+.nav__btn--home { font-size: 1.25em; }
+.pov__hud--timer { inset-inline-start: auto; inset-inline-end: 0.9rem; font-family: var(--font-num); font-variant-numeric: tabular-nums; direction: ltr; }
+.pov__hud--timer[hidden] { display: none; }
+.pov__hud--timer.is-live { background: rgba(225, 29, 72, 0.9); color: #fff; }

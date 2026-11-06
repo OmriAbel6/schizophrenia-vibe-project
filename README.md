@@ -45,7 +45,8 @@
 ```
 schizophrenia-vibe-project/
 ├── web/                         המצגת
-│   ├── index.html               20 שקופיות, lang="he" dir="rtl"
+│   ├── index.html               20 שקופיות, lang="he" dir="rtl" (גרסת פיתוח, קבצים נפרדים)
+│   ├── schizophrenia-deck.html  **המצגת כקובץ HTML יחיד** – CSS ו-JS מוטמעים (נבנה ע"י build_single_file.py)
 │   ├── style.css                מערכת עיצוב רפואית/פארמה (אלבסטר, נייבי, קובלט, טיל), Rubik + Assistant, בידוד bidi
 │   ├── app.js                   ניווט, סצנת POV (Three.js), אודיו מרחבי, ויזואליזציות Neuro-Sim, מיקרו-אנימציות וגשר המוח
 │   ├── dialogue.js              עותק של מאגר המשבצות לעבודה ללא שרת (נוצר ע"י dialogue.py)
@@ -55,6 +56,7 @@ schizophrenia-vibe-project/
 │   ├── dialogue.py                מאגר משבצות השיח (10 שאלות × 2 מצבים × 2 גרסאות) + יצוא ל-web/dialogue.js
 │   ├── schizophrenia_analysis.py  מודל Neuro-Sim (ספרייה) – מעגן את הפרסונות ומוגש ב-/api/neuro-sim
 │   ├── generate_references_pdf.py כותב PDF של המקורות בספרייה הסטנדרטית בלבד
+│   ├── build_single_file.py       מאגד את המצגת לקובץ HTML יחיד (web/schizophrenia-deck.html)
 │   └── requirements.txt           fastapi · uvicorn · pydantic · openai
 ├── assets/                      צילומי מסך מהדפדפן: slide.png, brain.png, chat.png, simulation.png (מוטמעים ב-README)
 ├── docs/screenshots/            צילומי מסך נוספים ב-1280px שנלכדו ב-Chrome headless (מוטמעים ב-README)
@@ -70,7 +72,8 @@ schizophrenia-vibe-project/
 │   ├── 09_live_ai_patient_agent.md
 │   ├── 10_tile_based_agent_and_20_slides.md
 │   ├── 11_red_team_qa_audit.md
-│   └── 12_final_documentation_polish.md
+│   ├── 12_final_documentation_polish.md
+│   └── 13_lecture2_compliance_audit.md
 ├── PRD.md                       מסמך דרישות המוצר
 └── README.md
 ```
@@ -107,13 +110,17 @@ python3 dialogue.py --export ../web/dialogue.js   # לעדכן את עותק ה�
 
 ```bash
 python3 generate_references_pdf.py   # יצירה מחדש של web/references.pdf (ספרייה סטנדרטית בלבד)
+python3 build_single_file.py         # אריזת המצגת לקובץ יחיד: web/schizophrenia-deck.html
 ```
+`web/schizophrenia-deck.html` הוא קובץ HTML יחיד ועצמאי (רק גופני Google ו-Three.js נטענים מ-CDN) – אפשר
+לפתוח אותו ישירות בדפדפן או לשלוח כקובץ בודד.
 
 ### ניווט
 | פעולה | מקש |
 |---|---|
-| קדימה | ← / רווח / PageDown |
-| אחורה | → / PageUp |
+| בית (שקופית הפתיחה) | כפתור ⌂ / Home |
+| קדימה | כפתור ← / ← / רווח / PageDown |
+| אחורה | כפתור → / → / PageUp |
 | תחילה / סוף | Home / End |
 | מסך מלא | F |
 | קפיצה לשקופית | `index.html#8` |
@@ -131,7 +138,7 @@ python3 generate_references_pdf.py   # יצירה מחדש של web/references.p
 | 7 | השערת הדופמין | גרסאות I–III, סליינס חריג | תרשים זרימה אופקי אינטראקטיבי (4 שלבים, תובנה קלינית בריחוף/לחיצה) |
 | 8 | גלוטמט | תת-תפקוד NMDA, PCP/קטמין, אינטרנוירוני PV, GWAS | – |
 | 9 | הקורטקס הפרה-פרונטלי | היפו-פרונטליות, DLPFC, גיזום סינפטי, C4A | – |
-| 10 | סימולציה תלת-ממדית | חוויה מגוף ראשון: יציאה מדלת הבית אל הרחוב – קירות נושמים, צללים נפרדים, אור מהבהב, צלליות היקפיות, וינייטה ואברציה כרומטית; פעימות לב, לחשושים, חריקות וצלצול | Three.js POV + Web Audio, כפתור צעד, מחוון עוצמה, שמע מרחבי, איפוס |
+| 10 | סימולציה תלת-ממדית | **סרט אנימציה תלת-ממדי של 15 שניות** (Three.js, עם סאונד): יציאה מדלת הבית אל הרחוב – קירות נושמים, צללים נפרדים, אור מהבהב, צלליות היקפיות; פעימות לב, לחשושים, חריקות וצלצול | כפתור ▶ סרט אוטומטי, מצב צעד-אחר-צעד, מחוון עוצמה, שמע מרחבי, איפוס |
 | 11 | ליקויים קוגניטיביים | 7 תחומי MATRICS, קוגניציה חברתית, ניבוי תפקוד | – |
 | 12 | תסמינים אפקטיביים | דיכאון, חרדה, פרדוקס הרגש, סיכון אובדני | אריחי נתונים |
 | 13 | ירידה תפקודית | תעסוקה, מגורים, DUP, תחלואה גופנית | – |
@@ -207,6 +214,7 @@ python3 generate_references_pdf.py   # יצירה מחדש של web/references.p
 | 2026-11-06 | הטמעת משבצות שאלות אינטראקטיביות בממשק ה-Liquid Glass, והוספת 2 שקופיות אינפוגרפיקה חדשות להשלמת 20 שקופיות | עומרי אבל & אלה אדרי |
 | 2026-11-06 | ביקורת QA להגשה: הוספת צילומי מסך אמיתיים של המצגת, רכיב ה-3D והסוכן ל-README, הטמעת פילוסופיית הקורס ("האויב של הטוב הוא הטוב ביותר") ועיצוב ה-Liquid Glass ב-PRD, מילוי פרטי הקורס ותיעוד פרומפטים חסרים | עומרי אבל & אלה אדרי |
 | 2026-11-06 | ליטוש תיעוד סופי להגשה: הטמעת צילומי המסך מתיקיית assets (ממשק המצגת, אנימציית המוח, משבצות הצ'אט והסימולציה התלת-ממדית) ב-README, עדכון PRD לארכיטקטורה הסופית (Liquid Glass, סוכן משבצות, 20 שקופיות) ודחיפה סופית | עומרי אבל & אלה אדרי |
+| 2026-11-06 | ביקורת תאימות לשיעור 2: הוספת כפתור בית לניווט, מצב סרט אנימציה אוטומטי של 15 שניות עם סאונד בסצנת ה-Three.js, סקריפט אריזה לקובץ HTML יחיד (schizophrenia-deck.html), וטבלת כלים ב-PRD | עומרי אבל & אלה אדרי |
 
 ## מקורות נבחרים
 
