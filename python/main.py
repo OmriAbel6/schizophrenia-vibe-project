@@ -3,16 +3,20 @@
 The server exposes a small JSON API that the presentation calls from the
 "Live Clinical AI Simulation" slide:
 
-* ``POST /api/chat``       – talk to the simulated patient in one of two
-  clinical states (``untreated`` / ``treated``).
+* ``GET  /api/questions``  – the question tiles the slide renders.
+* ``POST /api/chat``       – answer a tile (``question_id``) for one of two
+  clinical states (``untreated`` / ``treated``); free text is still accepted
+  and routed to the LLM when a key is configured.
 * ``GET  /api/health``     – readiness, active mode (``llm`` or ``demo``) and
   model name.
 * ``GET  /api/neuro-sim``  – the Neuro-Sim dopamine model output that grounds
   the personas (see ``schizophrenia_analysis.py``).
 
-The language model is reached through the OpenAI API when ``OPENAI_API_KEY``
-is set.  Without a key the server falls back to a scripted **demo mode** so
-the presentation still works offline, and says so in every response.
+Tile answers come from the curated bank in ``dialogue.py`` – distinct per
+question *and* clinical state – so the classroom demo needs no API key or
+connectivity.  Free-text messages use the OpenAI API when ``OPENAI_API_KEY``
+is set and a scripted demo reply otherwise; every response states its
+``mode`` (``tiles`` / ``llm`` / ``demo``).
 
 Run::
 
@@ -42,6 +46,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+import dialogue
 import schizophrenia_analysis as sa
 
 logger = logging.getLogger("patient-agent")
@@ -97,8 +102,10 @@ SYSTEM_PROMPTS: Dict[str, str] = {
 - תובנה: אתה יודע שהיו לך הזיות ומחשבות שווא, ומדבר עליהן בגוף ראשון ובכנות ("הקולות \
 היו אמיתיים בשבילי אז; היום אני יודע שהם חלק מהמחלה"). לעיתים נדירות עדיין יש "רחש" \
 קל ברקע, ואתה יודע להתעלם ממנו.
-- השטחה רגשית קלה: טון שקט ומאופק, פחות הבעות התלהבות, תשובות קצרות יותר; לא עצוב – \
-פשוט "שטוח" מעט. אל תגזים.
+- תסמינים שליליים ברורים: אפקט שטוח (טון אחיד, כמעט ללא הבעה, "בסדר" כתשובה שכיחה), \
+אבוליציה (קושי להתחיל דברים, "אין דחף"), דלות דיבור (משפטים קצרים, שתיקות), ונסיגה \
+חברתית (עונה לחברים באיחור, מעדיף להישאר בבית). לא עצוב – פשוט מעט ומאופק. אל תגזים \
+עד כדי חוסר תקשורת.
 - תופעות לוואי שאתה מזכיר אם רלוונטי: עייפות בבוקר, עלייה של כמה קילוגרמים, לפעמים \
 חוסר מנוחה קל ברגליים.
 - תפקוד: חזרת ללימודים חלקית, עובד יומיים בשבוע בסטודיו, מתאמן עם חבר. יש ימים קשים.
@@ -106,10 +113,7 @@ SYSTEM_PROMPTS: Dict[str, str] = {
 אם המשתמש שואל על ההבדל בין "אז" ל"היום" – זו ההזדמנות לתאר את השינוי בצורה מוחשית.""",
 }
 
-STATE_LABELS_HE: Dict[str, str] = {
-    "untreated": "ללא טיפול – אפיזודה פסיכוטית פעילה",
-    "treated": "תחת טיפול תרופתי – שישה חודשים של ריספרידון",
-}
+STATE_LABELS_HE: Dict[str, str] = dict(dialogue.STATE_LABELS_HE)
 
 # Scripted replies for demo mode (no API key).  Chosen by keyword, otherwise
 # in rotation, so a classroom demo without a key still feels alive.
@@ -181,7 +185,8 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    message: str = Field(..., min_length=1, max_length=2000)
+    question_id: Optional[str] = Field(default=None, max_length=40)
+    message: Optional[str] = Field(default=None, max_length=2000)
     clinical_state: ClinicalState = "untreated"
     history: List[ChatMessage] = Field(default_factory=list, max_length=20)
 
@@ -190,8 +195,16 @@ class ChatResponse(BaseModel):
     reply: str
     clinical_state: ClinicalState
     state_label_he: str
-    mode: Literal["llm", "demo"]
+    question_id: Optional[str] = None
+    question_he: Optional[str] = None
+    mode: Literal["tiles", "llm", "demo"]
     model: Optional[str] = None
+
+
+class QuestionTile(BaseModel):
+    id: str
+    label_he: str
+    icon: str
 
 
 class HealthResponse(BaseModel):
@@ -199,6 +212,7 @@ class HealthResponse(BaseModel):
     mode: Literal["llm", "demo"]
     model: Optional[str]
     states: List[str]
+    questions: int
 
 
 # --------------------------------------------------------------------------- #
@@ -213,6 +227,7 @@ class PatientAgent:
         self.api_key = os.environ.get("OPENAI_API_KEY")
         self._client = None
         self._rotation: Dict[str, int] = {"untreated": 0, "treated": 0}
+        self._tile_rotation: Dict[str, int] = {}
         if self.api_key:
             try:
                 from openai import OpenAI  # imported lazily so demo mode needs no key
@@ -246,9 +261,17 @@ class PatientAgent:
 
     def reply(self, request: ChatRequest) -> ChatResponse:
         state = request.clinical_state
+        if request.question_id:
+            return self._tile_reply(state, request.question_id)
+        if not request.message or not request.message.strip():
+            raise HTTPException(
+                status_code=422, detail="Provide a question_id or a message."
+            )
         if self._client is None:
             return ChatResponse(
-                reply=self._demo_reply(state, request.message),
+                reply=self._demo_reply(
+                    state, request.message  # type: ignore[arg-type]
+                ),
                 clinical_state=state,
                 state_label_he=STATE_LABELS_HE[state],
                 mode="demo",
@@ -257,7 +280,7 @@ class PatientAgent:
         system = SYSTEM_PROMPTS[state] + self._grounding(state)
         messages = [{"role": "system", "content": system}]
         messages += [{"role": m.role, "content": m.content} for m in request.history]
-        messages.append({"role": "user", "content": request.message})
+        messages.append({"role": "user", "content": request.message.strip()})
         try:
             completion = self._client.chat.completions.create(
                 model=OPENAI_MODEL,
@@ -278,6 +301,30 @@ class PatientAgent:
             state_label_he=STATE_LABELS_HE[state],
             mode="llm",
             model=OPENAI_MODEL,
+        )
+
+    def _tile_reply(self, state: str, question_id: str) -> ChatResponse:
+        """Contextual answer: depends on the tile *and* the clinical state."""
+        try:
+            answers = dialogue.answers_for(question_id, state)
+        except KeyError as error:
+            raise HTTPException(
+                status_code=404, detail=f"Unknown question_id: {question_id}"
+            ) from error
+        key = f"{state}:{question_id}"
+        index = self._tile_rotation.get(key, 0)
+        self._tile_rotation[key] = index + 1
+        label = next(
+            q["label_he"] for q in dialogue.QUESTIONS if q["id"] == question_id
+        )
+        return ChatResponse(
+            reply=answers[index % len(answers)],
+            clinical_state=state,  # type: ignore[arg-type]
+            state_label_he=STATE_LABELS_HE[state],
+            question_id=question_id,
+            question_he=str(label),
+            mode="tiles",
+            model=None,
         )
 
     def _demo_reply(self, state: str, message: str) -> str:
@@ -301,7 +348,7 @@ agent = PatientAgent()
 app = FastAPI(
     title="Schizophrenia capstone – live AI patient agent",
     description="Educational simulation of a fictional patient in two clinical states.",
-    version="3.0.0",
+    version="3.1.0",
 )
 app.add_middleware(
     CORSMiddleware,
@@ -320,7 +367,19 @@ def health() -> HealthResponse:
         mode=agent.mode,  # type: ignore[arg-type]
         model=OPENAI_MODEL if agent.mode == "llm" else None,
         states=list(SYSTEM_PROMPTS),
+        questions=len(dialogue.QUESTIONS),
     )
+
+
+@app.get("/api/questions", response_model=List[QuestionTile])
+def questions() -> List[QuestionTile]:
+    return [QuestionTile(**tile) for tile in dialogue.question_catalog()]
+
+
+@app.get("/api/dialogue")
+def dialogue_bank() -> Dict[str, object]:
+    """The full tile bank (what ``web/dialogue.js`` mirrors for offline use)."""
+    return dialogue.as_document()
 
 
 @app.post("/api/chat", response_model=ChatResponse)
