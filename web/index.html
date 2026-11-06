@@ -7,11 +7,12 @@
   <meta name="description" content="מצגת אקדמית אינטראקטיבית בת 20 שקופיות על סכיזופרניה – ממדים קליניים, נוירוביולוגיים ותפיסתיים, כולל סימולציה תלת-ממדית ורכיב חישובי בפייתון.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Assistant:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Assistant:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-palette="#15803d,#3b82f6,#b91c1c">
 
+<div class="fluid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
 
 <main class="deck" id="deck" aria-live="polite">
@@ -591,32 +592,34 @@
   <section class="slide slide--end" data-title="סיכום ושאלות">
     <div class="slide__inner slide__inner--wide">
       <header class="slide__head">
-        <p class="eyebrow">סיכום · שאלות ודיון · תודה</p>
-        <h2>סיכום קצר, שאלות ודיון</h2>
+        <p class="eyebrow">סיכום · שאלות ודיון</p>
+        <h2>שלושה דברים לקחת מכאן</h2>
       </header>
-      <div class="closing">
-        <div class="closing__summary">
-          <h3>סיכום קצר – שלוש נקודות</h3>
-          <ol class="summary-points">
-            <li><span class="summary-point__icon">🧠</span><span><b>נוירוביולוגיה:</b> סכיזופרניה היא הפרעה של איזון – סערת דופמין מזולימבית לצד חסר מזוקורטיקלי, על רקע גלוטמט, גיזום סינפטי וגנטיקה.</span></li>
-            <li><span class="summary-point__icon">👁</span><span><b>החוויה הסובייקטיבית:</b> הזיות ומחשבות שווא אינן "דמיון" – הן עולם תפיסתי שלם, מלווה בחרדה, שאפשר להתחיל להבין רק כשמסתכלים דרך עיני המטופל.</span></li>
-            <li><span class="summary-point__icon">🎯</span><span><b>טיפול ממוקד:</b> תרופות שמאזנות קולטנים במקום לחסום בגסות, יחד עם פסיכותרפיה, משפחה ושיקום – מחזירות תפקוד ואיכות חיים.</span></li>
-          </ol>
-          <a class="btn btn--primary btn--pdf" href="references.pdf" target="_blank" rel="noopener">
-            <span class="btn--pdf__icon" aria-hidden="true">📄</span><span>לצפייה והורדת רשימת המקורות המלאה (<bdi>PDF</bdi>)</span>
-          </a>
-        </div>
-        <div class="closing__side">
-          <div class="card card--qa">
-            <h3>שאלות ודיון (<bdi>Q&amp;A</bdi>)</h3>
-            <p>נשמח לשאלות על הנוירוביולוגיה, על הסימולציה מגוף ראשון ועל מנוע ה-<bdi>Neuro-Sim</bdi>. הקוד, המצגת והנתונים זמינים במאגר הפרויקט.</p>
-          </div>
-          <div class="thanks">
-            <div class="thanks__title">תודה על ההקשבה!</div>
-            <div class="thanks__names">עומרי אבל · אלה אדרי</div>
-            <div class="thanks__meta">קורס <bdi>VIBE CODING</bdi> וסוכני <bdi>AI</bdi> · אוניברסיטת חיפה – חטיבת <bdi>AI</bdi> · מרצה: ד״ר יורם ראובן סגל</div>
-          </div>
-        </div>
+      <div class="finale">
+        <article class="finale__card">
+          <span class="finale__icon" aria-hidden="true">🧠</span>
+          <span class="finale__kicker">נוירוביולוגיה</span>
+          <span class="finale__title">הפרעה של איזון</span>
+          <p class="finale__text">סערת דופמין מזולימבית לצד חסר מזוקורטיקלי – על רקע גלוטמט, גיזום סינפטי וגנטיקה.</p>
+        </article>
+        <article class="finale__card">
+          <span class="finale__icon" aria-hidden="true">👁</span>
+          <span class="finale__kicker">החוויה הסובייקטיבית</span>
+          <span class="finale__title">עולם תפיסתי שלם</span>
+          <p class="finale__text">הזיות ומחשבות שווא אינן "דמיון". מבינים אותן רק כשמסתכלים דרך עיני המטופל.</p>
+        </article>
+        <article class="finale__card">
+          <span class="finale__icon" aria-hidden="true">🎯</span>
+          <span class="finale__kicker">טיפול ממוקד</span>
+          <span class="finale__title">לאזן, לא לחסום</span>
+          <p class="finale__text">תרופות שמאזנות קולטנים, יחד עם פסיכותרפיה, משפחה ושיקום – מחזירות תפקוד ואיכות חיים.</p>
+        </article>
+      </div>
+      <a class="finale__cta" href="references.pdf" target="_blank" rel="noopener"><i aria-hidden="true"></i><span>רשימת המקורות המלאה (<bdi>PDF</bdi>)</span></a>
+      <div class="finale__close">
+        <div class="finale__thanks">תודה על ההקשבה</div>
+        <div class="finale__names">עומרי אבל · אלה אדרי</div>
+        <div class="finale__meta">שאלות ודיון · <bdi>VIBE CODING</bdi> וסוכני <bdi>AI</bdi> · אוניברסיטת חיפה – חטיבת <bdi>AI</bdi> · ד״ר יורם ראובן סגל</div>
       </div>
     </div>
   </section>
