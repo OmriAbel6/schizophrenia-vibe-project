@@ -62,3 +62,33 @@ Git log summary to confirm success.
 3. Wrote `prompts/01–04`, `PRD.md`, `.gitignore`, and the templated `README.md`.
 4. Executed the four-stage commit sequence exactly as specified (Step A also carried `.gitignore` as part
    of the project structure), renamed the branch to `main`, and pushed.
+
+## Standing instruction received during this iteration (verbatim)
+
+```
+From now on, follow a strict continuous documentation workflow for every change or iteration made in this repository.
+
+Whenever any task, file edit, or fix is completed:
+
+1. Update `README.md`:
+   - Locate the Change Log table (`יומן עדכונים ושינויים`) inside `README.md`.
+   - Append a new row with:
+     - Date: Today's date (YYYY-MM-DD)
+     - Engineering Description: A concise, professional Hebrew summary of the specific change just performed.
+     - Author: Omri Abel & Michelle
+
+2. Atomic Git Commit & Push:
+   - Stage the changed files along with `README.md`:
+     `git add README.md <modified_files>`
+   - Commit using a conventional commit message reflecting the exact modification:
+     `git commit -m "<type>(<scope>): <clear description of change>"`
+   - Push immediately to the main branch:
+     `git push origin main`
+
+3. Verification:
+   - Run `git log -1 --stat` to display the committed files and confirm that `README.md` was updated and pushed successfully.
+```
+
+Applied from this point on: every later iteration appends a dated Hebrew row to the change log before each
+commit, commits with a conventional message and pushes to `main`. The author column switched to
+"עומרי אבל & אלה אדרי" in iteration 05 at the user's request.

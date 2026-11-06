@@ -2,9 +2,26 @@
 
 **Project:** מבוא לסכיזופרניה: פסיכוביולוגיה, תפיסה וטכנולוגיה
 **Repository:** https://github.com/OmriAbel6/schizophrenia-vibe-project
-**Version:** 3.1 · **Date:** 2026-11-06 · **Status:** Iteration 3.1 (tile-based patient agent, 20 slides)
+**Version:** 3.2 · **Date:** 2026-11-06 · **Status:** Submission candidate (tile-based patient agent, 20 slides, liquid-glass design)
 
 ---
+
+## 0. Product Philosophy – "האויב של הטוב הוא הטוב ביותר"
+
+The course's guiding sentence, *"the enemy of good is the best"*, shaped every iteration of this product.
+We did not stop at a presentation that *meets* the brief; each cycle asked what a senior clinical-UX team
+would ship, and rebuilt toward that:
+
+| Minimum requirement | What this product does instead |
+|---|---|
+| 20 static slides in Hebrew | 20 slides with RTL-perfect typography, vertically distributed layouts, staggered entry animations, floating biological nodes and a text-free "shaking brain" bridge before the finale |
+| A 3D media container | A first-person Three.js walk from the home to the street with breathing walls, detaching shadows, peripheral silhouettes that vanish when looked at, chromatic fringing, and a synthesised spatial-anxiety soundscape |
+| A Python script that exports JSON | A FastAPI patient agent with two psychiatrically grounded personas, a curated 10 × 2 × 2 dialogue bank, an identical offline bank in the browser, an optional LLM path, and the Neuro-Sim dopamine model behind it |
+| Readable slides | An Apple-inspired **Liquid Glass** design system: fluid mesh background with drifting blurred blobs, surfaces at 45 % white with 24 px backdrop blur, hairline white borders, 24 px radii, Heebo/Assistant hierarchy, and zero-overflow slides verified by screenshots |
+| A bibliography slide | A standard-library PDF writer that typesets 24 references, linked from a glass pill button |
+| Commit the code | Eleven numbered prompt logs, a dated Hebrew change log, incremental conventional commits, and headless-Chrome verification for every visual change |
+
+"Good" would have passed; "best" is the only grade we tried to design for.
 
 ## 1. Background & Problem Statement
 
@@ -23,6 +40,7 @@ dopamine engine) behind the neurobiology slides.
 | G2 | Let the audience *experience* perceptual distortion safely | Slide 8 renders an interactive 3D scene with adjustable intensity and an opt-in auditory layer |
 | G3 | Let the audience *question* a simulated patient and feel the difference treatment makes | Slide 18 hosts a tile-based interview with the patient agent in two clinical states, answered by the FastAPI backend from a curated bank (no API key needed), with an identical offline bank in the browser |
 | G4 | Meet the course engineering standards | RTL/BiDi correct, PEP 8, modular code, incremental Git history, prompt logs, PRD |
+| G5 | Exceed the minimum ("האויב של הטוב הוא הטוב ביותר") | Premium liquid-glass design, first-person 3D experience, tile-based patient agent with offline parity, screenshots in the README, headless-Chrome verification |
 
 ## 3. Non-Goals
 
@@ -80,7 +98,7 @@ dopamine engine) behind the neurobiology slides.
 
 | ID | Requirement |
 |---|---|
-| N-01 | Executive pharma design system: `#F8FAFC→#FFFFFF` canvas, translucent white surfaces with `#E2E8F0` hairlines, navy `#0F172A` headings, cobalt `#0284C7` / cerulean `#0EA5E9` accents, teal `#0D9488` for mechanisms, emerald/rose reserved for positive/negative; Rubik + Assistant; zero vertical overflow at 100vh |
+| N-01 | **Liquid Glass (Apple-inspired) design system**: fluid mesh background (ice blue, mint, pearl, pale rose) with four drifting blurred blobs; every surface `rgba(255,255,255,0.45)` + `backdrop-filter: blur(24px)` + `1px rgba(255,255,255,0.6)` border + `0 8px 32px rgba(0,0,0,0.04)` shadow + 24 px radius; navy `#0F172A` headings, `#334155` body, `#64748B` captions, cobalt `#0284C7` / cerulean `#0EA5E9` accents, teal `#0D9488` for mechanisms, emerald/rose reserved for positive/negative; Heebo headings (tight tracking) + Assistant body; vertically centred, zero-overflow slides at 100vh |
 | N-02 | Chart palette validated for colour-vision deficiency and ≥ 3:1 contrast on the dark surface |
 | N-03 | Usable at phone width (single-column layout, 16 px gutters, no horizontal scroll) |
 | N-04 | `prefers-reduced-motion` lowers default simulation intensity and disables drift |

@@ -14,9 +14,25 @@
 | **מאגר** | https://github.com/OmriAbel6/schizophrenia-vibe-project |
 | **מגישים** | עומרי אבל (`@OmriAbel6`) ואלה אדרי |
 | **מרצה** | ד״ר יורם ראובן סגל |
-| **קורס / מוסד** | ________________ · תשפ"ז |
+| **קורס / מוסד** | VIBE CODING וסוכני AI · אוניברסיטת חיפה – חטיבת AI · תשפ"ז |
 | **כלי AI** | Claude Code (Claude Fable 5.1) – יומני הפרומפטים ב-[`prompts/`](prompts/) |
 | **מסמך דרישות** | [`PRD.md`](PRD.md) |
+
+## צילומי מסך
+
+| ממשק המצגת (Liquid Glass) | צלילת עומק – תסמינים חיוביים |
+|---|---|
+| ![שקופית הפתיחה – עיצוב Liquid Glass בהשראת Apple](docs/screenshots/01-title-liquid-glass.jpg) | ![שקופית 5 – אינפוגרפיקת זכוכית של הזיות, מחשבות שווא ופרנויה](docs/screenshots/05-positive-symptoms-deep-dive.jpg) |
+
+| רכיב ה-3D – חוויה מגוף ראשון (Three.js) | הפלט האינטראקטיבי של הפייתון – סוכן המטופל |
+|---|---|
+| ![שקופית 10 – יציאה מדלת הבית אל הרחוב בסצנת WebGL עם עיוותים תפיסתיים](docs/screenshots/10-first-person-3d-hallucination.jpg) | ![שקופית 18 – משבצות שאלה ותשובות הסוכן משרת ה-FastAPI בשני מצבים קליניים](docs/screenshots/18-tile-based-ai-patient-chat.jpg) |
+
+| צלילת עומק – תסמינים שליליים | שקופית הסיום |
+|---|---|
+| ![שקופית 6 – מעגלים חברתיים מתכווצים ומפל הירידה התפקודית](docs/screenshots/06-negative-symptoms-deep-dive.jpg) | ![שקופית 20 – שלושה כרטיסי זכוכית, כפתור PDF ותודה על ההקשבה](docs/screenshots/20-finale.jpg) |
+
+הצילומים נלכדו ב-Chrome headless ברזולוציית 1440×900 מהמצגת כפי שהיא מוגשת על ידי שרת ה-FastAPI (`docs/screenshots/`).
 
 ## מבנה המאגר
 
@@ -34,6 +50,7 @@ schizophrenia-vibe-project/
 │   ├── schizophrenia_analysis.py  מודל Neuro-Sim (ספרייה) – מעגן את הפרסונות ומוגש ב-/api/neuro-sim
 │   ├── generate_references_pdf.py כותב PDF של המקורות בספרייה הסטנדרטית בלבד
 │   └── requirements.txt           fastapi · uvicorn · pydantic · openai
+├── docs/screenshots/            צילומי מסך של המצגת, רכיב ה-3D והסוכן (מוטמעים ב-README)
 ├── prompts/                     יומני האינטראקציה עם ה-AI
 │   ├── 01_project_scaffolding.md
 │   ├── 02_frontend_development.md
@@ -44,7 +61,8 @@ schizophrenia-vibe-project/
 │   ├── 07_layout_infographics_and_brain_gif.md
 │   ├── 08_liquid_glass_and_final_polish.md
 │   ├── 09_live_ai_patient_agent.md
-│   └── 10_tile_based_agent_and_20_slides.md
+│   ├── 10_tile_based_agent_and_20_slides.md
+│   └── 11_red_team_qa_audit.md
 ├── PRD.md                       מסמך דרישות המוצר
 └── README.md
 ```
@@ -171,6 +189,7 @@ python3 generate_references_pdf.py   # יצירה מחדש של web/references.p
 | 2026-11-06 | הטמעת ממשק צ'אט אינטראקטיבי מזכוכית (Liquid Glass) במצגת, חיבור לשרת ה-FastAPI, והחלפת הגרפים הסטטיים בסימולציית זמן אמת | עומרי אבל & אלה אדרי |
 | 2026-11-06 | שדרוג סוכן ה-AI לממשק משבצות שיח מבוססות הקשר (ללא תלות בטוקנים חיצוניים), והחזרת המצגת ל-20 שקופיות עם צלילת עומק לתסמינים חיוביים ושליליים | עומרי אבל & אלה אדרי |
 | 2026-11-06 | הטמעת משבצות שאלות אינטראקטיביות בממשק ה-Liquid Glass, והוספת 2 שקופיות אינפוגרפיקה חדשות להשלמת 20 שקופיות | עומרי אבל & אלה אדרי |
+| 2026-11-06 | ביקורת QA להגשה: הוספת צילומי מסך אמיתיים של המצגת, רכיב ה-3D והסוכן ל-README, הטמעת פילוסופיית הקורס ("האויב של הטוב הוא הטוב ביותר") ועיצוב ה-Liquid Glass ב-PRD, מילוי פרטי הקורס ותיעוד פרומפטים חסרים | עומרי אבל & אלה אדרי |
 
 ## מקורות נבחרים
 
