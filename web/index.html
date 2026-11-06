@@ -495,60 +495,46 @@
   </section>
 
   <!-- ===================== 16 ===================== -->
-  <section class="slide slide--neuro" data-title="סערת הדופמין">
+  <section class="slide slide--chat" data-title="סימולציה קלינית חיה">
     <div class="slide__inner slide__inner--wide">
-      <header class="slide__head">
-        <p class="eyebrow">חלק ו׳ · מנוע Neuro-Sim – נתיבי הדופמין</p>
-        <h2>סערת הדופמין במוח: הנתיב המזולימבי מול המזוקורטיקלי</h2>
+      <header class="slide__head slide__head--center">
+        <p class="eyebrow">חלק ו׳ · סוכן AI חי</p>
+        <h2>סימולציה קלינית חיה: שיחה עם דני</h2>
       </header>
-      <p class="lead">במוח בריא שני הנתיבים מאוזנים סביב 100%. בהתקף פסיכוטי הנתיב המזולימבי סוער והנתיב המזוקורטיקלי דועך – וכך נולדים בו-זמנית ההזיות והאפתיה.</p>
-      <div class="gauges" id="pathwayGauges" aria-live="polite"></div>
-      <p class="footnote" id="metricsMeta">טוען נתונים…</p>
-    </div>
-  </section>
-
-  <!-- ===================== 17 ===================== -->
-  <section class="slide slide--neuro" data-title="סימולטור התרופות">
-    <div class="slide__inner slide__inner--wide">
-      <header class="slide__head">
-        <p class="eyebrow">חלק ו׳ · מנוע Neuro-Sim – השפעת התרופות</p>
-        <h2>סימולטור השפעת התרופות בזמן אמת</h2>
-      </header>
-      <div class="sim-buttons" id="simButtons" role="group" aria-label="בחירת מצב טיפולי">
-        <button class="btn is-active" data-state="psychosis" type="button">ללא טיפול</button>
-        <button class="btn" data-state="fga" type="button">תרופות דור 1</button>
-        <button class="btn" data-state="sga" type="button">תרופות דור 2</button>
-      </div>
-      <div class="sim-grid">
-        <div class="sim-panel"><h3>תפיסת קולטנים</h3><div class="dials" id="simDials"></div></div>
-        <div class="sim-panel"><h3>אות הדופמין בשני הנתיבים</h3><div class="bars" id="simPathways"></div></div>
-        <div class="sim-panel"><h3>תסמינים ותופעות לוואי</h3><div class="bars" id="simSymptoms"></div></div>
-        <div class="sim-panel sim-panel--wide"><h3>חלון טיפולי: תסמינים לעומת תפיסת קולטני D2</h3><div class="chart" id="sweepChart"></div><div class="legend" id="sweepLegend"></div></div>
-        <div class="sim-panel sim-panel--summary"><p id="simSummary"></p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 18 ===================== -->
-  <section class="slide slide--neuro" data-title="איזון ואיכות חיים">
-    <div class="slide__inner slide__inner--wide">
-      <header class="slide__head">
-        <p class="eyebrow">חלק ו׳ · מנוע Neuro-Sim – מהלך לאורך זמן</p>
-        <h2>איזון מוחי ואיכות חיים לאורך זמן</h2>
-      </header>
-      <div class="recovery">
-        <div>
-          <div class="chart chart--tall" id="recoveryChart"></div>
-          <div class="legend" id="recoveryLegend"></div>
+      <div class="chat" id="chat">
+        <div class="chat__top">
+          <div class="chat__who">
+            <span class="chat__avatar" aria-hidden="true">ד</span>
+            <div>
+              <div class="chat__name">דני כהן, 24</div>
+              <div class="chat__status" id="chatStatus"><i class="chat__dot"></i>מתחבר לשרת…</div>
+            </div>
+          </div>
+          <div class="state-toggle" role="radiogroup" aria-label="מצב קליני">
+            <button class="state-toggle__opt is-active" data-state="untreated" role="radio" aria-checked="true" type="button">ללא טיפול</button>
+            <button class="state-toggle__opt" data-state="treated" role="radio" aria-checked="false" type="button">תחת טיפול תרופתי</button>
+            <span class="state-toggle__thumb" aria-hidden="true"></span>
+          </div>
         </div>
-        <aside class="milestone-card" id="milestoneCard">
-          <span class="milestone-card__week">רחפו מעל נקודת ציון</span>
-          <div class="milestone-card__title">מה קורה בכל שלב?</div>
-          <p class="milestone-card__text">כל עיגול על העקומה הוא אבן דרך קלינית. רחפו מעליו כדי לקרוא במשפט אחד מה השתנה במוח ובחיי היום-יום.</p>
-        </aside>
+        <div class="chat__messages" id="chatMessages" aria-live="polite"></div>
+        <div class="chat__suggest" id="chatSuggest">
+          <button class="pill" type="button" data-q="היי דני, מה שלומך היום?">מה שלומך היום?</button>
+          <button class="pill" type="button" data-q="אתה שומע קולות עכשיו?">אתה שומע קולות?</button>
+          <button class="pill" type="button" data-q="איך התרופות משפיעות עליך?">איך התרופות משפיעות?</button>
+          <button class="pill" type="button" data-q="מה ההבדל בין איך שהרגשת אז לבין היום?">אז לעומת היום</button>
+        </div>
+        <form class="chat__form" id="chatForm" autocomplete="off">
+          <input class="chat__input" id="chatInput" type="text" maxlength="500" placeholder="כתבו לדני…" aria-label="הודעה לדני" required>
+          <button class="btn btn--primary chat__send" id="chatSend" type="submit">שליחה</button>
+        </form>
+        <p class="chat__note">דמות בדיונית להמחשה אקדמית, לא מטופל אמיתי. השרת: <bdi class="mono" id="chatEndpoint">localhost:8000</bdi> · <span id="chatMode">—</span></p>
       </div>
     </div>
   </section>
+
+  
+
+  
 
   <!-- ===================== 19 ===================== -->
   <section class="slide" data-title="אתיקה ועתיד">
@@ -680,7 +666,6 @@
 <div class="tooltip" id="tooltip" role="status" aria-live="polite" hidden></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="metrics.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -88,4 +88,24 @@ Execute these commands sequentially using your terminal capabilities. Do NOT com
 
 ### Commit 2 – liquid-glass chat slide
 
-(appended after execution)
+- Slides 16–18 (pathway gauges, medication simulator, recovery curve) were replaced by one slide,
+  "סימולציה קלינית חיה: שיחה עם דני"; the deck is now 18 slides (`TOTAL = 18`, brain bridge moves to the
+  17→18 transition, floating nodes on 1/5/6/7/16/17). `metrics.js`/`metrics.json` and their script tag
+  were removed from `web/`, together with the old chart renderers in `app.js`.
+- The `.chat` container uses the exact glass recipe (45 % white, 24 px backdrop blur, 60 % white hairline,
+  `0 8px 32px rgba(0,0,0,0.04)`, 24 px radius). Header: avatar, name, live status dot (green = LLM,
+  amber = server demo mode, red = unreachable). A pill **state toggle** with a sliding thumb switches
+  between "ללא טיפול" (rose) and "תחת טיפול תרופתי" (teal/emerald); each state keeps its own history and
+  opener line. Message list (RTL, user bubbles cobalt on the right, agent bubbles glass on the left with a
+  state-coloured edge), four suggested questions, text input and send button.
+- `app.js` `initChat()`: `GET /api/health` on load and on slide entry; `POST /api/chat` with the last 20
+  turns, a 45 s abort timeout and a liquid-glass spinner + typing dots while waiting; server errors are
+  shown as a system bubble; if the backend is unreachable the slide switches to local scripted replies
+  (mirroring the server's demo bank) and shows the `uvicorn` command. `API_BASE` is relative when the deck
+  is served by the backend itself and `http://localhost:8000` otherwise.
+- Keyboard: the deck no longer hijacks arrow keys inside text inputs, and ignores keys while the brain
+  bridge is showing.
+- Verified with headless Chrome: served from `http://localhost:8000` (demo mode) a suggested question was
+  sent in the untreated state, the toggle switched to treated and a second question was answered by the
+  server; with the server stopped, the same flow from `file://` produced local fallback replies and the
+  red status.
